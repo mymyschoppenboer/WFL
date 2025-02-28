@@ -1,0 +1,1178 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 56.25vw;
+  overflow: hidden;
+  /* Prevent pull-to-refresh and overscroll on mobile devices */
+  overscroll-behavior: none;
+  touch-action: manipulation;
+}
+
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  flex-direction: column;
+}
+
+.windows-loader {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 40px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background: #ffa500;
+  border-radius: 50%;
+  animation: loader 2s infinite;
+}
+
+.dot:nth-child(2) { animation-delay: 0.1s; }
+.dot:nth-child(3) { animation-delay: 0.2s; }
+.dot:nth-child(4) { animation-delay: 0.3s; }
+.dot:nth-child(5) { animation-delay: 0.4s; }
+
+@keyframes loader {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+.explorer-window {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 600px;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+}
+
+.window-header {
+  background: #f0f0f0;
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 6px 6px 0 0;
+  cursor: move;
+  user-select: none;
+  touch-action: none; 
+  -webkit-user-select: none;
+}
+
+.window-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.folder-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.window-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.control {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 4px;
+  color: black;
+}
+
+.control:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.close:hover {
+  background: #e81123;
+  color: white;
+}
+
+.toolbar {
+  padding: 8px;
+  background: #f8f8f8;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  gap: 16px;
+}
+
+.toolbar-group {
+  display: flex;
+  gap: 8px;
+}
+
+.toolbar button {
+  padding: 4px 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.toolbar button:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.toolbar button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.toolbar button:disabled:hover {
+  background: transparent;
+}
+
+.explorer-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 200px;
+  background: #f8f8f8;
+  padding: 8px;
+  border-right: 1px solid #e0e0e0;
+}
+
+.sidebar-item {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.sidebar-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-item.active {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.file-list {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.file-item {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.file-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.file-item svg {
+  width: 32px;
+  height: 32px;
+}
+
+.file-item span {
+  font-size: 14px;
+}
+
+.desktop {
+  height: 100vh;
+  position: relative;
+}
+
+.hidden {
+  display: none;
+}
+
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  padding: 0 0 0 10px;
+  color: white;
+  z-index: 10000;
+}
+
+.start-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.start-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.waffle-logo {
+  width: 16px;
+  height: 16px;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2));
+}
+
+.time {
+  padding: 8px;
+}
+
+.taskbar-windows {
+  display: flex;
+  flex: 1;
+  margin: 0 20px;
+  gap: 4px;
+  max-width: calc(100% - 280px); 
+}
+
+.taskbar-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  max-width: 200px;
+  overflow: hidden;
+  transition: background 0.2s;
+  position: relative;
+  justify-content: space-between;
+}
+
+.taskbar-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.taskbar-item.active {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.taskbar-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.taskbar-item span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.taskbar-close-button {
+  position: relative;
+  right: 0px;
+  top: auto;
+  transform: none;
+  margin-left: 8px;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+
+.taskbar-item:hover .taskbar-close-button {
+  opacity: 0.7;
+}
+
+.taskbar-close-button:hover {
+  opacity: 1;
+}
+
+.window {
+  touch-action: pan-x pan-y; 
+  position: absolute;
+  z-index: 100;
+  max-height: calc(100vh - 40px);
+  margin-bottom: 40px;
+}
+
+.desktop-icons {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 80px);
+  gap: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.desktop-icon {
+  width: 80px;
+  text-align: center;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.desktop-icon:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.desktop-icon img {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 5px;
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+.desktop-icon span {
+  color: white;
+  font-size: 12px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  word-wrap: break-word;
+  display: block;
+}
+
+.text-window {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 400px;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  z-index: 200;
+}
+
+.text-content {
+  flex: 1;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 0 0 6px 6px;
+}
+
+.text-content .html-preview {
+  width: 100%;
+  height: 100%;
+  border: none;
+  overflow-y: auto;
+}
+
+.text-content textarea {
+  width: 100%;
+  height: 100%;
+  border: none;
+  resize: none;
+  font-family: 'Consolas', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 8px;
+}
+
+.text-content textarea:focus {
+  outline: none;
+}
+
+.file-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.video-window {
+  width: 800px;
+  height: 600px;
+}
+
+.video-content {
+  flex: 1;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.video-content video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.start-menu {
+  position: fixed;
+  bottom: 40px;
+  left: 0;
+  width: 300px;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 8px 8px 0 0;
+  color: white;
+  display: none;
+  flex-direction: column;
+  box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.3);
+  z-index: 10001;
+}
+
+.start-menu.visible {
+  display: flex;
+}
+
+.start-menu-header {
+  padding: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.user-profile:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.user-avatar svg {
+  width: 32px;
+  height: 32px;
+}
+
+.start-menu-items {
+  padding: 8px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.menu-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.menu-item svg {
+  width: 20px;
+  height: 20px;
+}
+
+.menu-footer {
+  margin-top: auto;
+  padding: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.power-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.power-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.power-menu {
+  position: absolute;
+  bottom: 0;
+  left: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 6px;
+  padding: 8px;
+  display: none;
+  min-width: 150px;
+  margin-left: 8px;
+}
+
+.power-menu.visible {
+  display: block;
+}
+
+.power-menu-item {
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.power-menu-item:not(.disabled):hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.power-menu-item.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.power-menu-item svg {
+  width: 16px;
+  height: 16px;
+}
+
+.tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: -5px;
+}
+
+.power-menu-item:hover .tooltip {
+  opacity: 1;
+}
+
+.settings-window {
+  position: absolute;
+  width: 400px;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  z-index: 200;
+  cursor: default;
+}
+
+.settings-window .window-header {
+  cursor: move;
+}
+
+.settings-content {
+  padding: 20px;
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.setting-item:last-child {
+  border-bottom: none;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+  overflow: hidden;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+  border: 2px solid black;
+  box-sizing: border-box;
+}
+
+input:checked + .slider {
+  background-color: #ccc;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+  background-color: #ff7800;
+  border: 2px solid black;
+}
+
+.experimental-button {
+  background: #ff4444;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.experimental-button:hover {
+  background: #ff0000;
+}
+
+.close-all-tabs-button {
+  background: #ff4444;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.close-all-tabs-button:hover {
+  background: #ff0000;
+}
+
+.bsod {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0000aa;
+  color: #ffffff;
+  font-family: "Courier New", monospace;
+  padding: 50px;
+  z-index: 10003;
+  display: none;
+}
+
+.bsod.active {
+  display: block;
+}
+
+body.nederlands .start-menu,
+body.nederlands .taskbar {
+  background: rgba(66, 204, 255, 0.9);
+}
+
+body.nederlands .menu-item:hover,
+body.nederlands .power-button:hover,
+body.nederlands .power-menu-item:not(.disabled):hover,
+body.nederlands .taskbar-item:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+body.nederlands .power-menu {
+  background: rgba(66, 204, 255, 0.9);
+}
+
+body.nederlands .taskbar-item {
+  background: rgba(255, 120, 0, 0.3);
+}
+
+body.nederlands .taskbar-item.active {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+body.nederlands .start-button:hover {
+  background: rgba(255, 120, 0, 0.3);
+}
+
+body.nederlands .menu-item svg path,
+body.nederlands .power-button svg path {
+}
+
+body.nederlands .menu-item svg path[fill="#FFA000"],
+body.nederlands .menu-item svg path[fill="#FFCA28"] {
+  fill: #FFA000 !important;
+}
+
+body.nederlands .menu-item svg path[fill="#4CAF50"] {
+  fill: #4CAF50 !important;
+}
+
+body.nederlands .start-menu-header,
+body.nederlands .menu-footer {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+body.nederlands .toggle-switch input:checked + .slider {
+  background-color: #ff7800;
+}
+
+body.nederlands .window-header {
+  background: #ff7800;
+}
+
+body.nederlands .control {
+  color: black;
+}
+
+body.nederlands .control:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+body.nederlands .control.close:hover {
+  background: #e81123;
+  color: white;
+}
+
+.steam-window {
+  position: absolute;
+  width: 45vW;
+  height: auto;
+  background: #000000;
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+  transform: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.steam-window .window-header {
+  background: #f0f0f0;
+  border-radius: 6px 6px 0 0;
+}
+
+.steam-window .window-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.steam-window .control {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 4px;
+  color: black;
+}
+
+.steam-window .control:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.steam-window .close:hover {
+  background: #e81123;
+  color: white;
+}
+
+.steam-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.steam-logo {
+  width: 180px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.steam-form {
+  width: 100%;
+  max-width: 320px;
+}
+
+.steam-input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 5px;
+  background: #32353c;
+  border: 1px solid #3c4149;
+  border-radius: 3px;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.steam-input:focus {
+  outline: none;
+  border-color: #66c0f4;
+}
+
+.steam-button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(to right, #47bfff, #1a44c2);
+  border: none;
+  border-radius: 3px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.steam-links {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 320px;
+  margin-top: 3px;
+  font-size: 12px;
+}
+
+.steam-link {
+  color: #66c0f4;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.steam-link:hover {
+  color: #ffffff;
+}
+
+.steam-qr {
+  margin-top: 20px;
+  padding: 15px;
+  background: #32353c;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.steam-qr svg {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 10px;
+}
+
+.steam-qr-text {
+  font-size: 12px;
+  color: #8f98a0;
+}
+
+.loading-message {
+  font-size: 18px;
+  color: #ffa500;
+  text-align: center;
+  text-shadow: -0.5px -0.5px 0 #000,
+               0.5px -0.5px 0 #000,
+               -0.5px 0.5px 0 #000,
+               0.5px 0.5px 0 #000;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+}
+
+.taskbar-pet {
+  position: relative;
+  bottom: 40px;
+  left: 0;
+  width: 96px;
+  height: 96px;
+  pointer-events: all;
+  z-index: 10002;
+  display: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.taskbar-pet img {
+  width: 100%;
+  height: 100%;
+  transform-origin: center;
+  pointer-events: none;
+  transition: transform 0.3s ease-out;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.taskbar-pet.active {
+  display: block;
+}
+
+.speech-bubble {
+  position: absolute;
+  background: #ffffff;
+  color: #ff7800;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-family: monospace;
+  font-size: 14px;
+  white-space: pre-wrap;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 10px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  border: 3px solid #000;
+  box-shadow: 0 0 0 3px #000;
+  max-width: 750px;
+  word-wrap: break-word;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.speech-bubble:after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 15px solid #000;
+}
+
+.speech-bubble:before {
+  content: '';
+  position: absolute;
+  bottom: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 12px solid #fff;
+  z-index: 1;
+}
+
+.speech-text {
+  font-family: monospace;
+  letter-spacing: 1px;
+  min-width: 100px;
+  display: inline-block;
+  font-weight: bold;
+  text-shadow: 1px 1px 0px #000;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  text-align: center;
+  width: 100%;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.slider-container {
+  width: 100%;
+  max-width: 320px;
+  margin-top: 10px;
+}
+
+.slider-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+.volume-slider {
+  width: 100%;
+  height: 5px;
+  -webkit-appearance: none;
+  background: #ccc;
+  outline: none;
+  border-radius: 5px;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #ff7800;
+  cursor: pointer;
+  border: 2px solid black;
+  box-sizing: border-box;
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #ff7800;
+  cursor: pointer;
+  border: 2px solid black;
+  box-sizing: border-box;
+}
+
+body.nederlands .volume-slider::-webkit-slider-thumb {
+  background: #ff7800;
+}
+
+body.nederlands .volume-slider::-moz-range-thumb {
+  background: #ff7800;
+}
+
+@media screen and (orientation: portrait) and (max-width: 1024px) {
+}
+
+@media screen and (max-height: 500px) {
+  .taskbar {
+    height: 30px;
+  }
+  
+  .start-button, .taskbar-item {
+    padding: 3px 8px;
+  }
+  
+  .desktop {
+    height: calc(100vh - 30px);
+    margin-bottom: 30px;
+  }
+  
+  .window {
+    max-height: calc(100vh - 30px);
+    margin-bottom: 30px;
+  }
+  
+  .taskbar-pet {
+    bottom: 30px;
+    width: 72px;
+    height: 72px;
+  }
+  
+  .desktop-icon {
+    padding: 5px;
+  }
+  
+  .desktop-icon img {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-height: 400px) {
+  .start-menu {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  
+  .file-list {
+    max-height: 50vh;
+  }
+  
+  .explorer-window, .text-window, .video-window, .settings-window, .steam-window {
+    max-width: 80vw;
+    max-height: 90vh;
+  }
+  
+  .window-header {
+    padding: 4px;
+  }
+  
+  .loading-screen .windows-loader {
+    margin-bottom: 20px;
+  }
+  
+  .text-window, .video-window {
+    width: 90vw !important;
+    height: 80vh !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  /* For mobile devices, position power menu above the start menu */
+  .power-menu {
+    left: 0;
+    bottom: 100%;
+    margin-left: 0;
+    margin-bottom: 8px;
+  }
+  
+  /* Make sure tooltips still work well on mobile */
+  .power-menu-item .tooltip {
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+    margin-right: 0;
+  }
+}
+
+@keyframes turn-around {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(180deg); }
+}
+/* Well at least she organized these... sort of */
