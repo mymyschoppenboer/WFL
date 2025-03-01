@@ -813,7 +813,7 @@ Notes: Asset retrieval <br>
     </div>
     <div class="message">
         <span class="dev">sh3llsh0ck3d</span> <span class="timestamp">[04:07 UTC]</span>:  
-        Maybe she was just testing you to see if you woould actually listen
+        Maybe she was just testing you to see if you would actually listen
     </div>
     <div class="message">
         <span class="handler">RamZ33</span> <span class="timestamp">[04:08 UTC]</span>:  
