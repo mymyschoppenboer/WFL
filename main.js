@@ -1093,8 +1093,7 @@ function init() {
       "I have a foam dart with YOUR name on it",
       "こんに- I mean... hallo vriend!",
       "Deleting bottle.exe...",
-      "System running 12% slower than expected. Coco interference likely...",
-      "It's practically a national holiday today! You DO know what day it is right?"
+      "System running 12% slower than expected. Coco interference likely..."
     ];
 
     function showSpeechBubble() {

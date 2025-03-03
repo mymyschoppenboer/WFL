@@ -936,8 +936,8 @@ body.nederlands .control.close:hover {
   position: relative;
   bottom: 40px;
   left: 0;
-  width: 128px;
-  height: 128px;
+  width: 96px;
+  height: 96px;
   pointer-events: all;
   z-index: 10002;
   display: none;
