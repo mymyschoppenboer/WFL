@@ -1,22 +1,23 @@
 export function initializeExplorer() {
-  const closeButton = document.querySelector('.control.close');
-  const maximizeButton = document.querySelector('.control.maximize');
-  const minimizeButton = document.querySelector('.control.minimize');
-  const explorerWindow = document.querySelector('.explorer-window');
-  const windowHeader = document.querySelector('.window-header');
-  const fileList = document.querySelector('.file-list');
-  const windowTitle = document.querySelector('.window-title span');
-  const backButton = document.querySelector('.back-button');
+  const closeButton = document.querySelector(".control.close");
+  const maximizeButton = document.querySelector(".control.maximize");
+  const minimizeButton = document.querySelector(".control.minimize");
+  const explorerWindow = document.querySelector(".explorer-window");
+  const windowHeader = document.querySelector(".window-header");
+  const fileList = document.querySelector(".file-list");
+  const windowTitle = document.querySelector(".window-title span");
+  const backButton = document.querySelector(".back-button");
 
   // Navigation state
-  let currentPath = ['Users'];
-  
+  let currentPath = ["Users"];
+
   // Modified folder structure to include HTML content and video files
   const folderStructure = {
     Users: {
       Maya: {
-        Documents: {     'log-devchat-02-23-25.txt': { 
-            type: 'file', 
+        Documents: {
+          "log-devchat-02-23-25.txt": {
+            type: "file",
             content: `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -98,9 +99,10 @@ export function initializeExplorer() {
 </body>
 </html>
 
-`
-          }, 'log-devchat-02-24-25.txt': { 
-            type: 'file', 
+`,
+          },
+          "log-devchat-02-24-25.txt": {
+            type: "file",
             content: `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -190,11 +192,12 @@ export function initializeExplorer() {
 </body>
 </html>
 
-`
-          }},
-        Downloads: {          
-          'readme.txt': { 
-            type: 'file', 
+`,
+          },
+        },
+        Downloads: {
+          "readme.txt": {
+            type: "file",
             content: `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -306,24 +309,25 @@ export function initializeExplorer() {
                                                                                                                                                                                                        
     </pre>                                                  
 </body>                         
-`
-          }},
+`,
+          },
+        },
         Pictures: {},
         Videos: {
-          'wastedyears.mp4': {
-            type: 'file',
-            content: 'Video file'
+          "wastedyears.mp4": {
+            type: "file",
+            content: "Video file",
           },
-          'horrific.mp4': {
-            type: 'file',
-            content: 'Video file'
-          }
-        }
+          "horrific.mp4": {
+            type: "file",
+            content: "Video file",
+          },
+        },
       },
       Coco: {
-        Documents: {          
-          'log-devchat-02-16-25.txt': { 
-            type: 'file', 
+        Documents: {
+          "log-devchat-02-16-25.txt": {
+            type: "file",
             content: `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -405,11 +409,12 @@ export function initializeExplorer() {
     </div>
 </body>
 </html>
-`
-          }},
-        Downloads: {          
-          'readme.txt': { 
-            type: 'file', 
+`,
+          },
+        },
+        Downloads: {
+          "readme.txt": {
+            type: "file",
             content: `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -521,20 +526,21 @@ export function initializeExplorer() {
     </pre>
 </body>                                    
                 
-`
-          }},
+`,
+          },
+        },
         Pictures: {},
         Videos: {
-          'pbj.mp4': {
-            type: 'file',
-            content: 'Video file'
-          }
-        }
+          "pbj.mp4": {
+            type: "file",
+            content: "Video file",
+          },
+        },
       },
       Mymy: {
-        Documents: {          
-          'log-devchat-02-12-25.txt': { 
-            type: 'file', 
+        Documents: {
+          "log-devchat-02-12-25.txt": {
+            type: "file",
             content: `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -607,9 +613,10 @@ export function initializeExplorer() {
     </div>
 </body>
 </html>
-`
-          }, 'log-offtopic-02-27-25.txt': { 
-            type: 'file', 
+`,
+          },
+          "log-offtopic-02-27-25.txt": {
+            type: "file",
             content: `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -731,16 +738,18 @@ export function initializeExplorer() {
     </div>
 </body>
 </html>
-`
-          }, 'log-video-02-27-25.txt': { 
-            type: 'file', 
+`,
+          },
+          "log-video-02-27-25.txt": {
+            type: "file",
             content: `=== LOG === <br> 
 Timestamp: 2025-02-27 14:21:01 UTC  <br>
 Approximate Location: [NULL]  <br>
 Notes: Asset retrieval <br>  
-`
-          }, 'log-devchat-03-01-25.txt': { 
-            type: 'file', 
+`,
+          },
+          "log-devchat-03-01-25.txt": {
+            type: "file",
             content: `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -826,11 +835,12 @@ Notes: Asset retrieval <br>
 </body>
 </html>
 
-`
-          }},
-        Downloads: {          
-          'readme.txt': { 
-            type: 'file', 
+`,
+          },
+        },
+        Downloads: {
+          "readme.txt": {
+            type: "file",
             content: `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -907,7 +917,7 @@ Notes: Asset retrieval <br>
                          :@++++++=%*=============+@#%@#%=%@.       #*------------*#       .@%=%#@%#@+=============*%==+++++@-                         
                          -%+++++++%=================#==*+@    #%    @------------@    %#    @+*==#=================%+++++++*-                         
                          -%+++++++@=================#==*@+    -+    -+------+---+-    +-    +@*==#================+@++++++++-                         
-                         -%+++++++@+================#==*@.           %----------%           .@*==#================+@+++++++*-                         
+                         -%+++++++@+================#==*@.           %----------%           .@*==#================+@+++++++*-          Hallo Coco     
                          -@+++++++%+================#==*@            #----------#            @*==#===============++@+++++++#-                         
                          .@+++++++#++===============#==*@            .*--------*.            @*==#==============+++%+++++++@:                         
                           @+++++++%+++==============#==*@             #--------#             @*==#=============++++%+++++++@                          
@@ -943,34 +953,37 @@ Notes: Asset retrieval <br>
                                         
     </pre>
 </body>
-`
-          }},
+`,
+          },
+        },
         Pictures: {},
-        Videos: {'thisisasign.mp4': {
-            type: 'file',
-            content: 'Video file'
-          }}
-      }
-    }
+        Videos: {
+          "thisisasign.mp4": {
+            type: "file",
+            content: "Video file",
+          },
+        },
+      },
+    },
   };
 
   // Initially hide the explorer window
-  explorerWindow.style.display = 'none';
+  explorerWindow.style.display = "none";
 
-  explorerWindow.classList.add('window');
-  explorerWindow.dataset.title = 'File Explorer';
+  explorerWindow.classList.add("window");
+  explorerWindow.dataset.title = "File Explorer";
 
-  explorerWindow.addEventListener('show', () => {
+  explorerWindow.addEventListener("show", () => {
     window.addToTaskbar(explorerWindow);
   });
 
   function createFileElement(name, content) {
-    const div = document.createElement('div');
-    div.className = 'file-item';
-    
+    const div = document.createElement("div");
+    div.className = "file-item";
+
     // Choose icon based on file extension
     let iconPath;
-    if (name.endsWith('.mp4')) {
+    if (name.endsWith(".mp4")) {
       iconPath = `
         <svg viewBox="0 0 24 24">
           <path d="M4,6H2v14c0,1.1,0.9,2,2,2h14v-2H4V6z" fill="#7E57C2"/>
@@ -985,36 +998,42 @@ Notes: Asset retrieval <br>
         </svg>
       `;
     }
-    
+
     div.innerHTML = `
       ${iconPath}
       <span>${name}</span>
     `;
-    
-    if (name.endsWith('.mp4')) {
-      div.addEventListener('click', () => {
+
+    if (name.endsWith(".mp4")) {
+      div.addEventListener("click", () => {
         openVideoFile(name);
         // Add specific pet messages for video files
-        if (name === 'thisisasign.mp4' && window.showPetMessage) {
+        if (name === "thisisasign.mp4" && window.showPetMessage) {
           setTimeout(() => {
-            window.showPetMessage("Isn't it great when someone does their job right?");
+            window.showPetMessage(
+              "Isn't it great when someone does their job right?"
+            );
           }, 500);
-        } else if (name === 'pbj.mp4' && window.showPetMessage) {
+        } else if (name === "pbj.mp4" && window.showPetMessage) {
           setTimeout(() => {
-            window.showPetMessage("Someone really needs to teach Coco how to compress videos");
+            window.showPetMessage(
+              "Someone really needs to teach Coco how to compress videos"
+            );
           }, 500);
-        } else if (name === 'wastedyears.mp4' && window.showPetMessage) {
+        } else if (name === "wastedyears.mp4" && window.showPetMessage) {
           setTimeout(() => {
-            window.showPetMessage("I think Maya may have had a hand in making.... whatever this is");
+            window.showPetMessage(
+              "I think Maya may have had a hand in making.... whatever this is"
+            );
           }, 500);
-        } else if (name === 'horrific.mp4' && window.showPetMessage) {
+        } else if (name === "horrific.mp4" && window.showPetMessage) {
           setTimeout(() => {
             window.showPetMessage("...");
           }, 500);
         }
       });
     } else {
-      div.addEventListener('click', () => {
+      div.addEventListener("click", () => {
         openTextFile(name, content);
       });
     }
@@ -1022,8 +1041,8 @@ Notes: Asset retrieval <br>
   }
 
   function createFolderElement(name) {
-    const div = document.createElement('div');
-    div.className = 'file-item';
+    const div = document.createElement("div");
+    div.className = "file-item";
     div.innerHTML = `
       <svg viewBox="0 0 24 24">
         <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z" fill="#FFA000"/>
@@ -1035,12 +1054,12 @@ Notes: Asset retrieval <br>
   }
 
   function openTextFile(name, content) {
-    const textWindow = document.createElement('div');
-    textWindow.className = 'text-window window';
+    const textWindow = document.createElement("div");
+    textWindow.className = "text-window window";
     textWindow.dataset.title = name;
-    
+
     window.addToTaskbar(textWindow);
-    
+
     textWindow.innerHTML = `
       <div class="window-header">
         <div class="window-title">
@@ -1057,65 +1076,71 @@ Notes: Asset retrieval <br>
         </div>
       </div>
       <div class="text-content">
-        <iframe class="html-preview" srcdoc="${content.replace(/"/g, '&quot;')}" frameborder="0"></iframe>
+        <iframe class="html-preview" srcdoc="${content.replace(
+          /"/g,
+          "&quot;"
+        )}" frameborder="0"></iframe>
       </div>
     `;
 
-    const htmlPreview = textWindow.querySelector('.html-preview');
-    
+    const htmlPreview = textWindow.querySelector(".html-preview");
+
     // Create a temporary iframe to parse the HTML content
-    const tempIframe = document.createElement('iframe');
-    tempIframe.style.display = 'none';
+    const tempIframe = document.createElement("iframe");
+    tempIframe.style.display = "none";
     document.body.appendChild(tempIframe);
     tempIframe.contentDocument.write(content);
-    
+
     // Look for background-color in style tags
-    const styleTag = tempIframe.contentDocument.querySelector('style');
+    const styleTag = tempIframe.contentDocument.querySelector("style");
     if (styleTag) {
       const styleContent = styleTag.textContent;
-      const bgColorMatch = styleContent.match(/body\s*{[^}]*background-color:\s*([^;}\s]+)/);
+      const bgColorMatch = styleContent.match(
+        /body\s*{[^}]*background-color:\s*([^;}\s]+)/
+      );
       if (bgColorMatch) {
         const backgroundColor = bgColorMatch[1];
         // Apply the background color to the text-content div only
-        textWindow.querySelector('.text-content').style.backgroundColor = backgroundColor;
+        textWindow.querySelector(".text-content").style.backgroundColor =
+          backgroundColor;
       }
     }
-    
+
     document.body.removeChild(tempIframe);
     document.body.appendChild(textWindow);
     window.bringToFront(textWindow); // Bring to front when opened
 
-    textWindow.addEventListener('pointerdown', () => {
+    textWindow.addEventListener("pointerdown", () => {
       window.bringToFront(textWindow); // Bring to front on click
     });
 
     // Make the text window draggable
-    const textWindowHeader = textWindow.querySelector('.window-header');
+    const textWindowHeader = textWindow.querySelector(".window-header");
     let isDragging = false;
     let initialX, initialY;
     let isMaximized = false;
 
     // Center the window initially
     if (/Mobi|Android/i.test(navigator.userAgent)) {
-      textWindow.style.transform = 'none';
-      textWindow.style.width = '100%';
-      textWindow.style.height = 'calc(100% - 40px)';
-      textWindow.style.left = '0';
-      textWindow.style.top = '0';
+      textWindow.style.transform = "none";
+      textWindow.style.width = "100%";
+      textWindow.style.height = "calc(100% - 40px)";
+      textWindow.style.left = "0";
+      textWindow.style.top = "0";
       isMaximized = true;
     } else {
       const centerX = (window.innerWidth - 500) / 2;
       const centerY = (window.innerHeight - 400) / 2;
       textWindow.style.left = `${centerX}px`;
       textWindow.style.top = `${centerY}px`;
-      textWindow.style.width = '500px';
-      textWindow.style.height = '400px';
-      textWindow.style.transform = 'none';
+      textWindow.style.width = "500px";
+      textWindow.style.height = "400px";
+      textWindow.style.transform = "none";
       isMaximized = false;
     }
 
-    textWindowHeader.addEventListener('pointerdown', e => {
-      if (e.target.classList.contains('control')) return;
+    textWindowHeader.addEventListener("pointerdown", (e) => {
+      if (e.target.classList.contains("control")) return;
       if (isMaximized) return;
 
       // Use pointer capture for better mobile support
@@ -1125,31 +1150,31 @@ Notes: Asset retrieval <br>
       const rect = textWindow.getBoundingClientRect();
       initialX = e.clientX - rect.left;
       initialY = e.clientY - rect.top;
-      
+
       isDragging = true;
     });
 
-    textWindowHeader.addEventListener('pointermove', e => {
+    textWindowHeader.addEventListener("pointermove", (e) => {
       if (isDragging) {
         e.preventDefault();
         // Calculate the new position
         const newX = e.clientX - initialX;
         const newY = e.clientY - initialY;
-        
+
         // Apply the new position
         textWindow.style.left = `${newX}px`;
         textWindow.style.top = `${newY}px`;
       }
     });
 
-    textWindowHeader.addEventListener('pointerup', e => {
+    textWindowHeader.addEventListener("pointerup", (e) => {
       if (isDragging) {
         textWindowHeader.releasePointerCapture(e.pointerId);
         isDragging = false;
       }
     });
 
-    textWindowHeader.addEventListener('pointercancel', e => {
+    textWindowHeader.addEventListener("pointercancel", (e) => {
       if (isDragging) {
         textWindowHeader.releasePointerCapture(e.pointerId);
         isDragging = false;
@@ -1157,42 +1182,42 @@ Notes: Asset retrieval <br>
     });
 
     // Add maximize functionality
-    textWindow.querySelector('.maximize').addEventListener('click', () => {
+    textWindow.querySelector(".maximize").addEventListener("click", () => {
       if (isMaximized) {
-        textWindow.style.width = '500px';
-        textWindow.style.height = '400px';
-        textWindow.style.top = '50%';
-        textWindow.style.left = '50%';
-        textWindow.style.transform = 'translate(-50%, -50%)';
+        textWindow.style.width = "500px";
+        textWindow.style.height = "400px";
+        textWindow.style.top = "50%";
+        textWindow.style.left = "50%";
+        textWindow.style.transform = "translate(-50%, -50%)";
       } else {
-        textWindow.style.width = '100%';
-        textWindow.style.height = 'calc(100% - 40px)';
-        textWindow.style.top = '0';
-        textWindow.style.left = '0';
-        textWindow.style.transform = 'none';
+        textWindow.style.width = "100%";
+        textWindow.style.height = "calc(100% - 40px)";
+        textWindow.style.top = "0";
+        textWindow.style.left = "0";
+        textWindow.style.transform = "none";
       }
       isMaximized = !isMaximized;
     });
 
     // Add minimize functionality
-    textWindow.querySelector('.minimize').addEventListener('click', () => {
-      textWindow.style.display = 'none';
+    textWindow.querySelector(".minimize").addEventListener("click", () => {
+      textWindow.style.display = "none";
     });
 
-    const closeButton = textWindow.querySelector('.close');
-    closeButton.addEventListener('click', () => {
+    const closeButton = textWindow.querySelector(".close");
+    closeButton.addEventListener("click", () => {
       document.body.removeChild(textWindow);
       window.removeFromTaskbar(textWindow);
     });
   }
 
   function openVideoFile(name) {
-    const videoWindow = document.createElement('div');
-    videoWindow.className = 'text-window video-window window';
+    const videoWindow = document.createElement("div");
+    videoWindow.className = "text-window video-window window";
     videoWindow.dataset.title = name;
-    
+
     window.addToTaskbar(videoWindow);
-    
+
     videoWindow.innerHTML = `
       <div class="window-header">
         <div class="window-title">
@@ -1219,37 +1244,37 @@ Notes: Asset retrieval <br>
     document.body.appendChild(videoWindow);
     window.bringToFront(videoWindow);
 
-    videoWindow.addEventListener('pointerdown', () => {
+    videoWindow.addEventListener("pointerdown", () => {
       window.bringToFront(videoWindow);
     });
 
     // Make the video window draggable
-    const videoWindowHeader = videoWindow.querySelector('.window-header');
+    const videoWindowHeader = videoWindow.querySelector(".window-header");
     let isDragging = false;
     let initialX, initialY;
     let isMaximized = false;
 
     // Center the window initially
     if (/Mobi|Android/i.test(navigator.userAgent)) {
-      videoWindow.style.transform = 'none';
-      videoWindow.style.width = '100%';
-      videoWindow.style.height = 'calc(100% - 40px)';
-      videoWindow.style.top = '0';
-      videoWindow.style.left = '0';
+      videoWindow.style.transform = "none";
+      videoWindow.style.width = "100%";
+      videoWindow.style.height = "calc(100% - 40px)";
+      videoWindow.style.top = "0";
+      videoWindow.style.left = "0";
       isMaximized = true;
     } else {
       const centerX = (window.innerWidth - 800) / 2;
       const centerY = (window.innerHeight - 600) / 2;
       videoWindow.style.left = `${centerX}px`;
       videoWindow.style.top = `${centerY}px`;
-      videoWindow.style.width = '800px';
-      videoWindow.style.height = '600px';
-      videoWindow.style.transform = 'none';
+      videoWindow.style.width = "800px";
+      videoWindow.style.height = "600px";
+      videoWindow.style.transform = "none";
       isMaximized = false;
     }
 
-    videoWindowHeader.addEventListener('pointerdown', e => {
-      if (e.target.classList.contains('control')) return;
+    videoWindowHeader.addEventListener("pointerdown", (e) => {
+      if (e.target.classList.contains("control")) return;
       if (isMaximized) return;
 
       // Use pointer capture for better mobile support
@@ -1259,31 +1284,31 @@ Notes: Asset retrieval <br>
       const rect = videoWindow.getBoundingClientRect();
       initialX = e.clientX - rect.left;
       initialY = e.clientY - rect.top;
-      
+
       isDragging = true;
     });
 
-    videoWindowHeader.addEventListener('pointermove', e => {
+    videoWindowHeader.addEventListener("pointermove", (e) => {
       if (isDragging) {
         e.preventDefault();
         // Calculate the new position
         const newX = e.clientX - initialX;
         const newY = e.clientY - initialY;
-        
+
         // Apply the new position
         videoWindow.style.left = `${newX}px`;
         videoWindow.style.top = `${newY}px`;
       }
     });
 
-    videoWindowHeader.addEventListener('pointerup', e => {
+    videoWindowHeader.addEventListener("pointerup", (e) => {
       if (isDragging) {
         videoWindowHeader.releasePointerCapture(e.pointerId);
         isDragging = false;
       }
     });
 
-    videoWindowHeader.addEventListener('pointercancel', e => {
+    videoWindowHeader.addEventListener("pointercancel", (e) => {
       if (isDragging) {
         videoWindowHeader.releasePointerCapture(e.pointerId);
         isDragging = false;
@@ -1291,37 +1316,37 @@ Notes: Asset retrieval <br>
     });
 
     // Add maximize functionality
-    videoWindow.querySelector('.maximize').addEventListener('click', () => {
+    videoWindow.querySelector(".maximize").addEventListener("click", () => {
       if (isMaximized) {
-        videoWindow.style.width = '800px';
-        videoWindow.style.height = '600px';
-        videoWindow.style.top = '50%';
-        videoWindow.style.left = '50%';
-        videoWindow.style.transform = 'translate(-50%, -50%)';
+        videoWindow.style.width = "800px";
+        videoWindow.style.height = "600px";
+        videoWindow.style.top = "50%";
+        videoWindow.style.left = "50%";
+        videoWindow.style.transform = "translate(-50%, -50%)";
       } else {
-        videoWindow.style.width = '100%';
-        videoWindow.style.height = 'calc(100% - 40px)';
-        videoWindow.style.top = '0';
-        videoWindow.style.left = '0';
-        videoWindow.style.transform = 'none';
+        videoWindow.style.width = "100%";
+        videoWindow.style.height = "calc(100% - 40px)";
+        videoWindow.style.top = "0";
+        videoWindow.style.left = "0";
+        videoWindow.style.transform = "none";
       }
       isMaximized = !isMaximized;
     });
 
     // Add minimize functionality
-    videoWindow.querySelector('.minimize').addEventListener('click', () => {
-      videoWindow.style.display = 'none';
+    videoWindow.querySelector(".minimize").addEventListener("click", () => {
+      videoWindow.style.display = "none";
     });
 
-    const closeButton = videoWindow.querySelector('.close');
-    closeButton.addEventListener('click', () => {
+    const closeButton = videoWindow.querySelector(".close");
+    closeButton.addEventListener("click", () => {
       document.body.removeChild(videoWindow);
       window.removeFromTaskbar(videoWindow);
     });
   }
 
   // Add back button functionality
-  backButton.addEventListener('click', () => {
+  backButton.addEventListener("click", () => {
     if (currentPath.length > 1) {
       currentPath.pop();
       updateExplorerContent();
@@ -1340,15 +1365,15 @@ Notes: Asset retrieval <br>
 
     // Update back button state
     backButton.disabled = currentPath.length <= 1;
-    backButton.style.opacity = currentPath.length <= 1 ? '0.5' : '1';
+    backButton.style.opacity = currentPath.length <= 1 ? "0.5" : "1";
 
     // Clear current content
-    fileList.innerHTML = '';
+    fileList.innerHTML = "";
 
     // If we're not at root, show parent folder option
     if (currentPath.length > 1) {
-      const parentFolder = createFolderElement('..');
-      parentFolder.addEventListener('click', () => {
+      const parentFolder = createFolderElement("..");
+      parentFolder.addEventListener("click", () => {
         currentPath.pop();
         updateExplorerContent();
       });
@@ -1357,12 +1382,12 @@ Notes: Asset retrieval <br>
 
     // Add folders and files for current level
     Object.entries(currentFolder).forEach(([name, item]) => {
-      if (item.type === 'file') {
+      if (item.type === "file") {
         const fileElement = createFileElement(name, item.content);
         fileList.appendChild(fileElement);
       } else {
         const folderElement = createFolderElement(name);
-        folderElement.addEventListener('click', () => {
+        folderElement.addEventListener("click", () => {
           currentPath.push(name);
           updateExplorerContent();
         });
@@ -1383,17 +1408,17 @@ Notes: Asset retrieval <br>
   let isMaximized = false; // Track maximized state for explorer window
 
   function dragStart(e) {
-    if (e.target.classList.contains('control')) return;
+    if (e.target.classList.contains("control")) return;
     if (isMaximized) return; // Prevent dragging if maximized
-    
+
     // Use pointer capture for better mobile support
     windowHeader.setPointerCapture(e.pointerId);
-    
+
     // Get the current position
     const rect = explorerWindow.getBoundingClientRect();
     initialX = e.clientX - rect.left;
     initialY = e.clientY - rect.top;
-    
+
     if (e.target === windowHeader || e.target.parentElement === windowHeader) {
       isDragging = true;
     }
@@ -1402,13 +1427,13 @@ Notes: Asset retrieval <br>
   function drag(e) {
     if (isDragging) {
       e.preventDefault();
-      
+
       // Calculate the new position
       currentX = e.clientX - initialX;
       currentY = e.clientY - initialY;
-      
+
       // Apply the new position
-      explorerWindow.style.transform = 'none';
+      explorerWindow.style.transform = "none";
       explorerWindow.style.left = `${currentX}px`;
       explorerWindow.style.top = `${currentY}px`;
     }
@@ -1422,67 +1447,67 @@ Notes: Asset retrieval <br>
   }
 
   // Update event listeners to support pointer capture
-  windowHeader.addEventListener('pointerdown', dragStart);
-  windowHeader.addEventListener('pointermove', drag);
-  windowHeader.addEventListener('pointerup', dragEnd);
-  windowHeader.addEventListener('pointercancel', dragEnd);
+  windowHeader.addEventListener("pointerdown", dragStart);
+  windowHeader.addEventListener("pointermove", drag);
+  windowHeader.addEventListener("pointerup", dragEnd);
+  windowHeader.addEventListener("pointercancel", dragEnd);
 
   // Window controls
-  closeButton.addEventListener('click', () => {
-    explorerWindow.style.display = 'none';
+  closeButton.addEventListener("click", () => {
+    explorerWindow.style.display = "none";
     window.removeFromTaskbar(explorerWindow);
     // Reset path when closing
-    currentPath = ['Users'];
+    currentPath = ["Users"];
     updateExplorerContent();
   });
 
-  maximizeButton.addEventListener('click', () => {
+  maximizeButton.addEventListener("click", () => {
     if (isMaximized) {
-      explorerWindow.style.width = '800px';
-      explorerWindow.style.height = '600px';
-      explorerWindow.style.top = '50%';
-      explorerWindow.style.left = '50%';
-      explorerWindow.style.transform = 'translate(-50%, -50%)';
+      explorerWindow.style.width = "800px";
+      explorerWindow.style.height = "600px";
+      explorerWindow.style.top = "50%";
+      explorerWindow.style.left = "50%";
+      explorerWindow.style.transform = "translate(-50%, -50%)";
       xOffset = 0;
       yOffset = 0;
     } else {
-      explorerWindow.style.width = '100%';
-      explorerWindow.style.height = 'calc(100% - 40px)';
-      explorerWindow.style.top = '0';
-      explorerWindow.style.left = '0';
-      explorerWindow.style.transform = 'none';
+      explorerWindow.style.width = "100%";
+      explorerWindow.style.height = "calc(100% - 40px)";
+      explorerWindow.style.top = "0";
+      explorerWindow.style.left = "0";
+      explorerWindow.style.transform = "none";
     }
     isMaximized = !isMaximized;
   });
 
-  minimizeButton.addEventListener('click', () => {
-    explorerWindow.style.display = 'none';
+  minimizeButton.addEventListener("click", () => {
+    explorerWindow.style.display = "none";
   });
 
   // Function to open explorer
-  window.openExplorer = function() {
-    explorerWindow.style.display = 'flex';
-    
+  window.openExplorer = function () {
+    explorerWindow.style.display = "flex";
+
     // Check if mobile device for automatic fullscreen
     if (/Mobi|Android/i.test(navigator.userAgent)) {
-      explorerWindow.style.width = '100%';
-      explorerWindow.style.height = 'calc(100% - 40px)';
-      explorerWindow.style.top = '0';
-      explorerWindow.style.left = '0';
-      explorerWindow.style.transform = 'none';
+      explorerWindow.style.width = "100%";
+      explorerWindow.style.height = "calc(100% - 40px)";
+      explorerWindow.style.top = "0";
+      explorerWindow.style.left = "0";
+      explorerWindow.style.transform = "none";
       isMaximized = true;
     } else {
-      explorerWindow.style.width = '800px'; 
-      explorerWindow.style.height = '600px'; 
-      explorerWindow.style.top = '50%';       
-      explorerWindow.style.left = '50%';      
-      explorerWindow.style.transform = 'translate(-50%, -50%)';
+      explorerWindow.style.width = "800px";
+      explorerWindow.style.height = "600px";
+      explorerWindow.style.top = "50%";
+      explorerWindow.style.left = "50%";
+      explorerWindow.style.transform = "translate(-50%, -50%)";
       isMaximized = false;
     }
-                    
+
     xOffset = 0;
     yOffset = 0;
-    currentPath = ['Users'];
+    currentPath = ["Users"];
     updateExplorerContent();
     window.addToTaskbar(explorerWindow);
   };
