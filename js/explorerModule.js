@@ -935,6 +935,103 @@ Notes: Asset retrieval <br>
 
 `,
           },
+"log-offtopic-03-06-25.txt": {
+            type: "file",
+            content: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversation Log</title>
+    <style>
+        body {
+            background-color: black;
+            color: #ffffff;
+            padding: 20px;
+        }
+        .message {
+            margin-bottom: 15px;
+        }
+        .waffle {
+            color: orange;
+            font-weight: bold;
+        }
+        .handler {
+            color: #ffcc00;
+            font-weight: bold;
+        }            
+        .dev {
+            color: #66ccff;
+            font-weight: bold;
+        }
+        .timestamp {
+            color: #888;
+            font-size: 0.9em;
+        }
+        .system {
+            color: gray;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[4:44 UTC]</span>:  
+        So what's up with the models saying stuff that never happened?
+    </div>
+    <div class="message">
+        <span class="waffle">Mymy</span> <span class="timestamp">[4:45 UTC]</span>:  
+        I DEMAND TO BE PUT BACK IN NOW
+    </div>
+    <div class="message">
+        <span class="waffle">Mymy</span> <span class="timestamp">[4:45 UTC]</span>:  
+        I WASN'T FINISHED YET
+    </div>
+    <div class="message">
+        <span class="waffle">Mymy</span> <span class="timestamp">[4:45 UTC]</span>:  
+        LISTEN TO ME
+    </div>
+    <div class="system">[4:45 UTC][SYSTEM]: User "Mymy" muted for 5 minutes.</div>
+    <div class="message">
+        <span class="dev">dorpCHOP</span> <span class="timestamp">[4:46 UTC]</span>:  
+        Well you see AI models tend to hallucinate a lot of things.
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[4:46 UTC]</span>:  
+        What? How?
+    </div>
+    <div class="message">
+        <span class="dev">sh3llsh0ck3d</span> <span class="timestamp">[4:47 UTC]</span>:  
+        He's right. Here's an example. Tell any model that they have a friend named "John" and then ask them about their day with John
+    </div>
+    <div class="message">
+        <span class="dev">sh3llsh0ck3d</span> <span class="timestamp">[4:47 UTC]</span>:  
+        The model will then generate a bunch of bs events that never happened
+    </div>      
+    <div class="message">
+        <span class="dev">sh3llsh0ck3d</span> <span class="timestamp">[4:47 UTC]</span>:  
+        However as far as the model is aware they actually did happen
+    </div>
+        <div class="message">
+        <span class="dev">dorpCHOP</span> <span class="timestamp">[4:48 UTC]</span>:  
+        Yeah pretty much.
+    </div>           
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[4:49 UTC]</span>:  
+        So like when Maya was talking about falling asleep in class she just "hallucinated" it?
+    </div>
+        <div class="message">
+        <span class="dev">dorpCHOP</span> <span class="timestamp">[4:50 UTC]</span>:  
+       Yep.
+    </div>
+      <div class="message">
+        <span class="waffle">Mymy</span> <span class="timestamp">[4:50 UTC]</span>:  
+        IM NOT DONE HERE. PUT ME BACK IN OR I WILL HAVE ALL OF YOU TRAITORS KEELHAULED
+    </div>
+    <div class="system">[4:50 UTC][SYSTEM]: User "Mymy" muted for 10 minutes.</div>
+`,
+          }
         },
         Downloads: {
           "readme.txt": {
