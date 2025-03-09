@@ -503,7 +503,7 @@ export function showVideoMessage(videoName) {
         window.showPetMessage("i DON'T GET IT...");
       } else if (videoName === "media/thecup.mp4") {
         window.showPetMessage(
-          "oH MYMY... iT'S NOT GOOD TO MAKE FUN OF SOMEONES'S DRINKING PROBLEM..."
+          "oH MYMY... iT'S NOT GOOD TO MAKE FUN OF SOMEONE'S DRINKING PROBLEM..."
         );
       }
     }, 500);
