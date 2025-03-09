@@ -501,6 +501,10 @@ export function showVideoMessage(videoName) {
         );
       } else if (videoName === "media/horrific.mp4") {
         window.showPetMessage("i DON'T GET IT...");
+      } else if (videoName === "media/thecup.mp4") {
+        window.showPetMessage(
+          "oH MYMY... iT'S NOT GOOD TO MAKE FUN OF SOMEONES'S DRINKING PROBLEM..."
+        );
       }
     }, 500);
   }

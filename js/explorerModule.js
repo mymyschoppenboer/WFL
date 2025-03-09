@@ -1157,6 +1157,11 @@ Notes: Asset retrieval <br>
             type: "file",
             content: "Video file",
           },
+          
+          "thecup.mp4": {
+            type: "file",
+            content: "Video file",
+          },
         },
       },
     },
