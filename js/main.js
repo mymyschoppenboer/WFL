@@ -1,6 +1,6 @@
-import { updateTime } from './timeModule.js';
-import { initializeExplorer } from './explorerModule.js';
-import { initializeTaskbarpet, setupTaskbarpet } from './taskbarpetModule.js';
+import { updateTime } from './timeModule.js?v=1';
+import { initializeExplorer } from './explorerModule.js?v=1';
+import { initializeTaskbarpet, setupTaskbarpet } from './taskbarpetModule.js?v=1';
 
 import { showSteamMessage, showMayaStressReliefMessage, showNederlandsModeMessage, showVolumeZeroMessage, showUsersClickMessage } from './taskbarpetModule.js';
 

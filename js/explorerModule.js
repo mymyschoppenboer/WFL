@@ -1,4 +1,4 @@
-import { showVideoMessage } from "./taskbarpetModule.js";
+import { showVideoMessage } from "./taskbarpetModule.js?v=1";
 
 export function initializeExplorer() {
   const closeButton = document.querySelector(".control.close");
