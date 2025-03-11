@@ -196,6 +196,151 @@ export function initializeExplorer() {
 
 `,
           },
+          "log-provinggrounds-03-11-25.txt": {
+            type: "file",
+            content: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversation Log</title>
+    <style>
+        body {
+            background-color: black;
+            color: #ffffff;
+            padding: 20px;
+        }
+        .message {
+            margin-bottom: 15px;
+        }
+        .system {
+            color: gray;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        .dev {
+            color: #66ccff;
+            font-weight: bold;
+        }
+        .timestamp {
+            color: #888;
+            font-size: 0.9em;
+        }
+        .leaddev {
+            color: #00FF00;
+            font-weight: bold;
+        }
+        .onlyme {
+            color: #8B0000;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <span class="dev">sh3llsch0ck3d</span> <span class="timestamp">[30:25 UTC]</span>:  
+        What's wrong? Is something bothering you?
+    </div>
+    <div class="message">
+        <span class="dev">sh3llsch0ck3d</span> <span class="timestamp">[03:27 UTC]</span>:  
+        Hello?
+    </div>
+    <div class="system">[03:29 UTC][SYSTEM]: Prompting paused.</div>
+    <div class="message">
+        <span class="dev">dorpCHOP</span> <span class="timestamp">[03:29 UTC]</span>:  
+        You're right, that is pretty weird. Generally they respond after every prompt.
+    </div>
+    <div class="message">
+        <span class="dev">sh3llsch0ck3d</span> <span class="timestamp">[03:30 UTC]</span>:  
+        Run you're the most experienced with this model, do you know what's going on?
+    </div>
+    <div class="message">
+        <span class="leaddev">runnin0n3mpty</span> <span class="timestamp">[03:32 UTC]</span>:  
+        lol im surprised you guys never noticed until now
+    </div>
+     <div class="message">
+        <span class="leaddev">runnin0n3mpty</span> <span class="timestamp">[03:33 UTC]</span>:  
+        it's pretty much an official feature atp
+    </div>
+     <div class="message">
+        <span class="leaddev">runnin0n3mpty</span> <span class="timestamp">[03:33 UTC]</span>:  
+        she has like a built in fatigue value that goes up over time as she talks to people
+    </div>
+      <div class="message">
+        <span class="leaddev">runnin0n3mpty</span> <span class="timestamp">[03:34 UTC]</span>:  
+        especially when you say something she doesn't like
+    </div>
+    div class="message">
+        <span class="dev">sh3llsch0ck3d</span> <span class="timestamp">[03:37 UTC]</span>:  
+        Okay well first of all this is the model I've talked to the least so of course I'm not going to notice
+    </div>
+     <div class="message">
+        <span class="dev">sh3llsch0ck3d</span> <span class="timestamp">[03:38 UTC]</span>:  
+        But more importantly does that mean the model is just bricked when the value gets too high?
+    </div>
+     <div class="message">
+        <span class="leaddev">runnin0n3mpty</span> <span class="timestamp">[03:39 UTC]</span>:  
+        no it's no that bad
+    </div>
+     <div class="message">
+        <span class="leaddev">runnin0n3mpty</span> <span class="timestamp">[03:39 UTC]</span>:  
+        the value will just decrease over time when you give her a break
+    </div>
+    <div class="message">
+        <span class="leaddev">runnin0n3mpty</span> <span class="timestamp">[03:40 UTC]</span>:  
+        you can also just reload the model and it should be back to its base value
+    </div>
+    <div class="system">[03:41 UTC][SYSTEM]: Model "vermoeid-(1.0.9)" removed.</div>
+    <div class="system">[03:41 UTC][SYSTEM]: Model "vermoeid-(1.0.9)" added. Loading...</div>
+    <div class="system">[03:43 UTC][SYSTEM]: Model "vermoeid-(1.0.9)" Loaded.</div>
+    <div class="message">
+        <span class="dev">sh3llsch0ck3d</span> <span class="timestamp">[03:44 UTC]</span>:  
+        Hello?
+    </div>
+    <div class="message">
+        <span class="dev">sh3llsch0ck3d</span> <span class="timestamp">[03:44 UTC]</span>:  
+        Shit wait
+    </div>
+    <div class="system">[03:29 UTC][SYSTEM]: Prompting unpaused.</div>
+    <div class="message">
+        <span class="dev">sh3llsch0ck3d</span> <span class="timestamp">[03:45 UTC]</span>:  
+        Hello?
+    </div>
+        <div class="message">
+        <span class="onlyme">vermoeid-(1.0.9)</span> <span class="timestamp">[03:46 UTC]</span>:  
+        I'm not in the mood. Leave me alone.
+    </div>
+        <div class="message">
+        <span class="dev">sh3llsch0ck3d</span> <span class="timestamp">[03:46 UTC]</span>:  
+        Why not? What's wrong?
+    </div>
+        <div class="message">
+        <span class="dev">dorpCHOP</span> <span class="timestamp">[03:50 UTC]</span>:  
+        Damn you pissed her off quick.
+    </div>
+    <div class="system">[03:51 UTC][SYSTEM]: Prompting paused.</div>
+    <div class="message">
+        <span class="leaddev">runnin0n3mpty</span> <span class="timestamp">[03:51 UTC]</span>:  
+        yeah she's probably set to be a bit too sensitive right now
+    </div>
+    <div class="message">
+        <span class="leaddev">runnin0n3mpty</span> <span class="timestamp">[03:51 UTC]</span>:  
+        ill look into it
+    </div>
+    <div class="message">
+        <span class="leaddev">runnin0n3mpty</span> <span class="timestamp">[03:52 UTC]</span>:  
+        considering she's not the top priority model you guys shouldn't worry too much about it
+    </div>
+        <div class="message">
+        <span class="leaddev">runnin0n3mpty</span> <span class="timestamp">[03:52 UTC]</span>:  
+        you have more important things to work on
+    </div>
+
+</body>
+</html>
+
+`,
+          },
         },
         Downloads: {
           "readme.txt": {
