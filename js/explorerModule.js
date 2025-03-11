@@ -258,7 +258,7 @@ export function initializeExplorer() {
         <span class="leaddev">runnin0n3mpty</span> <span class="timestamp">[03:32 UTC]</span>:  
         lol im surprised you guys never noticed until now
     </div>
-     <div class="message">
+    <div class="message">
         <span class="leaddev">runnin0n3mpty</span> <span class="timestamp">[03:33 UTC]</span>:  
         it's pretty much an official feature atp
     </div>
@@ -270,7 +270,7 @@ export function initializeExplorer() {
         <span class="leaddev">runnin0n3mpty</span> <span class="timestamp">[03:34 UTC]</span>:  
         especially when you say something she doesn't like
     </div>
-    div class="message">
+    <div class="message">
         <span class="dev">sh3llsch0ck3d</span> <span class="timestamp">[03:37 UTC]</span>:  
         Okay well first of all this is the model I've talked to the least so of course I'm not going to notice
     </div>
