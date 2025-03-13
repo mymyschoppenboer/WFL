@@ -1,8 +1,8 @@
-import { updateTime } from './timeModule.js?v=1';
-import { initializeExplorer } from './explorerModule.js?v=1';
-import { initializeTaskbarpet, setupTaskbarpet } from './taskbarpetModule.js?v=1';
+import { updateTime } from './timeModule.js?v=2';
+import { initializeExplorer } from './explorerModule.js?v=2';
+import { initializeTaskbarpet, setupTaskbarpet } from './taskbarpetModule.js?v=2';
 
-import { showSteamMessage, showMayaStressReliefMessage, showNederlandsModeMessage, showVolumeZeroMessage, showUsersClickMessage } from './taskbarpetModule.js';
+import { showSteamMessage, showMayaStressReliefMessage, showNederlandsModeMessage, showVolumeZeroMessage, showUsersClickMessage, showMymycraftGameMessage, showSteamLibraryMessage } from './taskbarpetModule.js?v=2';
 
 function createSteamWindow() {
   // Show pet message every time Steam is opened
@@ -30,7 +30,7 @@ function createSteamWindow() {
     <div class="steam-content" style="background-color: #000;">
       <img src="images/steam-logo-black-transparent.png" alt="Steam" class="steam-logo" style="width: 10Vw; height: auto;">
       <form class="steam-form">
-        <input type="text" class="steam-input" placeholder="Steam Account Name">
+        <input type="text" class="steam-input" placeholder="Email">
         <input type="password" class="steam-input" placeholder="Password">
         <button type="button" class="steam-button">Sign in</button>
       </form>
@@ -120,12 +120,69 @@ function createSteamWindow() {
     removeFromTaskbar(steamWindow);
   });
 
-  steamWindow.querySelector('.steam-button').addEventListener('click', () => {
+  // Function to handle login attempt
+  const attemptLogin = () => {
+    const emailInput = steamWindow.querySelector('.steam-input[placeholder="Email"]');
+    const passwordInput = steamWindow.querySelector('.steam-input[placeholder="Password"]');
+    const email = emailInput.value;
+    const password = passwordInput.value;
     const button = steamWindow.querySelector('.steam-button');
-    button.textContent = 'We have detected multiple failed login attempts from this IP. Please try again in 999999 seconds.';
-    button.style.background = '#32353c';
-    button.style.fontSize = '12px';
-    button.style.cursor = 'not-allowed';
+    //USE THIS TO FIND THE PASSWORD IF YOU'RE BELGIAN
+    //USE THIS TO FIND THE PASSWORD IF YOU'RE BELGIAN
+    //USE THIS TO FIND THE PASSWORD IF YOU'RE BELGIAN
+    //USE THIS TO FIND THE PASSWORD IF YOU'RE BELGIAN
+    //USE THIS TO FIND THE PASSWORD IF YOU'RE BELGIAN
+    //USE THIS TO FIND THE PASSWORD IF YOU'RE BELGIAN
+    //USE THIS TO FIND THE PASSWORD IF YOU'RE BELGIAN
+    //USE THIS TO FIND THE PASSWORD IF YOU'RE BELGIAN
+    //USE THIS TO FIND THE PASSWORD IF YOU'RE BELGIAN
+    //USE THIS TO FIND THE PASSWORD IF YOU'RE BELGIAN
+    //USE THIS TO FIND THE PASSWORD IF YOU'RE BELGIAN
+    //USE THIS TO FIND THE PASSWORD IF YOU'RE BELGIAN
+    //USE THIS TO FIND THE PASSWORD IF YOU'RE BELGIAN
+    //USE THIS TO FIND THE PASSWORD IF YOU'RE BELGIAN
+    //USE THIS TO FIND THE PASSWORD IF YOU'RE BELGIAN
+    if (email === "mayadebae@mail.com" && password === "oranjekat03") {
+      // Close the login window
+      document.body.removeChild(steamWindow);
+      removeFromTaskbar(steamWindow);
+      
+      // Open the Steam library
+      createSteamLibrary();
+    } else {
+      // Show "Invalid password" for 2 seconds
+      button.textContent = 'Invalid email/password';
+      button.style.background = '#32353c';
+      button.style.cursor = 'not-allowed';
+      
+      // Disable inputs during the timeout
+      emailInput.disabled = true;
+      passwordInput.disabled = true;
+      button.disabled = true;
+      
+      // Reset after 2 seconds
+      setTimeout(() => {
+        button.textContent = 'Sign in';
+        button.style.background = 'linear-gradient(to right, #47bfff, #1a44c2)';
+        button.style.cursor = 'pointer';
+        emailInput.disabled = false;
+        passwordInput.disabled = false;
+        button.disabled = false;
+        passwordInput.value = '';
+        passwordInput.focus();
+      }, 2000);
+    }
+  };
+  
+  // Add click event listener to the button
+  steamWindow.querySelector('.steam-button').addEventListener('click', attemptLogin);
+  
+  // Add keydown event listener for Enter key
+  steamWindow.querySelector('.steam-form').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      attemptLogin();
+    }
   });
 
   const helpLink = steamWindow.querySelector('#steam-help-link');
@@ -961,6 +1018,233 @@ function makeTouchFriendly() {
     windowHeader.addEventListener('pointerup', onPointerUp);
     windowHeader.addEventListener('pointercancel', onPointerUp);
   });
+}
+
+function createSteamLibrary() {
+  // Show pet message when Steam library is opened
+  showSteamLibraryMessage();
+
+  const steamLibraryWindow = document.createElement('div');
+  steamLibraryWindow.className = 'steam-window window';
+  steamLibraryWindow.dataset.title = 'Steam';
+
+  // Add to taskbar immediately when created
+  addToTaskbar(steamLibraryWindow);
+
+  steamLibraryWindow.innerHTML = `
+    <div class="window-header">
+      <div class="window-title">
+        <img src="images/Steam_icon_logo.png" alt="Steam" style="width: 2Vw; height: 2Vw;">
+        <span style="color: black;">Steam Library</span>
+      </div>
+      <div class="window-controls">
+        <div class="control minimize">─</div>
+        <div class="control maximize">□</div>
+        <div class="control close">×</div>
+      </div>
+    </div>
+    <div class="steam-content" style="background-color: #1b2838; padding: 20px;">
+      <div class="steam-library-header">
+        <div class="steam-nav">
+          <div class="steam-nav-item active">LIBRARY</div>
+          <div class="steam-nav-item">STORE</div>
+          <div class="steam-nav-item">COMMUNITY</div>
+          <div class="steam-nav-item">mayadebae</div>
+        </div>
+      </div>
+      <div class="steam-library-content">
+        <div class="game-item">
+          <img src="images/mymycraft.png" alt="Mymycraft" class="game-image">
+          <div class="game-info">
+            <div class="game-title">Mymycraft</div>
+            <div class="game-status">Ready to Play</div>
+            <button class="play-button">PLAY</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(steamLibraryWindow);
+  window.bringToFront(steamLibraryWindow);
+
+  steamLibraryWindow.addEventListener('pointerdown', () => {
+    window.bringToFront(steamLibraryWindow);
+  });
+
+  let isDragging = false;
+  let currentX;
+  let currentY;
+  let initialX;
+  let initialY;
+  let xOffset = 0;
+  let yOffset = 0;
+  let isMaximized = false;
+
+  const windowHeader = steamLibraryWindow.querySelector('.window-header');
+  const minimizeButton = steamLibraryWindow.querySelector('.control.minimize');
+  const maximizeButton = steamLibraryWindow.querySelector('.control.maximize');
+  const closeButton = steamLibraryWindow.querySelector('.close');
+
+  windowHeader.addEventListener('pointerdown', (e) => {
+    if (e.target.classList.contains('control')) return;
+    if (isMaximized) return;
+
+    const rect = steamLibraryWindow.getBoundingClientRect();
+    xOffset = rect.left;
+    yOffset = rect.top;
+
+    initialX = e.clientX - xOffset;
+    initialY = e.clientY - yOffset;
+    isDragging = true;
+  });
+
+  document.addEventListener('pointermove', (e) => {
+    if (isDragging) {
+      e.preventDefault();
+      currentX = e.clientX - initialX;
+      currentY = e.clientY - initialY;
+      xOffset = currentX;
+      yOffset = currentY;
+      steamLibraryWindow.style.transform = 'translate(0, 0)';
+      steamLibraryWindow.style.left = `${currentX}px`;
+      steamLibraryWindow.style.top = `${currentY}px`;
+    }
+  });
+
+  document.addEventListener('pointerup', () => {
+    isDragging = false;
+  });
+
+  maximizeButton.addEventListener('click', () => {
+    if (isMaximized) {
+      steamLibraryWindow.style.width = '700px';
+      steamLibraryWindow.style.height = 'auto';
+      steamLibraryWindow.style.top = '50%';
+      steamLibraryWindow.style.left = '50%';
+      steamLibraryWindow.style.transform = 'translate(-50%, -50%)';
+      xOffset = 0;
+      yOffset = 0;
+    } else {
+      steamLibraryWindow.style.width = '100%';
+      steamLibraryWindow.style.height = 'calc(100% - 40px)';
+      steamLibraryWindow.style.top = '0';
+      steamLibraryWindow.style.left = '0';
+      steamLibraryWindow.style.transform = 'none';
+    }
+    isMaximized = !isMaximized;
+  });
+
+  minimizeButton.addEventListener('click', () => {
+    steamLibraryWindow.style.display = 'none';
+  });
+
+  closeButton.addEventListener('click', () => {
+    document.body.removeChild(steamLibraryWindow);
+    removeFromTaskbar(steamLibraryWindow);
+  });
+
+  // Add click handler for the play button
+  const playButton = steamLibraryWindow.querySelector('.play-button');
+  playButton.addEventListener('click', () => {
+    playButton.textContent = 'LAUNCHING...';
+    playButton.style.background = '#32353c';
+    
+    setTimeout(() => {
+      playButton.textContent = 'PLAY';
+      playButton.style.background = '';
+      
+      // Create a new fullscreen window for the MymyCraft game
+      const gameWindow = document.createElement('div');
+      gameWindow.className = 'game-window window';
+      gameWindow.dataset.title = 'Mymycraft';
+      
+      // Show pet message when Mymycraft game opens
+      showMymycraftGameMessage();
+      gameWindow.style.width = '100%';
+      gameWindow.style.height = 'calc(100% - 40px)';
+      gameWindow.style.top = '0';
+      gameWindow.style.left = '0';
+      gameWindow.style.zIndex = '1000';
+      gameWindow.style.background = '#000';
+      
+      // Add to taskbar
+      addToTaskbar(gameWindow);
+      
+      gameWindow.innerHTML = `
+        <div class="window-header">
+          <div class="window-title">
+            <img src="images/mymycraft.png" alt="Mymycraft" style="width: 20px; height: 20px;">
+            <span>Mymycraft</span>
+          </div>
+          <div class="window-controls">
+            <div class="control minimize">─</div>
+            <div class="control maximize">□</div>
+            <div class="control close">×</div>
+          </div>
+        </div>
+        <div class="game-content">
+          <iframe src="MymyCraft/index.html" frameborder="0" style="width: 100%; height: 100%;"></iframe>
+        </div>
+      `;
+      
+      document.body.appendChild(gameWindow);
+      window.bringToFront(gameWindow);
+      
+      // Set up window controls
+      const closeBtn = gameWindow.querySelector('.close');
+      const minimizeBtn = gameWindow.querySelector('.minimize');
+      const maximizeBtn = gameWindow.querySelector('.maximize');
+      
+      closeBtn.addEventListener('click', () => {
+        document.body.removeChild(gameWindow);
+        removeFromTaskbar(gameWindow);
+      });
+      
+      minimizeBtn.addEventListener('click', () => {
+        gameWindow.style.display = 'none';
+      });
+      
+      let isMaximized = true;
+      maximizeBtn.addEventListener('click', () => {
+        if (isMaximized) {
+          gameWindow.style.width = '800px';
+          gameWindow.style.height = '600px';
+          gameWindow.style.top = '50%';
+          gameWindow.style.left = '50%';
+          gameWindow.style.transform = 'translate(-50%, -50%)';
+        } else {
+          gameWindow.style.width = '100%';
+          gameWindow.style.height = 'calc(100% - 40px)';
+          gameWindow.style.top = '0';
+          gameWindow.style.left = '0';
+          gameWindow.style.transform = 'none';
+        }
+        isMaximized = !isMaximized;
+      });
+    }, 2000);
+  });
+
+  // Center the window initially
+  setTimeout(() => {
+    const rect = steamLibraryWindow.getBoundingClientRect();
+    
+    // Check if mobile device for automatic fullscreen
+    if (/Mobi|Android/i.test(navigator.userAgent)) {
+      steamLibraryWindow.style.transform = 'none';
+      steamLibraryWindow.style.width = '100%';
+      steamLibraryWindow.style.height = 'calc(100% - 40px)';
+      steamLibraryWindow.style.left = '0';
+      steamLibraryWindow.style.top = '0';
+      isMaximized = true;
+    } else {
+      const centerX = (window.innerWidth - rect.width) / 2;
+      const centerY = (window.innerHeight - rect.height) / 2;
+      steamLibraryWindow.style.transform = 'none';
+      steamLibraryWindow.style.left = `${centerX}px`;
+      steamLibraryWindow.style.top = `${centerY}px`;
+    }
+  }, 0);
 }
 
 window.addEventListener('resize', function() {

@@ -1,4 +1,4 @@
-import { showVideoMessage } from "./taskbarpetModule.js?v=1";
+import { showVideoMessage } from "./taskbarpetModule.js?v=2";
 
 export function initializeExplorer() {
   const closeButton = document.querySelector(".control.close");
@@ -13,7 +13,7 @@ export function initializeExplorer() {
   // Navigation state
   let currentPath = ["Users"];
 
-  // Modified folder structure to include HTML content and video files
+  // Modified folder structure to include HTML content, video files, and GIFs
   const folderStructure = {
     Users: {
       Maya: {
@@ -341,6 +341,100 @@ export function initializeExplorer() {
 
 `,
           },
+          "log-devchat-03-13-25.txt": {
+            type: "file",
+            content: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversation Log</title>
+    <style>
+        body {
+            background-color: black;
+            color: #ffffff;
+            padding: 20px;
+        }
+        .message {
+            margin-bottom: 15px;
+        }
+        .handler {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+        .dev {
+            color: #66ccff;
+            font-weight: bold;
+        }
+        .timestamp {
+            color: #888;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <span class="dev">sh3llsh0ck3d</span> <span class="timestamp">[01:47 UTC]</span>:  
+        Heard you worked with Mymy on a little game she wanted to make
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[01:48 UTC]</span>:  
+        "Worked with" is over-selling it
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[01:49 UTC]</span>:  
+        I just let her generate whatever she wanted to make. Working with the code she makes is not worth it dude
+    </div>
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[01:49 UTC]</span>:  
+        And it's not like I let her make it because I wanted to. I am "obligated" to help her now
+    </div>
+    <div class="message">
+        <span class="dev">sh3llsh0ck3d</span> <span class="timestamp">[01:50 UTC]</span>:  
+        Yeah yeah I know. Why did she want to make the game anyway?
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[01:51 UTC]</span>:  
+        She said "I want to make it for Maya"
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[01:51 UTC]</span>:  
+        I figured I would just throw this one into steam
+    </div>
+    <div class="message">
+        <span class="dev">sh3llsh0ck3d</span> <span class="timestamp">[01:52 UTC]</span>:  
+        How come?
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[01:52 UTC]</span>:  
+        Well I was working on having fake login functionality for steam with that fake email she was trying to use over and over
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[01:53 UTC]</span>:  
+        So I suppose there should be at least ONE game in the library so she doesn't freak out completly after logging in
+    </div>
+    <div class="message">
+        <span class="dev">sh3llsh0ck3d</span> <span class="timestamp">[01:54 UTC]</span>:  
+        Fair enough. Do you know what password she would use?
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[01:54 UTC]</span>:  
+        The most tried password was "oranjekat03" so that's what I went with
+    </div>
+      <div class="message">
+        <span class="dev">sh3llsh0ck3d</span> <span class="timestamp">[01:55 UTC]</span>:  
+        How original
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[01:55 UTC]</span>:  
+        ikr
+    </div>
+</body>
+</html>
+
+`,
+          },
         },
         Downloads: {
           "readme.txt": {
@@ -444,14 +538,15 @@ export function initializeExplorer() {
                                                  =@@@@%%%%%@%%%%%%%%%@*********@@%%%%%%%%@@%%%%%@@@+                                                  
                                                    +@%%%%%%%%@%%%%%%%%%* .-:  *%%%%%%%%@@%%%%%%%@+                                                    
                                                    *@%%%%%%%%%%@@%%%%%%%#*  *%%%%%%%%@@%%%%%%%%%%%       
-
-                                                   ░▒▓██████████████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░          ░▒▓█▓▒░      ░▒▓████████▓▒░ 
-                                                   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓████▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
-                                                   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
-                                                   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░░▒▓██████▓▒░░▒▓████████▓▒░         ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
-                                                   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
-                                                   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░▒▓██▓▒░▒▓█▓▒░░▒▓█▓▒░ 
-                                                   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░▒▓██▓▒░▒▓████████▓▒░ 
+                                                   
+                                                   ░▒▓██████████████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░          ░▒▓█▓▒░      ░▒▓████████▓▒░      ░▒▓██████▓▒░  
+                                                   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓████▓▒░      ░▒▓█▓▒░░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░ 
+                                                   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░ 
+                                                   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░░▒▓██████▓▒░░▒▓████████▓▒░         ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░      ░▒▓███████▓▒░ 
+                                                   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░            ░▒▓█▓▒░ 
+                                                   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░▒▓██▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓██▓▒░     ░▒▓█▓▒░ 
+                                                   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░▒▓██▓▒░▒▓████████▓▒░▒▓██▓▒░▒▓██████▓▒░  
+                                                                                                                                                                        
                                                                                                                                                     
                                                                                                                                                                                                        
     </pre>                                                  
@@ -459,7 +554,13 @@ export function initializeExplorer() {
 `,
           },
         },
-        Pictures: {},
+        Pictures: {
+          "MayaDans.gif": {
+            type: "file",
+            content: "GIF file",
+            source: "images/MayaDans.gif",
+          },
+        },
         Videos: {
           "wastedyears.mp4": {
             type: "file",
@@ -772,7 +873,13 @@ export function initializeExplorer() {
 `,
           },
         },
-        Pictures: {},
+        Pictures: {
+          "CocoDans.gif": {
+            type: "file",
+            content: "GIF file",
+            source: "images/CocoDans.gif",
+          },
+        },
         Videos: {
           "pbj.mp4": {
             type: "file",
@@ -1296,7 +1403,13 @@ Notes: Asset retrieval <br>
 `,
           },
         },
-        Pictures: {},
+        Pictures: {
+          "MymyDans.gif": {
+            type: "file",
+            content: "GIF file",
+            source: "images/MymyDans.gif",
+          },
+        },
         Videos: {
           "thisisasign.mp4": {
             type: "file",
@@ -1335,6 +1448,13 @@ Notes: Asset retrieval <br>
           <path d="M20,2H8C6.9,2,6,2.9,6,4v12c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V4C22,2.9,21.1,2,20,2z M14.5,12.5L11,15V9l3.5,2.5L18,9v6 L14.5,12.5z" fill="#9575CD"/>
         </svg>
       `;
+    } else if (name.endsWith(".gif")) {
+      iconPath = `
+        <svg viewBox="0 0 24 24">
+          <path d="M4,6H2v14c0,1.1,0.9,2,2,2h14v-2H4V6z" fill="#4CAF50"/>
+          <path d="M20,2H8C6.9,2,6,2.9,6,4v12c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V4C22,2.9,21.1,2,20,2z M14.5,12.5L11,15V9l3.5,2.5L18,9v6 L14.5,12.5z" fill="#81C784"/>
+        </svg>
+      `;
     } else {
       iconPath = `
         <svg viewBox="0 0 24 24">
@@ -1352,6 +1472,10 @@ Notes: Asset retrieval <br>
     if (name.endsWith(".mp4")) {
       div.addEventListener("click", () => {
         openVideoFile(name);
+      });
+    } else if (name.endsWith(".gif")) {
+      div.addEventListener("click", () => {
+        openGifFile(name, content);
       });
     } else {
       div.addEventListener("click", () => {
@@ -1529,6 +1653,140 @@ Notes: Asset retrieval <br>
     closeButton.addEventListener("click", () => {
       document.body.removeChild(textWindow);
       window.removeFromTaskbar(textWindow);
+    });
+  }
+
+  function openGifFile(name, content) {
+    const gifWindow = document.createElement("div");
+    gifWindow.className = "text-window video-window window";
+    gifWindow.dataset.title = name;
+
+    window.addToTaskbar(gifWindow);
+
+    // Get the source path from the content object if available
+    const sourcePath = content.source || `images/${name.split("/").pop()}`;
+
+    gifWindow.innerHTML = `
+      <div class="window-header">
+        <div class="window-title">
+          <svg class="file-icon" viewBox="0 0 24 24" width="20" height="20">
+            <path d="M4,6H2v14c0,1.1,0.9,2,2,2h14v-2H4V6z" fill="#4CAF50"/>
+            <path d="M20,2H8C6.9,2,6,2.9,6,4v12c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V4C22,2.9,21.1,2,20,2z M14.5,12.5L11,15V9l3.5,2.5L18,9v6 L14.5,12.5z" fill="#81C784"/>
+          </svg>
+          <span>${name}</span>
+        </div>
+        <div class="window-controls">
+          <div class="control minimize">─</div>
+          <div class="control maximize">□</div>
+          <div class="control close">×</div>
+        </div>
+      </div>
+      <div class="video-content" style="background-color: #f0f0f0;">
+        <img src="${sourcePath}" alt="${name}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+      </div>
+    `;
+
+    document.body.appendChild(gifWindow);
+    window.bringToFront(gifWindow);
+
+    gifWindow.addEventListener("pointerdown", () => {
+      window.bringToFront(gifWindow);
+    });
+
+    // Make the gif window draggable
+    const gifWindowHeader = gifWindow.querySelector(".window-header");
+    let isDragging = false;
+    let initialX, initialY;
+    let isMaximized = false;
+
+    // Center the window initially
+    if (/Mobi|Android/i.test(navigator.userAgent)) {
+      gifWindow.style.transform = "none";
+      gifWindow.style.width = "100%";
+      gifWindow.style.height = "calc(100% - 40px)";
+      gifWindow.style.top = "0";
+      gifWindow.style.left = "0";
+      isMaximized = true;
+    } else {
+      const centerX = (window.innerWidth - 600) / 2;
+      const centerY = (window.innerHeight - 500) / 2;
+      gifWindow.style.left = `${centerX}px`;
+      gifWindow.style.top = `${centerY}px`;
+      gifWindow.style.width = "600px";
+      gifWindow.style.height = "500px";
+      gifWindow.style.transform = "none";
+      isMaximized = false;
+    }
+
+    gifWindowHeader.addEventListener("pointerdown", (e) => {
+      if (e.target.classList.contains("control")) return;
+      if (isMaximized) return;
+
+      // Use pointer capture for better mobile support
+      gifWindowHeader.setPointerCapture(e.pointerId);
+
+      // Get the current position
+      const rect = gifWindow.getBoundingClientRect();
+      initialX = e.clientX - rect.left;
+      initialY = e.clientY - rect.top;
+
+      isDragging = true;
+    });
+
+    gifWindowHeader.addEventListener("pointermove", (e) => {
+      if (isDragging) {
+        e.preventDefault();
+        // Calculate the new position
+        const newX = e.clientX - initialX;
+        const newY = e.clientY - initialY;
+
+        // Apply the new position
+        gifWindow.style.left = `${newX}px`;
+        gifWindow.style.top = `${newY}px`;
+      }
+    });
+
+    gifWindowHeader.addEventListener("pointerup", (e) => {
+      if (isDragging) {
+        gifWindowHeader.releasePointerCapture(e.pointerId);
+        isDragging = false;
+      }
+    });
+
+    gifWindowHeader.addEventListener("pointercancel", (e) => {
+      if (isDragging) {
+        gifWindowHeader.releasePointerCapture(e.pointerId);
+        isDragging = false;
+      }
+    });
+
+    // Add maximize functionality
+    gifWindow.querySelector(".maximize").addEventListener("click", () => {
+      if (isMaximized) {
+        gifWindow.style.width = "600px";
+        gifWindow.style.height = "500px";
+        gifWindow.style.top = "50%";
+        gifWindow.style.left = "50%";
+        gifWindow.style.transform = "translate(-50%, -50%)";
+      } else {
+        gifWindow.style.width = "100%";
+        gifWindow.style.height = "calc(100% - 40px)";
+        gifWindow.style.top = "0";
+        gifWindow.style.left = "0";
+        gifWindow.style.transform = "none";
+      }
+      isMaximized = !isMaximized;
+    });
+
+    // Add minimize functionality
+    gifWindow.querySelector(".minimize").addEventListener("click", () => {
+      gifWindow.style.display = "none";
+    });
+
+    const closeButton = gifWindow.querySelector(".close");
+    closeButton.addEventListener("click", () => {
+      document.body.removeChild(gifWindow);
+      window.removeFromTaskbar(gifWindow);
     });
   }
 

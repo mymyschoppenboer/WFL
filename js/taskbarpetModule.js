@@ -54,7 +54,7 @@ export function initializeTaskbarpet() {
     const speechText = speechBubble.querySelector(".speech-text");
     clearSpeechBubble(); // Clear any existing message first
     speechBubble.style.opacity = "1";
-    typeText(speechText, "wOAH1 bE CAREFUL1");
+    typeText(speechText, "So... this is how it ends...");
     lastMessageTime = Date.now();
   }
 
@@ -346,13 +346,13 @@ export function initializeTaskbarpet() {
   });
 
   const messages = [
-    "tHIS PLACE IS VERY COMFORTABLE1 nOT MUCH SUNLIGHT THOUGH...",
-    "(iT'S BEEN A WHILE SINCE IVE SEEN MY FRIENDS...)",
-    "mYMY SEEMS TO HAVE BEEN BUSY HERE1",
-    "tHIS COMPUTER IS SO MUCH FASTER THAN MINE1",
-    "dO YOU THINK I SHOULD ASK HIM IF I CAN DOWNLOAD PROGRAMS AGAIN/",
-    "hAHA I SHOULD HAVE PAID MORE ATTENTION IN THE COMPUTER LAB1",
-    "mAYA WOULD LOVE THIS PLACE1",
+    "At least I don't have to deal with Coco here",
+    "This is better than the school bathroom I guess",
+    "My feet hurt",
+    "I'm too tired for this",
+    "Fatigue levels rising...",
+    "What are you going to force me to talk too?",
+    "I hate this place",
   ];
 
   function showSpeechBubble() {
@@ -435,7 +435,7 @@ export function initializeTaskbarpet() {
     speechBubble.style.opacity = "1";
     typeText(
       speechBubble.querySelector(".speech-text"),
-      "hOI1 i AM COCOBOT1 i DON'T KNOW MUCH ABOUT COMPUTERS BUT I CAN TRY TO HELP1"
+      "Hi I'm Mayabot. I'd prefer if you didn't ask me for help..."
     );
     lastMessageTime = Date.now();
 
@@ -488,22 +488,16 @@ export function showVideoMessage(videoName) {
   if (window.showPetMessage) {
     setTimeout(() => {
       if (videoName === "media/thisisasign.mp4") {
-        window.showPetMessage(
-          "mYMY SEEMS REALLY INTERESTED IN PICTURES OF HERSELF1 mAYBE SHE'S BUILDING A COLLECTION/"
-        );
+        window.showPetMessage("They let MYMY of all people have a phone???");
       } else if (videoName === "media/pbj.mp4") {
-        window.showPetMessage(
-          "i THOUGHT MAYA WOULD LIKE THIS BUT I GUESS NOT..."
-        );
+        window.showPetMessage("I hate this stupid video");
       } else if (videoName === "media/wastedyears.mp4") {
-        window.showPetMessage(
-          "iS THIS WHAT MAYA HAS BEEN UP TO/ i HAVEN'T SEEN HER IN A WHILE1"
-        );
+        window.showPetMessage("If I could thow Coco like that I would");
       } else if (videoName === "media/horrific.mp4") {
-        window.showPetMessage("i DON'T GET IT...");
+        window.showPetMessage("It's NOT funny");
       } else if (videoName === "media/thecup.mp4") {
         window.showPetMessage(
-          "oH MYMY... iT'S NOT GOOD TO MAKE FUN OF SOMEONE'S DRINKING PROBLEM..."
+          "Mymy shouldn't be calling anyone out with the amount of that stupid stroopwafel drink she downs everyday"
         );
       }
     }, 500);
@@ -514,7 +508,20 @@ export function showVideoMessage(videoName) {
 export function showSteamMessage() {
   if (window.showPetMessage) {
     setTimeout(() => {
-      window.showPetMessage("iS THIS WHAT POWERS THE COMPUTER/");
+      window.showPetMessage(
+        "I wasted so much time trying to get this stupid thing to work"
+      );
+    }, 500);
+  }
+}
+
+// Function to show message when Steam library is opened
+export function showSteamLibraryMessage() {
+  if (window.showPetMessage) {
+    setTimeout(() => {
+      window.showPetMessage(
+        "Really loving the wide selection of games here... Also who said you could use MY account?"
+      );
     }, 500);
   }
 }
@@ -524,7 +531,7 @@ export function showMayaStressReliefMessage() {
   if (window.showPetMessage) {
     setTimeout(() => {
       window.showPetMessage(
-        "mAYA SPENDS A LOT OF TIME ON THIS1 iS THIS WHERE HER FRIENDS ARE/"
+        "NO NO... no... you are NOT allowed to look at that"
       );
     }, 500);
   }
@@ -533,14 +540,16 @@ export function showMayaStressReliefMessage() {
 // Function to show message when Nederlands Mode is enabled
 export function showNederlandsModeMessage() {
   if (window.showPetMessage) {
-    window.showPetMessage("oH1 hOW PRETTY1");
+    window.showPetMessage(
+      "Wow I wonder who could have possibly made this useless feature"
+    );
   }
 }
 
 // Function to show message when volume is set to zero
 export function showVolumeZeroMessage() {
   if (window.showPetMessage) {
-    window.showPetMessage("o NEE1 wAS IT SOMETHING I SAID/");
+    window.showPetMessage("I didn't like talking to you anyway");
   }
 }
 
@@ -548,7 +557,18 @@ export function showVolumeZeroMessage() {
 export function showUsersClickMessage() {
   if (window.showPetMessage) {
     setTimeout(() => {
-      window.showPetMessage("mYMY SAYS THIS IS HER FAVORITE PLACE1");
+      window.showPetMessage("At least she's organized...");
+    }, 500);
+  }
+}
+
+// Function to show message when Mymycraft game opens
+export function showMymycraftGameMessage() {
+  if (window.showPetMessage) {
+    setTimeout(() => {
+      window.showPetMessage(
+        "Mymy would name her game after herself... go head, im not playing that"
+      );
     }, 500);
   }
 }
