@@ -424,28 +424,21 @@ export function initializeTaskbarpet() {
     return false;
   };
 
-  const hasBeenEnabledBefore =
-    localStorage.getItem("taskbarPetInitialized") === "true";
-  if (!hasBeenEnabledBefore) {
-    localStorage.setItem("taskbarPetInitialized", "true");
+  // Always show the welcome message when the taskbarpet is activated
+  // Clear any existing message first
+  clearSpeechBubble();
 
-    // Clear any existing message first
-    clearSpeechBubble();
+  speechBubble.style.opacity = "1";
+  typeText(
+    speechBubble.querySelector(".speech-text"),
+    "Hi I'm Mayabot. I'd prefer if you didn't ask me for help..."
+  );
+  lastMessageTime = Date.now();
 
-    speechBubble.style.opacity = "1";
-    typeText(
-      speechBubble.querySelector(".speech-text"),
-      "Hi I'm Mayabot. I'd prefer if you didn't ask me for help..."
-    );
-    lastMessageTime = Date.now();
-
-    // Schedule speech after initial message (wait for typing + 2s delay)
-    setTimeout(() => {
-      scheduleSpeech();
-    }, 31 * 75 + 2000 + 2000);
-  } else {
+  // Schedule speech after initial message (wait for typing + 2s delay)
+  setTimeout(() => {
     scheduleSpeech();
-  }
+  }, 31 * 75 + 2000 + 2000);
 
   const originalActiveChange = taskbarpet.classList.toggle;
   taskbarpet.classList.toggle = function (className) {
@@ -576,10 +569,9 @@ export function showMymycraftGameMessage() {
 // Function to check if taskbarpet is enabled and initialize it
 export function setupTaskbarpet() {
   const taskbarpet = document.querySelector(".taskbar-pet");
-  const taskbarpetEnabled =
-    localStorage.getItem("taskbarPetEnabled") === "true";
-  if (taskbarpetEnabled) {
-    taskbarpet.classList.add("active");
-    initializeTaskbarpet();
-  }
+  // Don't restore the taskbarpet state from localStorage
+  // Always start with the taskbarpet closed
+  
+  // We still need to keep the toggle functionality in the settings
+  // but we won't restore the state on page load
 }
