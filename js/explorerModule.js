@@ -885,6 +885,10 @@ export function initializeExplorer() {
             type: "file",
             content: "Video file",
           },
+          "rightfoot.mp4": {
+            type: "file",
+            content: "Video file",
+          }
         },
       },
       Mymy: {

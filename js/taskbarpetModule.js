@@ -492,7 +492,10 @@ export function showVideoMessage(videoName) {
         window.showPetMessage(
           "Mymy shouldn't be calling anyone out with the amount of that stupid stroopwafel drink she downs everyday"
         );
+      } else if (videoName === "media/rightfoot.mp4") {
+        window.showPetMessage("I'm never showing Coco another game again");
       }
+      
     }, 500);
   }
 }

@@ -1,8 +1,8 @@
 import { updateTime } from './timeModule.js?v=2';
-import { initializeExplorer } from './explorerModule.js?v=2';
-import { initializeTaskbarpet, setupTaskbarpet } from './taskbarpetModule.js?v=2';
+import { initializeExplorer } from './explorerModule.js?v=3';
+import { initializeTaskbarpet, setupTaskbarpet } from './taskbarpetModule.js?v=3';
 
-import { showSteamMessage, showMayaStressReliefMessage, showNederlandsModeMessage, showVolumeZeroMessage, showUsersClickMessage, showMymycraftGameMessage, showSteamLibraryMessage } from './taskbarpetModule.js?v=2';
+import { showSteamMessage, showMayaStressReliefMessage, showNederlandsModeMessage, showVolumeZeroMessage, showUsersClickMessage, showMymycraftGameMessage, showSteamLibraryMessage } from './taskbarpetModule.js?v=3';
 
 function createSteamWindow() {
   // Show pet message every time Steam is opened
