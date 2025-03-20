@@ -7,13 +7,27 @@ let blockMeshes = {};
 let raycaster;
 let selectedBlock = null;
 let selectedBlockFace = null;
-let currentBlockType = "grass";
+let currentBlockType = "wgrass";
 let gameInitialized = false;
 
 let velocity = new THREE.Vector3(0, 0, 0);
 let isJumping = false;
 let isOnGround = true;
 let playerHeight = 1.7;
+
+// Snow particles system
+let snowParticles = [];
+let snowCount = 500; // Number of snow particles
+
+// Character visibility toggle (0 = invisible, 1 = visible)
+let showCharacter = 0; // Set to 0 to hide character, 1 to show
+
+// Sign text variables
+let isEditingSign = false;
+let currentEditingSign = null;
+let signTextInput = null;
+let signTextDisplay = null;
+const MAX_SIGN_CHARS = 40;
 
 const SAVE_KEY = "mymycraft_save";
 const AUTO_SAVE_INTERVAL = 10000;
@@ -23,19 +37,12 @@ let isMainMenuVisible = true;
 
 const SPRITE_INTERACTION_DISTANCE = 1.5;
 const SPRITE_MESSAGES = [
-  "Hallo!",
-  "I built this just for Maya but she didn't appreciate my beautiful work.",
-  "No matter.",
-  "I put this to better use anyway.",
-  "This is my new home away from home!",
-  'Away from that traitorous "Handler" at least...',
-  "You can stay for as long as you want.",
-  "Do mind the <i>back door</i> though, I kind of need it.",
+  "<i>The Mymy? in front of you gives no response</i>",
+
 ];
 
 const BACK_DOOR_DESTROYED_MESSAGES = [
-  "You're lucky that's not my only <i>back door</i>.",
-  "You're still a terrible Belg for doing that though...",
+"<i>The Mymy? in front of you gives no response</i>",
 ];
 
 let isBackDoorDestroyed = false;
@@ -59,7 +66,7 @@ const TERMINAL_VELOCITY = 0.15;
 const RESET_HEIGHT = -10;
 const JUMP_VELOCITY = 0.12;
 const COLORS = {
-  GRASS_TOP: 0x7cba3b,
+  GRASS_TOP: 0xffffff, // Changed from green to white to simulate snow
   GRASS_SIDE: 0x8e7340,
   DIRT: 0x6e5a38,
   STONE: 0x888888,
@@ -71,6 +78,8 @@ const COLORS = {
   BLUE_CLOTH: 0x3333cc,
   WHITE_CLOTH: 0xeeeeee,
   BLACK_CLOTH: 0x222222,
+  SNOW: 0xffffff, // Added for snow particles
+  SIGN: 0xd2b48c, // Tan color for sign
 };
 
 const BLOCK_TYPES = {
@@ -101,6 +110,12 @@ const BLOCK_TYPES = {
     materials: Array(6).fill({ color: COLORS.DOOR }),
     solid: false,
     isDoor: true,
+  },
+  sign: {
+    materials: Array(6).fill({ color: COLORS.SIGN }),
+    solid: false,
+    isSign: true,
+    text: "", // Default empty text
   },
   red_cloth: {
     materials: Array(6).fill({ color: COLORS.RED_CLOTH }),
@@ -134,6 +149,7 @@ const ALL_BLOCKS = [
   "stone",
   "wood",
   "door",
+  "sign",
   "red_cloth",
   "orange_cloth",
   "yellow_cloth",
@@ -148,10 +164,10 @@ const HOTBAR = [
   "stone",
   "wood",
   "door",
+  "sign",
   "red_cloth",
   "yellow_cloth",
   "orange_cloth",
-  "white_cloth",
 ];
 
 let selectedHotbarIndex = 0;
@@ -178,6 +194,9 @@ function init() {
   raycaster = new THREE.Raycaster();
 
   createWorld();
+  
+  // Create snow particles
+  createSnowParticles();
 
   setupControls();
 
@@ -186,6 +205,9 @@ function init() {
   document.addEventListener("keydown", onKeyDown);
 
   createInventoryDisplay();
+  
+  // Create sign elements
+  createSignElements();
 
   addIdleGifSprite(38, 1.5, 38);
 
@@ -200,6 +222,312 @@ function init() {
   }
 
   animate();
+}
+
+// Function to create snow particles
+function createSnowParticles() {
+  for (let i = 0; i < snowCount; i++) {
+    // Create a small white sphere for each snow particle
+    const geometry = new THREE.SphereGeometry(0.03, 8, 8); // Small radius for snow
+    const material = new THREE.MeshBasicMaterial({ color: COLORS.SNOW });
+    const particle = new THREE.Mesh(geometry, material);
+    
+    // Random position within the world bounds
+    const x = Math.random() * WORLD_SIZE;
+    const y = Math.random() * 20 + 10; // Start above the player
+    const z = Math.random() * WORLD_SIZE;
+    
+    particle.position.set(x, y, z);
+    
+    // Add random falling speed for each particle
+    particle.userData.speed = Math.random() * 0.02 + 0.01;
+    // Add slight random horizontal movement
+    particle.userData.driftX = (Math.random() - 0.5) * 0.005;
+    particle.userData.driftZ = (Math.random() - 0.5) * 0.005;
+    
+    scene.add(particle);
+    snowParticles.push(particle);
+  }
+  
+  console.log(`Created ${snowCount} snow particles`);
+}
+
+// Create sign text input and display elements
+function createSignElements() {
+  // Create container for sign editing
+  const signEditContainer = document.createElement("div");
+  signEditContainer.id = "sign-edit-container";
+  signEditContainer.style.position = "absolute";
+  signEditContainer.style.top = "50%";
+  signEditContainer.style.left = "50%";
+  signEditContainer.style.transform = "translate(-50%, -50%)";
+  signEditContainer.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+  signEditContainer.style.border = "2px solid #555";
+  signEditContainer.style.borderRadius = "5px";
+  signEditContainer.style.padding = "20px";
+  signEditContainer.style.width = "300px";
+  signEditContainer.style.zIndex = "2000"; // Higher z-index to ensure it's on top
+  signEditContainer.style.display = "none";
+  signEditContainer.style.flexDirection = "column";
+  signEditContainer.style.alignItems = "center";
+  signEditContainer.style.gap = "10px";
+  signEditContainer.style.pointerEvents = "auto"; // Ensure pointer events work
+
+  // Add event listeners to stop propagation
+  ["mousedown", "mouseup", "click", "dblclick"].forEach(eventType => {
+    signEditContainer.addEventListener(eventType, function(event) {
+      event.stopPropagation();
+    });
+  });
+
+  // Create title with Minecraft-style appearance
+  const title = document.createElement("h3");
+  title.textContent = "Edit Sign";
+  title.style.color = "#fff";
+  title.style.margin = "0 0 10px 0";
+  title.style.fontFamily = "'DotGothic16', sans-serif";
+  title.style.textAlign = "center";
+  signEditContainer.appendChild(title);
+
+  // Create text input
+  signTextInput = document.createElement("input");
+  signTextInput.type = "text";
+  signTextInput.maxLength = MAX_SIGN_CHARS;
+  signTextInput.style.width = "100%";
+  signTextInput.style.padding = "8px";
+  signTextInput.style.backgroundColor = "#333";
+  signTextInput.style.border = "1px solid #555";
+  signTextInput.style.borderRadius = "3px";
+  signTextInput.style.color = "#fff";
+  signTextInput.style.fontFamily = "'DotGothic16', sans-serif";
+  signTextInput.style.pointerEvents = "auto"; // Ensure pointer events work
+  signEditContainer.appendChild(signTextInput);
+
+  // Create character counter
+  const charCounter = document.createElement("div");
+  charCounter.style.color = "#aaa";
+  charCounter.style.fontSize = "12px";
+  charCounter.style.alignSelf = "flex-end";
+  charCounter.textContent = `0/${MAX_SIGN_CHARS}`;
+  signEditContainer.appendChild(charCounter);
+
+  // Update character counter when typing
+  signTextInput.addEventListener("input", function() {
+    charCounter.textContent = `${this.value.length}/${MAX_SIGN_CHARS}`;
+  });
+
+  // Create buttons container
+  const buttonsContainer = document.createElement("div");
+  buttonsContainer.style.display = "flex";
+  buttonsContainer.style.gap = "10px";
+  buttonsContainer.style.marginTop = "10px";
+  buttonsContainer.style.width = "100%";
+  buttonsContainer.style.justifyContent = "center";
+  signEditContainer.appendChild(buttonsContainer);
+
+  // Create save button with Minecraft-style appearance
+  const saveButton = document.createElement("button");
+  saveButton.textContent = "Save";
+  saveButton.style.padding = "8px 16px";
+  saveButton.style.backgroundColor = "#4CAF50";
+  saveButton.style.border = "none";
+  saveButton.style.borderRadius = "3px";
+  saveButton.style.color = "white";
+  saveButton.style.cursor = "pointer";
+  saveButton.style.fontFamily = "'DotGothic16', sans-serif";
+  saveButton.style.minWidth = "80px";
+  saveButton.style.pointerEvents = "auto"; // Ensure pointer events work
+  
+  // Add event listeners to ensure clicks work
+  ["mousedown", "mouseup", "click"].forEach(eventType => {
+    saveButton.addEventListener(eventType, function(event) {
+      event.stopPropagation();
+      if (eventType === "click") {
+        saveSignText();
+      }
+    });
+  });
+  
+  buttonsContainer.appendChild(saveButton);
+
+  // Create cancel button with Minecraft-style appearance
+  const cancelButton = document.createElement("button");
+  cancelButton.textContent = "Cancel";
+  cancelButton.style.padding = "8px 16px";
+  cancelButton.style.backgroundColor = "#f44336";
+  cancelButton.style.border = "none";
+  cancelButton.style.borderRadius = "3px";
+  cancelButton.style.color = "white";
+  cancelButton.style.cursor = "pointer";
+  cancelButton.style.fontFamily = "'DotGothic16', sans-serif";
+  cancelButton.style.minWidth = "80px";
+  cancelButton.style.pointerEvents = "auto"; // Ensure pointer events work
+  
+  // Add event listeners to ensure clicks work
+  ["mousedown", "mouseup", "click"].forEach(eventType => {
+    cancelButton.addEventListener(eventType, function(event) {
+      event.stopPropagation();
+      if (eventType === "click") {
+        cancelSignEdit();
+      }
+    });
+  });
+  
+  buttonsContainer.appendChild(cancelButton);
+
+  // Add to HUD
+  const hud = document.getElementById("hud");
+  hud.appendChild(signEditContainer);
+
+  // Create sign text display element (will be positioned at sign location)
+  signTextDisplay = document.createElement("div");
+  signTextDisplay.style.position = "absolute";
+  signTextDisplay.style.color = "#000";
+  signTextDisplay.style.fontFamily = "'DotGothic16', sans-serif";
+  signTextDisplay.style.fontSize = "14px";
+  signTextDisplay.style.textAlign = "center";
+  signTextDisplay.style.pointerEvents = "none";
+  signTextDisplay.style.userSelect = "none";
+  signTextDisplay.style.backgroundColor = "rgba(255, 255, 255, 0.7)";
+  signTextDisplay.style.padding = "5px";
+  signTextDisplay.style.borderRadius = "3px";
+  signTextDisplay.style.maxWidth = "150px";
+  signTextDisplay.style.wordWrap = "break-word";
+  signTextDisplay.style.display = "none";
+  hud.appendChild(signTextDisplay);
+}
+
+// Show sign editing UI
+function showSignEditor(sign) {
+  if (isLocked) {
+    controls.unlock();
+  }
+  
+  isEditingSign = true;
+  currentEditingSign = sign;
+  
+  // Get existing text if any
+  const text = sign.userData.text || "";
+  signTextInput.value = text;
+  
+  // Update character counter
+  const charCounter = document.querySelector("#sign-edit-container div:nth-child(3)");
+  if (charCounter) {
+    charCounter.textContent = `${text.length}/${MAX_SIGN_CHARS}`;
+  }
+  
+  // Show the editor
+  const signEditContainer = document.getElementById("sign-edit-container");
+  signEditContainer.style.display = "flex";
+  
+  // Make sure the HUD has pointer events enabled for the sign editor
+  const hud = document.getElementById("hud");
+  hud.style.pointerEvents = "auto";
+  
+  // Prevent clicks from passing through to the game
+  document.body.style.pointerEvents = "none";
+  signEditContainer.style.pointerEvents = "auto";
+  
+  // Focus the input after a short delay to ensure the UI is ready
+  setTimeout(() => {
+    signTextInput.focus();
+  }, 100);
+}
+
+// Save sign text
+function saveSignText() {
+  if (!currentEditingSign) return;
+  
+  // Get text from input
+  const text = signTextInput.value.trim();
+  
+  // Update sign's text
+  currentEditingSign.userData.text = text;
+  
+  // Update the key in blockMeshes
+  const x = Math.floor(currentEditingSign.position.x);
+  const y = Math.floor(currentEditingSign.position.y);
+  const z = Math.floor(currentEditingSign.position.z);
+  const key = `${x},${y},${z}`;
+  
+  if (blockMeshes[key]) {
+    blockMeshes[key].userData.text = text;
+  }
+  
+  console.log(`Sign text saved: "${text}" at position ${x},${y},${z}`);
+  
+  // Hide editor
+  const signEditContainer = document.getElementById("sign-edit-container");
+  signEditContainer.style.display = "none";
+  
+  isEditingSign = false;
+  currentEditingSign = null;
+  
+  // Lock controls again
+  if (!isLocked) {
+    controls.lock();
+  }
+  
+  // Save game state
+  saveGameState();
+}
+
+// Cancel sign editing
+function cancelSignEdit() {
+  // Hide editor
+  const signEditContainer = document.getElementById("sign-edit-container");
+  signEditContainer.style.display = "none";
+  
+  isEditingSign = false;
+  currentEditingSign = null;
+  
+  // Lock controls again
+  if (!isLocked) {
+    controls.lock();
+  }
+}
+
+// Update sign text display positions
+function updateSignTextDisplays() {
+if (!camera || !scene || !signTextDisplay) return;
+
+// Hide the text display initially
+signTextDisplay.style.display = "none";
+
+// Check if player is looking at a sign
+if (selectedBlock && selectedBlock.userData.isSign) {
+  const text = selectedBlock.userData.text;
+  
+  // Only show if the sign has text
+  if (text && text.length > 0) {
+    // Convert 3D position to screen position
+    const position = selectedBlock.position.clone();
+    position.y += 0.7; // Position text above the sign
+    
+    const vector = position.project(camera);
+    
+    // Convert to screen coordinates
+    const x = (vector.x * 0.5 + 0.5) * window.innerWidth;
+    const y = (-vector.y * 0.5 + 0.5) * window.innerHeight;
+    
+    // Get text color from sign if available, otherwise use default black
+    const textColor = selectedBlock.userData.textColor || "#000000";
+    
+    // Update text display position and content
+    signTextDisplay.style.left = `${x}px`;
+    signTextDisplay.style.top = `${y}px`;
+    signTextDisplay.style.transform = "translate(-50%, -100%)";
+    signTextDisplay.textContent = text;
+    signTextDisplay.style.display = "block";
+    signTextDisplay.style.zIndex = "1000"; // Ensure text is visible above other elements
+    signTextDisplay.style.backgroundColor = "rgba(255, 255, 255, 0.8)"; // Make background more visible
+    signTextDisplay.style.padding = "5px 10px"; // Add more padding
+    signTextDisplay.style.border = "1px solid #000"; // Add border
+    signTextDisplay.style.fontWeight = "bold"; // Make text more readable
+    signTextDisplay.style.boxShadow = "0 0 5px rgba(0,0,0,0.5)"; // Add shadow for better visibility
+    signTextDisplay.style.color = textColor; // Use the sign's text color
+  }
+}
 }
 
 function createMessageDisplay() {
@@ -349,7 +677,8 @@ function hideInteractPrompt() {
 }
 
 function checkSpriteProximity() {
-  if (!window.idleGifSprite || !camera) return;
+  // If character visibility is disabled, don't allow interaction
+  if (showCharacter === 0 || !window.idleGifSprite || !camera) return;
 
   const spritePos = window.idleGifSprite.position;
   const playerPos = camera.position;
@@ -398,6 +727,12 @@ function checkSpriteProximity() {
 }
 
 function addIdleGifSprite(x, y, z) {
+  // If showCharacter is 0, don't create the sprite
+  if (showCharacter === 0) {
+    console.log("Character visibility is disabled, not adding sprite");
+    return;
+  }
+
   const video = document.createElement("video");
   video.src = "idle.webm";
   video.loop = true;
@@ -457,13 +792,23 @@ function createWorld() {
   }
 
   const customBlocks = [
+    // White cloth ground blocks
     ...[37, 38, 39, 40].flatMap((x) =>
       [36, 37, 38, 39, 40].map((z) => ({
         position: { x, y: 0, z },
         type: "white_cloth",
       }))
     ),
+    
+    // Add a sign with specific text and orange color
+    {
+      position: { x: 38, y: 1, z: 38 },
+      type: "sign",
+      text: "Someone has flattened my beautiful house and that someone will pay dearly for it.",
+      textColor: "#ff8c00" // Orange text color
+    },
 
+    // Dirt path blocks - keep these intact
     ...[42, 43, 44, 45, 46, 47].flatMap((x) =>
       [37, 38, 39].map((z) => ({ position: { x, y: 0, z }, type: "dirt" }))
     ),
@@ -478,94 +823,17 @@ function createWorld() {
     { position: { x: 46, y: 0, z: 34 }, type: "dirt" },
     { position: { x: 46, y: 0, z: 35 }, type: "dirt" },
 
-    ...[36, 37, 38, 39, 40, 41].flatMap((x) =>
-      [35, 41].map((z) => ({ position: { x, y: 1, z }, type: "stone" }))
-    ),
-    ...[36, 41].flatMap((x) =>
-      [36, 37, 39, 40].map((z) => ({ position: { x, y: 1, z }, type: "stone" }))
-    ),
-    { position: { x: 41, y: 1, z: 38 }, type: "door" },
+    // Keep only the specified door blocks
     { position: { x: 36, y: 1, z: 38 }, type: "door" },
-
-    ...[36, 37, 38, 39, 40, 41].flatMap((x) =>
-      [35, 41].map((z) => ({ position: { x, y: 2, z }, type: "stone" }))
-    ),
-    ...[36, 41].flatMap((x) =>
-      [36, 37, 39, 40].map((z) => ({ position: { x, y: 2, z }, type: "stone" }))
-    ),
-    { position: { x: 41, y: 2, z: 38 }, type: "door" },
     { position: { x: 36, y: 2, z: 38 }, type: "door" },
 
-    ...[36, 37, 38, 39, 40, 41].flatMap((x) =>
-      [35, 41].map((z) => ({ position: { x, y: 3, z }, type: "stone" }))
-    ),
-    ...[36, 41].flatMap((x) =>
-      [36, 37, 38, 39, 40].map((z) => ({
-        position: { x, y: 3, z },
-        type: "stone",
-      }))
-    ),
-
-    ...[35, 36, 37, 38, 39, 40, 41, 42].map((x) => ({
-      position: { x, y: 3, z: 34 },
-      type: "wood",
-    })),
-    ...[35, 42].map((x) => ({ position: { x, y: 3, z: 35 }, type: "wood" })),
-    ...[35, 36, 37, 38, 39, 40, 41, 42].map((x) => ({
-      position: { x, y: 3, z: 42 },
-      type: "wood",
-    })),
-    ...[35, 42].map((x) => ({ position: { x, y: 3, z: 41 }, type: "wood" })),
-
-    ...[36, 37, 38, 39, 40, 41].flatMap((x) =>
-      [35, 41].map((z) => ({ position: { x, y: 4, z }, type: "wood" }))
-    ),
-    { position: { x: 36, y: 4, z: 37 }, type: "stone" },
-    { position: { x: 36, y: 4, z: 38 }, type: "stone" },
-    { position: { x: 36, y: 4, z: 39 }, type: "stone" },
-    { position: { x: 41, y: 4, z: 37 }, type: "stone" },
-    { position: { x: 41, y: 4, z: 38 }, type: "stone" },
-    { position: { x: 41, y: 4, z: 39 }, type: "stone" },
-    ...[37, 38, 39, 40].flatMap((x) =>
-      [36, 37, 38, 39, 40].map((z) => ({
-        position: { x, y: 4, z },
-        type: "wood",
-      }))
-    ),
-    ...[35, 42].flatMap((x) =>
-      [35, 36, 40, 41].map((z) => ({ position: { x, y: 4, z }, type: "wood" }))
-    ),
-
-    ...[36, 37, 38, 39, 40, 41].map((x) => ({
-      position: { x, y: 5, z: 36 },
-      type: "wood",
-    })),
-    ...[36, 37, 38, 39, 40, 41].map((x) => ({
-      position: { x, y: 5, z: 40 },
-      type: "wood",
-    })),
-    ...[36, 41].flatMap((x) =>
-      [37, 38, 39].map((z) => ({ position: { x, y: 5, z }, type: "wood" }))
-    ),
-    ...[35, 42].flatMap((x) =>
-      [36, 37, 38, 39, 40].map((z) => ({
-        position: { x, y: 5, z },
-        type: "wood",
-      }))
-    ),
-
-    ...[36, 37, 38, 39, 40, 41, 42].flatMap((x) =>
-      [37, 38, 39].map((z) => ({ position: { x, y: 6, z }, type: "wood" }))
-    ),
-    ...[35].flatMap((x) =>
-      [37, 38, 39].map((z) => ({ position: { x, y: 6, z }, type: "wood" }))
-    ),
-
+    // Stone pillar on the dirt path - keep this
     ...[1, 2, 3, 4, 5].map((y) => ({
       position: { x: 45, y, z: 30 },
       type: "stone",
     })),
 
+    // Cloth blocks on the dirt path - keep these
     ...[26, 27, 28, 29].map((z) => ({
       position: { x: 45, y: 5, z },
       type: "red_cloth",
@@ -582,7 +850,7 @@ function createWorld() {
 
   for (const block of customBlocks) {
     const { x, y, z } = block.position;
-    createBlock(x, y, z, block.type);
+    createBlock(x, y, z, block.type, block.text, block.textColor);
     blocksCreated++;
   }
 
@@ -592,28 +860,102 @@ function createWorld() {
   updateVisibleBlocks();
 }
 
-function createBlock(x, y, z, type = "grass") {
-  const geometry = new THREE.BoxGeometry(BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-
+function createBlock(x, y, z, type = "grass", customText = null, textColor = null) {
+  let geometry, materials, block;
+  
   const blockType = BLOCK_TYPES[type] || BLOCK_TYPES.grass;
-
-  const materials = blockType.materials.map(
-    (material) =>
-      new THREE.MeshBasicMaterial({ color: material.color, fog: true })
-  );
-
-  const block = new THREE.Mesh(geometry, materials);
-  block.position.set(x, y, z);
+  
+  if (type === "sign") {
+    // For signs, create a single mesh with a box geometry for better hitbox detection
+    geometry = new THREE.BoxGeometry(0.6, 0.4, 0.1); // Reduced height from 0.8 to 0.4
+    
+    // Create a canvas for the sign texture to make it look written on
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    canvas.width = 128;
+    canvas.height = 128;
+    
+    // Set background color (wooden sign)
+    context.fillStyle = '#d2b48c';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    
+    // Add wood grain texture
+    context.strokeStyle = '#b8926a';
+    context.lineWidth = 2;
+    for (let i = 0; i < 8; i++) {
+      const y = i * 16 + 8;
+      context.beginPath();
+      context.moveTo(0, y);
+      context.lineTo(canvas.width, y);
+      context.stroke();
+    }
+    
+    // Add some random "writing" marks to make it look written on
+    context.fillStyle = '#553311';
+    // Horizontal lines resembling text
+    for (let i = 0; i < 4; i++) {
+      const y = 30 + i * 20;
+      const width = 70 + Math.random() * 30;
+      const x = 10 + Math.random() * 10;
+      context.fillRect(x, y, width, 3);
+    }
+    
+    // Create texture from canvas
+    const texture = new THREE.CanvasTexture(canvas);
+    
+    // Create materials with the texture for the front and back, plain for other sides
+    materials = [
+      new THREE.MeshBasicMaterial({ color: COLORS.SIGN, fog: true }), // right
+      new THREE.MeshBasicMaterial({ color: COLORS.SIGN, fog: true }), // left
+      new THREE.MeshBasicMaterial({ color: COLORS.SIGN, fog: true }), // top
+      new THREE.MeshBasicMaterial({ color: COLORS.SIGN, fog: true }), // bottom
+      new THREE.MeshBasicMaterial({ map: texture, fog: true }), // front
+      new THREE.MeshBasicMaterial({ map: texture, fog: true })  // back
+    ];
+    
+    // Create the main sign block
+    block = new THREE.Mesh(geometry, materials);
+    
+    // Rotate the sign 90 degrees around the Y axis
+    block.rotation.y = Math.PI / 2; // 90 degrees in radians
+    
+    // Create the sign post (smaller vertical block) as a separate mesh
+    const postGeometry = new THREE.BoxGeometry(0.1, 0.8, 0.1); // Increased height from 0.6 to 0.8
+    const postMaterial = new THREE.MeshBasicMaterial({ color: COLORS.WOOD, fog: true });
+    const post = new THREE.Mesh(postGeometry, postMaterial);
+    
+    // Position post below the sign to connect with the board
+    post.position.set(0, -0.6, 0); // Adjusted from -0.7 to -0.6 to connect with the board
+    
+    // Add post as a child of the main block
+    block.add(post);
+    
+    // Position the entire sign
+    block.position.set(x, y, z);
+  } else {
+    // Regular block creation for other block types
+    geometry = new THREE.BoxGeometry(BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+    
+    materials = blockType.materials.map(
+      (material) =>
+        new THREE.MeshBasicMaterial({ color: material.color, fog: true })
+    );
+    
+    block = new THREE.Mesh(geometry, materials);
+    block.position.set(x, y, z);
+  }
 
   block.userData = {
     type: type,
     solid: blockType.solid,
     isDoor: blockType.isDoor || false,
+    isSign: blockType.isSign || false,
+    text: customText || blockType.text || "",
+    textColor: textColor || "#000000", // Default to black if not specified
   };
 
   const key = `${x},${y},${z}`;
   blockMeshes[key] = block;
-
 
   return block;
 }
@@ -974,7 +1316,8 @@ function onKeyDown(event) {
   }
 
   if (event.code === "KeyE") {
-    if (isNearSprite && isLookingAtSprite) {
+    // Only allow interaction if character visibility is enabled
+    if (showCharacter === 1 && isNearSprite && isLookingAtSprite) {
       if (!isDialogOpen) {
         messageIndex = 0;
         showDialog();
@@ -1385,7 +1728,7 @@ function breakBlock() {
   const y = Math.floor(position.y);
   const z = Math.floor(position.z);
 
-  if ((x === 36 && y === 2 && z === 38) || (x === 36 && y === 3 && z === 38)) {
+  if ((x === 36 && y === 2 && z === 38) || (x === 36 && y === 1 && z === 38)) {
     console.log("Back door block destroyed!");
     isBackDoorDestroyed = true;
     messageIndex = 0;
@@ -1461,6 +1804,15 @@ function placeBlock() {
     }
 
     console.log("Door placed successfully");
+  } else if (currentBlockType === "sign") {
+    // Create a sign block
+    const newSign = createBlock(x, y, z, "sign");
+    scene.add(newSign);
+    blocks.push(newSign);
+    console.log("Sign placed successfully");
+    
+    // Open sign editor after placing
+    showSignEditor(newSign);
   } else {
     const newBlock = createBlock(x, y, z, currentBlockType);
     scene.add(newBlock);
@@ -1505,8 +1857,15 @@ function animate() {
   updateRaycaster();
 
   updateCoordinatesDisplay();
+  
+  // Update snow particles
+  updateSnowParticles();
+  
+  // Update sign text displays
+  updateSignTextDisplays();
 
-  if (window.idleGifSprite) {
+  // Only update character if visibility is enabled
+  if (showCharacter === 1 && window.idleGifSprite) {
     const spritePos = window.idleGifSprite.position.clone();
 
     const targetPos = camera.position.clone();
@@ -1520,6 +1879,45 @@ function animate() {
   checkAutoSave();
 
   renderer.render(scene, camera);
+}
+
+// Function to update snow particles position
+function updateSnowParticles() {
+  if (!camera) return;
+  
+  const playerX = Math.floor(camera.position.x);
+  const playerZ = Math.floor(camera.position.z);
+  
+  snowParticles.forEach(particle => {
+    // Move particle down based on its speed
+    particle.position.y -= particle.userData.speed;
+    
+    // Add slight horizontal drift
+    particle.position.x += particle.userData.driftX;
+    particle.position.z += particle.userData.driftZ;
+    
+    // If particle goes below ground level, reset it to the top
+    if (particle.position.y < 0) {
+      // Reset to a random position above the player
+      particle.position.x = Math.random() * RENDER_DISTANCE * 2 + (playerX - RENDER_DISTANCE);
+      particle.position.y = Math.random() * 5 + 15; // Random height above
+      particle.position.z = Math.random() * RENDER_DISTANCE * 2 + (playerZ - RENDER_DISTANCE);
+      
+      // Randomize drift slightly
+      particle.userData.driftX = (Math.random() - 0.5) * 0.005;
+      particle.userData.driftZ = (Math.random() - 0.5) * 0.005;
+    }
+    
+    // If particle drifts too far from player, bring it back
+    const dx = particle.position.x - playerX;
+    const dz = particle.position.z - playerZ;
+    const distanceSquared = dx * dx + dz * dz;
+    
+    if (distanceSquared > RENDER_DISTANCE * RENDER_DISTANCE) {
+      particle.position.x = Math.random() * RENDER_DISTANCE * 2 + (playerX - RENDER_DISTANCE);
+      particle.position.z = Math.random() * RENDER_DISTANCE * 2 + (playerZ - RENDER_DISTANCE);
+    }
+  });
 }
 
 function updateCoordinatesDisplay() {
@@ -1553,10 +1951,17 @@ function saveGameState() {
     const [x, y, z] = key.split(",").map(Number);
 
     if (y > 0 || (y === 0 && block.userData.type !== "grass")) {
-      saveData.blocks.push({
+      const blockData = {
         position: { x, y, z },
         type: block.userData.type,
-      });
+      };
+      
+      // Save sign text if it's a sign
+      if (block.userData.isSign && block.userData.text) {
+        blockData.text = block.userData.text;
+      }
+      
+      saveData.blocks.push(blockData);
     }
   }
 
@@ -1615,7 +2020,20 @@ function loadGameState() {
         );
       }
     }
-
+    
+    // Load sign text from saved blocks
+    if (saveData.blocks && saveData.blocks.length > 0) {
+      for (const blockData of saveData.blocks) {
+        const { x, y, z } = blockData.position;
+        const key = `${x},${y},${z}`;
+        
+        // If the block exists and it's a sign with text
+        if (blockMeshes[key] && blockData.type === "sign" && blockData.text) {
+          blockMeshes[key].userData.text = blockData.text;
+          console.log(`Restored sign text at ${x},${y},${z}: "${blockData.text}"`);
+        }
+      }
+    }
 
     return true;
   } catch (error) {
@@ -1656,10 +2074,10 @@ function resetWorld() {
     "stone",
     "wood",
     "door",
+    "sign",
     "red_cloth",
     "orange_cloth",
-    "yellow_cloth",
-    "blue_cloth"
+    "yellow_cloth"
   );
   selectedHotbarIndex = 0;
   currentBlockType = HOTBAR[selectedHotbarIndex];

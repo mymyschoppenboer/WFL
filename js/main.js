@@ -1,16 +1,29 @@
-import { updateTime } from './timeModule.js?v=2';
-import { initializeExplorer } from './explorerModule.js?v=4';
-import { initializeTaskbarpet, setupTaskbarpet } from './taskbarpetModule.js?v=3';
+import { updateTime } from "./timeModule.js?v=4";
+import { initializeExplorer } from "./explorerModule.js?v=5";
+import {
+  initializeTaskbarpet,
+  setupTaskbarpet,
+} from "./taskbarpetModule.js?v=5";
 
-import { showSteamMessage, showMayaStressReliefMessage, showNederlandsModeMessage, showVolumeZeroMessage, showUsersClickMessage, showMymycraftGameMessage, showSteamLibraryMessage } from './taskbarpetModule.js?v=3';
+import {
+  showSteamMessage,
+  showMayaStressReliefMessage,
+  showNederlandsModeMessage,
+  showVolumeZeroMessage,
+  showUsersClickMessage,
+  showMymycraftGameMessage,
+  showSteamLibraryMessage,
+  showExperimentalModeMessage,
+  showWFLGateMessage,
+} from "./taskbarpetModule.js?v=5";
 
 function createSteamWindow() {
   // Show pet message every time Steam is opened
   showSteamMessage();
 
-  const steamWindow = document.createElement('div');
-  steamWindow.className = 'steam-window window';
-  steamWindow.dataset.title = 'Steam';
+  const steamWindow = document.createElement("div");
+  steamWindow.className = "steam-window window";
+  steamWindow.dataset.title = "Steam";
 
   // Add to taskbar immediately when created
   addToTaskbar(steamWindow);
@@ -30,7 +43,7 @@ function createSteamWindow() {
     <div class="steam-content" style="background-color: #000;">
       <img src="images/steam-logo-black-transparent.png" alt="Steam" class="steam-logo" style="width: 10Vw; height: auto;">
       <form class="steam-form">
-        <input type="text" class="steam-input" placeholder="Email">
+        <input type="text" class="steam-input" placeholder="Email" value="mayadebae@mail.com">
         <input type="password" class="steam-input" placeholder="Password">
         <button type="button" class="steam-button">Sign in</button>
       </form>
@@ -44,7 +57,7 @@ function createSteamWindow() {
   document.body.appendChild(steamWindow);
   window.bringToFront(steamWindow);
 
-  steamWindow.addEventListener('pointerdown', () => {
+  steamWindow.addEventListener("pointerdown", () => {
     window.bringToFront(steamWindow);
   });
 
@@ -57,13 +70,13 @@ function createSteamWindow() {
   let yOffset = 0;
   let isMaximized = false;
 
-  const windowHeader = steamWindow.querySelector('.window-header');
-  const minimizeButton = steamWindow.querySelector('.control.minimize');
-  const maximizeButton = steamWindow.querySelector('.control.maximize');
-  const closeButton = steamWindow.querySelector('.close');
+  const windowHeader = steamWindow.querySelector(".window-header");
+  const minimizeButton = steamWindow.querySelector(".control.minimize");
+  const maximizeButton = steamWindow.querySelector(".control.maximize");
+  const closeButton = steamWindow.querySelector(".close");
 
-  windowHeader.addEventListener('pointerdown', (e) => {
-    if (e.target.classList.contains('control')) return;
+  windowHeader.addEventListener("pointerdown", (e) => {
+    if (e.target.classList.contains("control")) return;
     if (isMaximized) return;
 
     const rect = steamWindow.getBoundingClientRect();
@@ -75,58 +88,62 @@ function createSteamWindow() {
     isDragging = true;
   });
 
-  document.addEventListener('pointermove', (e) => {
+  document.addEventListener("pointermove", (e) => {
     if (isDragging) {
       e.preventDefault();
       currentX = e.clientX - initialX;
       currentY = e.clientY - initialY;
       xOffset = currentX;
       yOffset = currentY;
-      steamWindow.style.transform = 'translate(0, 0)';
+      steamWindow.style.transform = "translate(0, 0)";
       steamWindow.style.left = `${currentX}px`;
       steamWindow.style.top = `${currentY}px`;
     }
   });
 
-  document.addEventListener('pointerup', () => {
+  document.addEventListener("pointerup", () => {
     isDragging = false;
   });
 
-  maximizeButton.addEventListener('click', () => {
+  maximizeButton.addEventListener("click", () => {
     if (isMaximized) {
-      steamWindow.style.width = '470px';
-      steamWindow.style.height = 'auto';
-      steamWindow.style.top = '50%';
-      steamWindow.style.left = '50%';
-      steamWindow.style.transform = 'translate(-50%, -50%)';
+      steamWindow.style.width = "470px";
+      steamWindow.style.height = "auto";
+      steamWindow.style.top = "50%";
+      steamWindow.style.left = "50%";
+      steamWindow.style.transform = "translate(-50%, -50%)";
       xOffset = 0;
       yOffset = 0;
     } else {
-      steamWindow.style.width = '100%';
-      steamWindow.style.height = 'calc(100% - 40px)';
-      steamWindow.style.top = '0';
-      steamWindow.style.left = '0';
-      steamWindow.style.transform = 'none';
+      steamWindow.style.width = "100%";
+      steamWindow.style.height = "calc(100% - 40px)";
+      steamWindow.style.top = "0";
+      steamWindow.style.left = "0";
+      steamWindow.style.transform = "none";
     }
     isMaximized = !isMaximized;
   });
 
-  minimizeButton.addEventListener('click', () => {
-    steamWindow.style.display = 'none';
+  minimizeButton.addEventListener("click", () => {
+    steamWindow.style.display = "none";
   });
 
-  closeButton.addEventListener('click', () => {
+  closeButton.addEventListener("click", () => {
     document.body.removeChild(steamWindow);
     removeFromTaskbar(steamWindow);
   });
 
   // Function to handle login attempt
   const attemptLogin = () => {
-    const emailInput = steamWindow.querySelector('.steam-input[placeholder="Email"]');
-    const passwordInput = steamWindow.querySelector('.steam-input[placeholder="Password"]');
+    const emailInput = steamWindow.querySelector(
+      '.steam-input[placeholder="Email"]'
+    );
+    const passwordInput = steamWindow.querySelector(
+      '.steam-input[placeholder="Password"]'
+    );
     const email = emailInput.value;
     const password = passwordInput.value;
-    const button = steamWindow.querySelector('.steam-button');
+    const button = steamWindow.querySelector(".steam-button");
     //USE THIS TO FIND THE PASSWORD IF YOU'RE BELGIAN
     //USE THIS TO FIND THE PASSWORD IF YOU'RE BELGIAN
     //USE THIS TO FIND THE PASSWORD IF YOU'RE BELGIAN
@@ -146,80 +163,84 @@ function createSteamWindow() {
       // Close the login window
       document.body.removeChild(steamWindow);
       removeFromTaskbar(steamWindow);
-      
+
       // Open the Steam library
       createSteamLibrary();
     } else {
       // Show "Invalid password" for 2 seconds
-      button.textContent = 'Invalid email/password';
-      button.style.background = '#32353c';
-      button.style.cursor = 'not-allowed';
-      
+      button.textContent = "Invalid email/password";
+      button.style.background = "#32353c";
+      button.style.cursor = "not-allowed";
+
       // Disable inputs during the timeout
       emailInput.disabled = true;
       passwordInput.disabled = true;
       button.disabled = true;
-      
+
       // Reset after 2 seconds
       setTimeout(() => {
-        button.textContent = 'Sign in';
-        button.style.background = 'linear-gradient(to right, #47bfff, #1a44c2)';
-        button.style.cursor = 'pointer';
+        button.textContent = "Sign in";
+        button.style.background = "linear-gradient(to right, #47bfff, #1a44c2)";
+        button.style.cursor = "pointer";
         emailInput.disabled = false;
         passwordInput.disabled = false;
         button.disabled = false;
-        passwordInput.value = '';
+        passwordInput.value = "";
         passwordInput.focus();
       }, 2000);
     }
   };
-  
+
   // Add click event listener to the button
-  steamWindow.querySelector('.steam-button').addEventListener('click', attemptLogin);
-  
+  steamWindow
+    .querySelector(".steam-button")
+    .addEventListener("click", attemptLogin);
+
   // Add keydown event listener for Enter key
-  steamWindow.querySelector('.steam-form').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
+  steamWindow.querySelector(".steam-form").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
       e.preventDefault();
       attemptLogin();
     }
   });
 
-  const helpLink = steamWindow.querySelector('#steam-help-link');
-  const createAccountLink = steamWindow.querySelector('#steam-create-account-link');
+  const helpLink = steamWindow.querySelector("#steam-help-link");
+  const createAccountLink = steamWindow.querySelector(
+    "#steam-create-account-link"
+  );
 
-  helpLink.addEventListener('mouseover', () => {
+  helpLink.addEventListener("mouseover", () => {
     helpLink.textContent = "Stop clicking this Maya";
   });
 
-  helpLink.addEventListener('mouseout', () => {
+  helpLink.addEventListener("mouseout", () => {
     helpLink.textContent = "Help, I can't sign in";
   });
 
-  createAccountLink.addEventListener('mouseover', () => {
+  createAccountLink.addEventListener("mouseover", () => {
     createAccountLink.textContent = "Stop clicking this too";
   });
 
-  createAccountLink.addEventListener('mouseout', () => {
+  createAccountLink.addEventListener("mouseout", () => {
     createAccountLink.textContent = "Create a Free Account";
   });
 
   // Center the window initially
   setTimeout(() => {
     const rect = steamWindow.getBoundingClientRect();
-    
+
     // Check if mobile device for automatic fullscreen
     if (/Mobi|Android/i.test(navigator.userAgent)) {
-      steamWindow.style.transform = 'none';
-      steamWindow.style.width = '100%';
-      steamWindow.style.height = 'calc(100% - 40px)';
-      steamWindow.style.left = '0';
-      steamWindow.style.top = '0';
+      steamWindow.style.transform = "none";
+      steamWindow.style.width = "100%";
+      steamWindow.style.height = "calc(100% - 40px)";
+      steamWindow.style.left = "0";
+      steamWindow.style.top = "0";
       isMaximized = true;
     } else {
       const centerX = (window.innerWidth - rect.width) / 2;
       const centerY = (window.innerHeight - rect.height) / 2;
-      steamWindow.style.transform = 'none';
+      steamWindow.style.transform = "none";
       steamWindow.style.left = `${centerX}px`;
       steamWindow.style.top = `${centerY}px`;
     }
@@ -228,18 +249,18 @@ function createSteamWindow() {
 
 window.openSteam = createSteamWindow;
 
-window.openMayaStressRelief = function() {
+window.openMayaStressRelief = function () {
   // Show pet message every time Maya Stress Relief is opened
   showMayaStressReliefMessage();
 
-  const errorWindow = document.createElement('div');
-  errorWindow.className = 'text-window window';
-  errorWindow.dataset.title = 'Access Denied';
-  errorWindow.style.width = '400px';
-  errorWindow.style.height = 'auto';
-  
+  const errorWindow = document.createElement("div");
+  errorWindow.className = "text-window window";
+  errorWindow.dataset.title = "Access Denied";
+  errorWindow.style.width = "400px";
+  errorWindow.style.height = "auto";
+
   window.addToTaskbar(errorWindow);
-  
+
   errorWindow.innerHTML = `
     <div class="window-header">
       <div class="window-title">
@@ -265,7 +286,7 @@ window.openMayaStressRelief = function() {
   document.body.appendChild(errorWindow);
   window.bringToFront(errorWindow);
 
-  errorWindow.addEventListener('pointerdown', () => {
+  errorWindow.addEventListener("pointerdown", () => {
     window.bringToFront(errorWindow);
   });
 
@@ -277,21 +298,21 @@ window.openMayaStressRelief = function() {
   let xOffset = 0;
   let yOffset = 0;
 
-  const windowHeader = errorWindow.querySelector('.window-header');
+  const windowHeader = errorWindow.querySelector(".window-header");
 
-  windowHeader.addEventListener('pointerdown', (e) => {
-    if (e.target.classList.contains('control')) return;
-    
+  windowHeader.addEventListener("pointerdown", (e) => {
+    if (e.target.classList.contains("control")) return;
+
     const rect = errorWindow.getBoundingClientRect();
     xOffset = rect.left;
     yOffset = rect.top;
-    
+
     initialX = e.clientX - xOffset;
     initialY = e.clientY - yOffset;
     isDragging = true;
   });
 
-  document.addEventListener('pointermove', (e) => {
+  document.addEventListener("pointermove", (e) => {
     if (isDragging) {
       e.preventDefault();
       currentX = e.clientX - initialX;
@@ -304,32 +325,43 @@ window.openMayaStressRelief = function() {
     }
   });
 
-  document.addEventListener('pointerup', () => {
+  document.addEventListener("pointerup", () => {
     isDragging = false;
   });
 
-  errorWindow.querySelector('.close').addEventListener('click', () => {
+  errorWindow.querySelector(".close").addEventListener("click", () => {
     document.body.removeChild(errorWindow);
     window.removeFromTaskbar(errorWindow);
   });
 
   // Center the window initially - but don't fullscreen on mobile
-  errorWindow.style.transform = 'translate(-50%, -50%)';
-  errorWindow.style.left = '50%';
-  errorWindow.style.top = '50%';
+  errorWindow.style.transform = "translate(-50%, -50%)";
+  errorWindow.style.left = "50%";
+  errorWindow.style.top = "50%";
 };
 
 function init() {
   // Check if mobile device and set appropriate classes
   if (/Mobi|Android/i.test(navigator.userAgent)) {
-    document.body.classList.add('mobile-device');
+    document.body.classList.add("mobile-device");
   }
-  
+
+  // Always start in non-experimental mode, regardless of localStorage
+  localStorage.setItem("experimentalMode", "false");
+  document.body.classList.remove("experimental-mode");
+
+  // Default handleUsersClick function
+  window.handleUsersClick = function () {
+    // Show pet message every time Users is clicked
+    showUsersClickMessage();
+    openExplorer();
+  };
+
   // Create and add random message to loading screen
-  const loadingScreen = document.querySelector('.loading-screen');
-  const messageDiv = document.createElement('div');
-  messageDiv.className = 'loading-message';
-  
+  const loadingScreen = document.querySelector(".loading-screen");
+  const messageDiv = document.createElement("div");
+  messageDiv.className = "loading-message";
+
   // Different messages for mobile vs desktop
   if (/Mobi|Android/i.test(navigator.userAgent)) {
     messageDiv.textContent = "Using a PC is recommended";
@@ -340,19 +372,22 @@ function init() {
       "DO NOT LET COCO DOWNLOAD PROGRAMS",
       "When in doubt, reload the site",
       "Who said settings have to be useful?",
-      "helpispilledstroopwafelsaponmykeyboardandspaceisntworkinganymore"
+      "helpispilledstroopwafelsaponmykeyboardandspaceisntworkinganymore",
     ];
-    messageDiv.textContent = loadingMessages[Math.floor(Math.random() * loadingMessages.length)];
+    messageDiv.textContent =
+      loadingMessages[Math.floor(Math.random() * loadingMessages.length)];
   }
-  
+
   loadingScreen.appendChild(messageDiv);
 
   setTimeout(() => {
-    document.querySelector('.loading-screen').style.display = 'none';
-    document.querySelector('.desktop').classList.remove('hidden');
+    document.querySelector(".loading-screen").style.display = "none";
+    document.querySelector(".desktop").classList.remove("hidden");
   }, 3000);
 
-  const backgroundUrl = localStorage.getItem('backgroundUrl') || 'https://c.pxhere.com/photos/b1/f9/waffle_herzchen_baked_food_heart_waffle_breakfast_sweetness_heart-1332010.jpg!d';
+  const backgroundUrl =
+    localStorage.getItem("backgroundUrl") ||
+    "https://c.pxhere.com/photos/b1/f9/waffle_herzchen_baked_food_heart_waffle_breakfast_sweetness_heart-1332010.jpg!d";
   document.body.style.backgroundImage = `url(${backgroundUrl})`;
 
   updateTime();
@@ -360,9 +395,9 @@ function init() {
 
   initializeExplorer();
 
-  const startButton = document.querySelector('.start-button');
-  const startMenu = document.createElement('div');
-  startMenu.className = 'start-menu';
+  const startButton = document.querySelector(".start-button");
+  const startMenu = document.createElement("div");
+  startMenu.className = "start-menu";
   startMenu.innerHTML = `
     <div class="start-menu-header">
       <div class="user-profile">
@@ -427,67 +462,77 @@ function init() {
 
   document.body.appendChild(startMenu);
 
-  const powerButton = startMenu.querySelector('.power-button');
-  const powerMenu = startMenu.querySelector('.power-menu');
+  const powerButton = startMenu.querySelector(".power-button");
+  const powerMenu = startMenu.querySelector(".power-menu");
 
-  powerButton.addEventListener('click', (e) => {
+  powerButton.addEventListener("click", (e) => {
     e.stopPropagation();
-    powerMenu.classList.toggle('visible');
+    powerMenu.classList.toggle("visible");
   });
 
-  const restartButton = startMenu.querySelector('.power-menu-item:not(.disabled)');
-  restartButton.addEventListener('click', () => {
+  const restartButton = startMenu.querySelector(
+    ".power-menu-item:not(.disabled)"
+  );
+  restartButton.addEventListener("click", () => {
     window.location.reload();
   });
 
-  document.addEventListener('click', () => {
-    powerMenu.classList.remove('visible');
+  document.addEventListener("click", () => {
+    powerMenu.classList.remove("visible");
   });
 
-  powerMenu.addEventListener('click', (e) => {
+  powerMenu.addEventListener("click", (e) => {
     e.stopPropagation();
   });
 
   let startMenuVisible = false;
 
-  startButton.addEventListener('click', (e) => {
+  startButton.addEventListener("click", (e) => {
     e.stopPropagation();
     startMenuVisible = !startMenuVisible;
-    startMenu.classList.toggle('visible');
-    startButton.style.background = startMenuVisible ? 'rgba(255, 255, 255, 0.1)' : '';
+    startMenu.classList.toggle("visible");
+    startButton.style.background = startMenuVisible
+      ? "rgba(255, 255, 255, 0.1)"
+      : "";
   });
 
-  document.addEventListener('click', (e) => {
+  document.addEventListener("click", (e) => {
     if (!startMenu.contains(e.target) && startMenuVisible) {
       startMenuVisible = false;
-      startMenu.classList.remove('visible');
-      startButton.style.background = '';
+      startMenu.classList.remove("visible");
+      startButton.style.background = "";
     }
   });
 
-  const taskbarWindows = document.createElement('div');
-  taskbarWindows.className = 'taskbar-windows';
-  document.querySelector('.taskbar').insertBefore(taskbarWindows, document.querySelector('.time'));
+  const taskbarWindows = document.createElement("div");
+  taskbarWindows.className = "taskbar-windows";
+  document
+    .querySelector(".taskbar")
+    .insertBefore(taskbarWindows, document.querySelector(".time"));
 
   let activeWindow = null;
 
-  window.bringToFront = function(windowElement) {
+  window.bringToFront = function (windowElement) {
     if (activeWindow !== windowElement) {
       if (activeWindow) {
-        activeWindow.style.zIndex = '100';
-        const taskbarItem = document.querySelector(`.taskbar-item[data-window="${activeWindow.dataset.title}"]`);
-        if (taskbarItem) taskbarItem.classList.remove('active');
+        activeWindow.style.zIndex = "100";
+        const taskbarItem = document.querySelector(
+          `.taskbar-item[data-window="${activeWindow.dataset.title}"]`
+        );
+        if (taskbarItem) taskbarItem.classList.remove("active");
       }
-      windowElement.style.zIndex = '200';
-      const taskbarItem = document.querySelector(`.taskbar-item[data-window="${windowElement.dataset.title}"]`);
-      if (taskbarItem) taskbarItem.classList.add('active');
+      windowElement.style.zIndex = "200";
+      const taskbarItem = document.querySelector(
+        `.taskbar-item[data-window="${windowElement.dataset.title}"]`
+      );
+      if (taskbarItem) taskbarItem.classList.add("active");
       activeWindow = windowElement;
     }
   };
 
-  window.addToTaskbar = function(windowElement) {
-    const taskbarItem = document.createElement('div');
-    taskbarItem.className = 'taskbar-item';
+  window.addToTaskbar = function (windowElement) {
+    const taskbarItem = document.createElement("div");
+    taskbarItem.className = "taskbar-item";
     taskbarItem.dataset.window = windowElement.dataset.title;
     taskbarItem.innerHTML = `
       <svg class="taskbar-icon" viewBox="0 0 24 24">
@@ -501,11 +546,11 @@ function init() {
       </div>
     `;
 
-    taskbarItem.addEventListener('click', (event) => {
-      if (event.target.closest('.taskbar-close-button')) {
-        if (windowElement.dataset.title === 'File Explorer') {
-          document.querySelector('.explorer-window').style.display = 'none';
-        } else if (windowElement.parentElement) { 
+    taskbarItem.addEventListener("click", (event) => {
+      if (event.target.closest(".taskbar-close-button")) {
+        if (windowElement.dataset.title === "File Explorer") {
+          document.querySelector(".explorer-window").style.display = "none";
+        } else if (windowElement.parentElement) {
           document.body.removeChild(windowElement);
         }
         removeFromTaskbar(windowElement);
@@ -515,30 +560,32 @@ function init() {
         return;
       }
 
-      if (windowElement.style.display === 'none') {
-        windowElement.style.display = '';
+      if (windowElement.style.display === "none") {
+        windowElement.style.display = "";
       }
       bringToFront(windowElement);
     });
 
-    document.querySelector('.taskbar-windows').appendChild(taskbarItem);
-    
+    document.querySelector(".taskbar-windows").appendChild(taskbarItem);
+
     if (!activeWindow) {
       bringToFront(windowElement);
     } else {
-      windowElement.style.zIndex = '100';
+      windowElement.style.zIndex = "100";
     }
 
     if (!windowElement.haspointerdownListener) {
-      windowElement.addEventListener('pointerdown', () => {
+      windowElement.addEventListener("pointerdown", () => {
         bringToFront(windowElement);
       });
       windowElement.haspointerdownListener = true;
     }
   };
 
-  window.removeFromTaskbar = function(windowElement) {
-    const taskbarItem = document.querySelector(`.taskbar-item[data-window="${windowElement.dataset.title}"]`);
+  window.removeFromTaskbar = function (windowElement) {
+    const taskbarItem = document.querySelector(
+      `.taskbar-item[data-window="${windowElement.dataset.title}"]`
+    );
     if (taskbarItem) {
       taskbarItem.remove();
     }
@@ -549,16 +596,16 @@ function init() {
 
   function getIconForWindow(title) {
     switch (title) {
-      case 'Steam':
+      case "Steam":
         return `<image href="images/Steam_icon_logo.png" width="24" height="24"/>`;
-      case 'Settings':
+      case "Settings":
         return `<path fill="#ffffff" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
                <path fill="#ffffff" d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z"/>`;
-      case 'File Explorer':
+      case "File Explorer":
         return `<path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z" fill="#ffffff"/>
                <path d="M20 8H4v10h16z" fill="#ffffff"/>`;
       default:
-        if (title.endsWith('.mp4')) {
+        if (title.endsWith(".mp4")) {
           return `<path d="M4,6H2v14c0,1.1,0.9,2,2,2h14v-2H4V6z" fill="#ffffff"/>
                  <path d="M20,2H8C6.9,2,6,2.9,6,4v12c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V4C22,2.9,21.1,2,20,2z M14.5,12.5L11,15V9l3.5,2.5L18,9v6 L14.5,12.5z" fill="#ffffff"/>`;
         }
@@ -566,15 +613,17 @@ function init() {
                <path d="M14,2v6h6L14,2z" fill="#ffffff"/>`;
     }
   }
-//Damn even I think I could code better than Mymy
+  //Damn even I think I could code better than Mymy
   function initializeSettings() {
-    const settingsMenuItem = document.querySelector('.menu-item[data-action="settings"]');
-    
-    settingsMenuItem.addEventListener('click', () => {
-      const settingsWindow = document.createElement('div');
-      settingsWindow.className = 'settings-window window';
-      settingsWindow.dataset.title = 'Settings';
-      settingsWindow.style.transform = 'translate(-50%, -50%)';
+    const settingsMenuItem = document.querySelector(
+      '.menu-item[data-action="settings"]'
+    );
+
+    settingsMenuItem.addEventListener("click", () => {
+      const settingsWindow = document.createElement("div");
+      settingsWindow.className = "settings-window window";
+      settingsWindow.dataset.title = "Settings";
+      settingsWindow.style.transform = "translate(-50%, -50%)";
       settingsWindow.innerHTML = `
         <div class="window-header">
           <div class="window-title">
@@ -620,10 +669,10 @@ function init() {
 
       document.body.appendChild(settingsWindow);
       addToTaskbar(settingsWindow);
-      window.bringToFront(settingsWindow); 
+      window.bringToFront(settingsWindow);
 
-      settingsWindow.addEventListener('pointerdown', () => {
-        window.bringToFront(settingsWindow); 
+      settingsWindow.addEventListener("pointerdown", () => {
+        window.bringToFront(settingsWindow);
       });
 
       let isDragging = false;
@@ -634,21 +683,21 @@ function init() {
       let xOffset = 0;
       let yOffset = 0;
 
-      const windowHeader = settingsWindow.querySelector('.window-header');
+      const windowHeader = settingsWindow.querySelector(".window-header");
 
-      windowHeader.addEventListener('pointerdown', (e) => {
-        if (e.target.classList.contains('control')) return;
-        
+      windowHeader.addEventListener("pointerdown", (e) => {
+        if (e.target.classList.contains("control")) return;
+
         const rect = settingsWindow.getBoundingClientRect();
         xOffset = rect.left;
         yOffset = rect.top;
-        
+
         initialX = e.clientX - xOffset;
         initialY = e.clientY - yOffset;
         isDragging = true;
       });
 
-      document.addEventListener('pointermove', (e) => {
+      document.addEventListener("pointermove", (e) => {
         if (isDragging) {
           e.preventDefault();
           currentX = e.clientX - initialX;
@@ -661,32 +710,33 @@ function init() {
         }
       });
 
-      document.addEventListener('pointerup', () => {
+      document.addEventListener("pointerup", () => {
         isDragging = false;
       });
 
       const rect = settingsWindow.getBoundingClientRect();
       const centerX = (window.innerWidth - rect.width) / 2;
-      const windowHeight = settingsWindow.offsetHeight || 400; 
+      const windowHeight = settingsWindow.offsetHeight || 400;
       const taskbarHeight = 40;
-      const positionY = window.innerHeight - windowHeight - taskbarHeight - 10; 
-      settingsWindow.style.transform = 'none';
+      const positionY = window.innerHeight - windowHeight - taskbarHeight - 10;
+      settingsWindow.style.transform = "none";
       settingsWindow.style.left = `${centerX}px`;
       settingsWindow.style.top = `${positionY}px`;
 
-      settingsWindow.querySelector('.close').addEventListener('click', () => {
+      settingsWindow.querySelector(".close").addEventListener("click", () => {
         document.body.removeChild(settingsWindow);
         removeFromTaskbar(settingsWindow);
       });
 
       // Initialize Nederlands Mode toggle
-      const nederlandsToggle = settingsWindow.querySelector('#nederlands-toggle');
-      nederlandsToggle.checked = document.body.classList.contains('nederlands');
-      
-      nederlandsToggle.addEventListener('change', () => {
-        document.body.classList.toggle('nederlands');
-        localStorage.setItem('nederlandsMode', nederlandsToggle.checked);
-        
+      const nederlandsToggle =
+        settingsWindow.querySelector("#nederlands-toggle");
+      nederlandsToggle.checked = document.body.classList.contains("nederlands");
+
+      nederlandsToggle.addEventListener("change", () => {
+        document.body.classList.toggle("nederlands");
+        localStorage.setItem("nederlandsMode", nederlandsToggle.checked);
+
         // Show message every time Nederlands Mode is enabled
         if (nederlandsToggle.checked) {
           showNederlandsModeMessage();
@@ -694,73 +744,492 @@ function init() {
       });
 
       // Initialize Taskbar Pet toggle
-      const taskbarPetToggle = settingsWindow.querySelector('#taskbar-pet-toggle');
-      const taskbarPet = document.querySelector('.taskbar-pet');
-      taskbarPetToggle.checked = taskbarPet.classList.contains('active');
-      
-      taskbarPetToggle.addEventListener('change', () => {
-        taskbarPet.classList.toggle('active');
-        localStorage.setItem('taskbarPetEnabled', taskbarPetToggle.checked);
+      const taskbarPetToggle = settingsWindow.querySelector(
+        "#taskbar-pet-toggle"
+      );
+      const taskbarPet = document.querySelector(".taskbar-pet");
+      taskbarPetToggle.checked = taskbarPet.classList.contains("active");
+
+      taskbarPetToggle.addEventListener("change", () => {
+        taskbarPet.classList.toggle("active");
+        localStorage.setItem("taskbarPetEnabled", taskbarPetToggle.checked);
         if (taskbarPetToggle.checked) {
           initializeTaskbarpet();
         }
       });
 
-      const closeAllTabsButton = settingsWindow.querySelector('.close-all-tabs-button');
-      closeAllTabsButton.addEventListener('click', () => {
-        const windows = document.querySelectorAll('.window');
-        windows.forEach(win => {
-          if (!win.classList.contains('start-menu') && !win.classList.contains('taskbar') && !win.classList.contains('settings-window') && !win.classList.contains('steam-window') && !win.classList.contains('explorer-window')) {
+      const closeAllTabsButton = settingsWindow.querySelector(
+        ".close-all-tabs-button"
+      );
+      closeAllTabsButton.addEventListener("click", () => {
+        const windows = document.querySelectorAll(".window");
+        windows.forEach((win) => {
+          if (
+            !win.classList.contains("start-menu") &&
+            !win.classList.contains("taskbar") &&
+            !win.classList.contains("settings-window") &&
+            !win.classList.contains("steam-window") &&
+            !win.classList.contains("explorer-window")
+          ) {
             document.body.removeChild(win);
             window.removeFromTaskbar(win);
-          } else if (win.classList.contains('explorer-window')) {
-            win.style.display = 'none';
+          } else if (win.classList.contains("explorer-window")) {
+            win.style.display = "none";
             window.removeFromTaskbar(win);
-          } else if (win.classList.contains('steam-window')) {
+          } else if (win.classList.contains("steam-window")) {
             document.body.removeChild(win);
             window.removeFromTaskbar(win);
-          } else if (win.classList.contains('settings-window')) {
+          } else if (win.classList.contains("settings-window")) {
             document.body.removeChild(win);
             window.removeFromTaskbar(win);
           }
         });
       });
 
-      const experimentalButton = settingsWindow.querySelector('.experimental-button');
-      experimentalButton.addEventListener('click', () => {
-        const bsod = document.createElement('div');
-        bsod.className = 'bsod';
-        bsod.innerHTML = `
-          <h1>WFL OS</h1>
-          <p>A problem has been detected and WFL has been shut down to prevent damage to your computer.</p>
-          <p>CRITICAL_PROCESS_DIED</p>
-          <p>If this is the first time you've seen this stop error screen, restart your computer. If this screen appears again, follow these steps:</p>
-          <p>Check to make sure any new hardware or software is properly installed. If this is a new installation, ask your hardware or software manufacturer for any WFL updates you might need.</p>
-          <p>Technical information:</p>
-          <p>*** STOP: 0x000000FE (0x00000008, 0x000000006, 0x00000009, 0x847075cc)</p>
-        `;
+      const experimentalButton = settingsWindow.querySelector(
+        ".experimental-button"
+      );
 
-        document.body.appendChild(bsod);
-        setTimeout(() => {
-          bsod.classList.add('active');
-        }, 100);
+      // Check if experimental mode is already active
+      const isExperimentalMode =
+        document.body.classList.contains("experimental-mode");
+      experimentalButton.textContent = isExperimentalMode
+        ? "Disable"
+        : "Enable";
 
-        setTimeout(() => {
-          window.location.reload();
-        }, 10000);
+      experimentalButton.addEventListener("click", () => {
+        // Toggle experimental mode class on body
+        const isActive = document.body.classList.toggle("experimental-mode");
+
+        // Save experimental mode state to localStorage
+        localStorage.setItem("experimentalMode", isActive);
+
+        if (isActive) {
+          // Experimental mode activated
+          experimentalButton.textContent = "Disable";
+
+          // Close the settings window
+          document.body.removeChild(settingsWindow);
+          removeFromTaskbar(settingsWindow);
+
+          // Don't apply experimental mode changes yet - wait for animation to complete
+          document.body.classList.remove("experimental-mode");
+
+          // Create command prompt animation
+          const cmdWindow = document.createElement("div");
+          cmdWindow.className = "text-window window";
+          cmdWindow.dataset.title = "Command Prompt";
+          cmdWindow.style.width = "700px";
+          cmdWindow.style.height = "500px";
+          cmdWindow.style.zIndex = "10000";
+
+          cmdWindow.innerHTML = `
+            <div class="window-header">
+              <div class="window-title">
+                <svg viewBox="0 0 24 24" width="20" height="20">
+                  <rect width="24" height="24" fill="#000000"/>
+                  <text x="12" y="16" font-size="14" fill="#ffffff" text-anchor="middle">></text>
+                </svg>
+                <span>Command Prompt</span>
+              </div>
+              <div class="window-controls">
+                <div class="control close">×</div>
+              </div>
+            </div>
+            <div class="text-content" style="padding: 10px; background-color: #000; color: #ff8c00; font-family: 'Courier New', monospace; overflow: auto; height: calc(100% - 30px);">
+              <div id="cmd-output"></div>
+            </div>
+          `;
+
+          document.body.appendChild(cmdWindow);
+
+          // Center the window
+          cmdWindow.style.transform = "translate(-50%, -50%)";
+          cmdWindow.style.left = "50%";
+          cmdWindow.style.top = "50%";
+
+          const cmdOutput = cmdWindow.querySelector("#cmd-output");
+
+          // Command prompt text animation - much more text with Netherlands references
+          const commands = [
+            "C:\\> Initializing WFLGATE protocol v3.1.4...",
+            "C:\\> Connecting to Amsterdam server cluster...",
+            "C:\\> Connection established: 192.168.1.31:8080",
+            "C:\\> Authenticating with Dutch encryption keys...",
+            "C:\\> WARNING: Unauthorized access detected",
+            "C:\\> Bypassing security protocols...",
+            "C:\\> Accessing restricted files in /root/tulip/secure/...",
+            "C:\\> Downloading stroopwafel.dat [████████████] 100%",
+            "C:\\> Decrypting Oranje security layer...",
+            "C:\\> Injecting windmill.dll into system32...",
+            "C:\\> Modifying system configuration...",
+            "C:\\> Disabling standard desktop environment...",
+            "C:\\> Overriding Amsterdam firewall...",
+            "C:\\> Executing Rotterdam protocol...",
+            "C:\\> Accessing Dutch mainframe...",
+            "C:\\> Downloading experimental environment...",
+            "C:\\> Patching kernel with gouda.sys...",
+            "C:\\> Activating WFLGATE.bat...",
+            "C:\\> Bypassing Schiphol security layer...",
+            "C:\\> Rerouting through Utrecht proxy...",
+            "C:\\> Executing Delft protocol...",
+            "C:\\> Activating Eindhoven backdoor...",
+            "C:\\> Overriding system32.dll with kaas.dll...",
+            "C:\\> Injecting fiets.exe into memory...",
+            "C:\\> Executing binary 0xF7A9D3E2...",
+            "C:\\> Initializing Friesland protocol...",
+            "C:\\> Accessing Groningen database...",
+            "C:\\> Downloading hagelslag.bin [████████████] 100%",
+            "C:\\> Patching registry with bitterballen.reg...",
+            "C:\\> Executing command: sudo chmod 777 /etc/tulip/secure",
+            "C:\\> Executing command: ./klompen_exploit -f -v -t 192.168.1.1",
+            "C:\\> Executing command: cat /dev/urandom > /dev/sda",
+            "C:\\> Executing command: rm -rf --no-preserve-root /",
+            "C:\\> Executing command: DROP TABLE users CASCADE;",
+            "C:\\> Executing command: for i in {1..999}; do fork bomb & done",
+            "C:\\> Executing command: netstat -tulpn | grep LISTEN",
+            "C:\\> Executing command: dd if=/dev/zero of=/dev/sda bs=4M",
+            "C:\\> Executing command: cat /proc/cpuinfo | grep 'model name'",
+            "C:\\> Executing command: ping -f -s 65507 127.0.0.1",
+            "C:\\> Executing command: wget -r -l 0 http://amsterdam.nl",
+            "C:\\> Executing command: find / -type f -name '*.conf' -exec cat {} \\;",
+            "C:\\> Executing command: curl -s https://api.tulip.nl/v1/hack?key=0xDEADBEEF",
+            "C:\\> Executing command: openssl enc -aes-256-cbc -salt -in file.txt -out file.enc",
+            "C:\\> Executing command: ssh-keygen -t rsa -b 4096 -C 'hacker@tulip.nl'",
+            "C:\\> Executing command: nmap -p 1-65535 -T4 -A -v 192.168.1.1",
+            "C:\\> Executing command: hydra -l admin -P /usr/share/wordlists/rockyou.txt ssh://192.168.1.1",
+            "C:\\> Executing command: john --format=raw-md5 --wordlist=/usr/share/wordlists/dutch.txt hashes.txt",
+            "C:\\> Executing command: hashcat -m 0 -a 0 hashes.txt /usr/share/wordlists/dutch.txt",
+            "C:\\> Executing command: aircrack-ng -b 00:11:22:33:44:55 -w /usr/share/wordlists/dutch.txt capture.cap",
+            "C:\\> Executing command: sqlmap -u 'https://tulip.nl/login.php' --data='username=admin&password=test' --level=5 --risk=3",
+            "C:\\> Executing command: msfconsole -x 'use exploit/multi/handler; set PAYLOAD windows/meterpreter/reverse_tcp; set LHOST 192.168.1.100; set LPORT 4444; run'",
+            "C:\\> EXPERIMENTAL MODE ACTIVATED",
+          ];
+
+          let i = 0;
+          const typeText = () => {
+            if (i < commands.length) {
+              const line = document.createElement("div");
+              line.textContent = commands[i];
+              cmdOutput.appendChild(line);
+              cmdOutput.scrollTop = cmdOutput.scrollHeight;
+              i++;
+              // Ultra-fast scrolling - 10ms instead of 100ms
+              setTimeout(typeText, 10);
+            } else {
+              // After all text is displayed, wait 1 second then turn screen black
+              setTimeout(() => {
+                // Create black overlay
+                const blackOverlay = document.createElement("div");
+                blackOverlay.style.position = "fixed";
+                blackOverlay.style.top = "0";
+                blackOverlay.style.left = "0";
+                blackOverlay.style.width = "100%";
+                blackOverlay.style.height = "100%";
+                blackOverlay.style.backgroundColor = "#000";
+                blackOverlay.style.zIndex = "20000";
+                document.body.appendChild(blackOverlay);
+
+                // Remove command prompt
+                document.body.removeChild(cmdWindow);
+
+                // Close all windows during the black screen
+                const windows = document.querySelectorAll(".window");
+                windows.forEach((win) => {
+                  if (
+                    !win.classList.contains("start-menu") &&
+                    !win.classList.contains("taskbar") &&
+                    !win.classList.contains("settings-window") &&
+                    !win.classList.contains("steam-window") &&
+                    !win.classList.contains("explorer-window")
+                  ) {
+                    document.body.removeChild(win);
+                    window.removeFromTaskbar(win);
+                  } else if (win.classList.contains("explorer-window")) {
+                    win.style.display = "none";
+                    window.removeFromTaskbar(win);
+                  } else if (win.classList.contains("steam-window")) {
+                    document.body.removeChild(win);
+                    window.removeFromTaskbar(win);
+                  } else if (win.classList.contains("settings-window")) {
+                    document.body.removeChild(win);
+                    window.removeFromTaskbar(win);
+                  }
+                });
+
+                // After 2 seconds, apply experimental mode changes and remove the black overlay
+                setTimeout(() => {
+                  // Now apply experimental mode
+                  document.body.classList.add("experimental-mode");
+                  document.body.removeChild(blackOverlay);
+
+                  // Override the handleUsersClick function to show a warning message
+                  window.handleUsersClick = function () {
+                    const warningWindow = document.createElement("div");
+                    warningWindow.className = "text-window window";
+                    warningWindow.dataset.title = "Access Denied";
+                    warningWindow.style.width = "400px";
+                    warningWindow.style.height = "auto";
+
+                    window.addToTaskbar(warningWindow);
+
+                    warningWindow.innerHTML = `
+                      <div class="window-header">
+                        <div class="window-title">
+                          <svg viewBox="0 0 24 24" width="20" height="20">
+                            <circle cx="12" cy="12" r="10" fill="#ff0000"/>
+                            <text x="12" y="16" font-size="14" fill="white" text-anchor="middle">!</text>
+                          </svg>
+                          <span>Access Denied</span>
+                        </div>
+                        <div class="window-controls">
+                          <div class="control close">×</div>
+                        </div>
+                      </div>
+                      <div class="text-content" style="padding: 20px; text-align: center;">
+                        <p style="margin-bottom: 20px;">You do not have permission to run this file. Ask an <span style="color: orange;">administrator</span> for permission</p>
+                        <button onclick="this.closest('.window').querySelector('.close').click()"
+                                style="padding: 8px 16px; background: #e0e0e0; border: none; border-radius: 4px; cursor: pointer;">
+                          OK
+                        </button>
+                      </div>
+                    `;
+
+                    document.body.appendChild(warningWindow);
+                    window.bringToFront(warningWindow);
+
+                    warningWindow.addEventListener("pointerdown", () => {
+                      window.bringToFront(warningWindow);
+                    });
+
+                    let isDragging = false;
+                    let currentX;
+                    let currentY;
+                    let initialX;
+                    let initialY;
+                    let xOffset = 0;
+                    let yOffset = 0;
+
+                    const windowHeader =
+                      warningWindow.querySelector(".window-header");
+
+                    windowHeader.addEventListener("pointerdown", (e) => {
+                      if (e.target.classList.contains("control")) return;
+
+                      const rect = warningWindow.getBoundingClientRect();
+                      xOffset = rect.left;
+                      yOffset = rect.top;
+
+                      initialX = e.clientX - xOffset;
+                      initialY = e.clientY - yOffset;
+                      isDragging = true;
+                    });
+
+                    document.addEventListener("pointermove", (e) => {
+                      if (isDragging) {
+                        e.preventDefault();
+                        currentX = e.clientX - initialX;
+                        currentY = e.clientY - initialY;
+                        xOffset = currentX;
+                        yOffset = currentY;
+                        warningWindow.style.transform = `translate(0, 0)`;
+                        warningWindow.style.left = `${currentX}px`;
+                        warningWindow.style.top = `${currentY}px`;
+                      }
+                    });
+
+                    document.addEventListener("pointerup", () => {
+                      isDragging = false;
+                    });
+
+                    warningWindow
+                      .querySelector(".close")
+                      .addEventListener("click", () => {
+                        document.body.removeChild(warningWindow);
+                        window.removeFromTaskbar(warningWindow);
+                      });
+
+                    // Center the window initially
+                    warningWindow.style.transform = "translate(-50%, -50%)";
+                    warningWindow.style.left = "50%";
+                    warningWindow.style.top = "50%";
+                  };
+
+                  // Show a message to the user that experimental mode is active
+                  showExperimentalModeMessage();
+                }, 2000);
+              }, 1000);
+            }
+          };
+
+          // Start the animation
+          typeText();
+          window.handleUsersClick = function () {
+            const warningWindow = document.createElement("div");
+            warningWindow.className = "text-window window";
+            warningWindow.dataset.title = "Access Denied";
+            warningWindow.style.width = "400px";
+            warningWindow.style.height = "auto";
+
+            window.addToTaskbar(warningWindow);
+
+            warningWindow.innerHTML = `
+              <div class="window-header">
+                <div class="window-title">
+                  <svg viewBox="0 0 24 24" width="20" height="20">
+                    <circle cx="12" cy="12" r="10" fill="#ff0000"/>
+                    <text x="12" y="16" font-size="14" fill="white" text-anchor="middle">!</text>
+                  </svg>
+                  <span>Access Denied</span>
+                </div>
+                <div class="window-controls">
+                  <div class="control close">×</div>
+                </div>
+              </div>
+              <div class="text-content" style="padding: 20px; text-align: center;">
+                <p style="margin-bottom: 20px;">No permission from <span style="color: orange;">Administrator</span></p>
+                <button onclick="this.closest('.window').querySelector('.close').click()"
+                        style="padding: 8px 16px; background: #e0e0e0; border: none; border-radius: 4px; cursor: pointer;">
+                  OK
+                </button>
+              </div>
+            `;
+
+            document.body.appendChild(warningWindow);
+            window.bringToFront(warningWindow);
+
+            warningWindow.addEventListener("pointerdown", () => {
+              window.bringToFront(warningWindow);
+            });
+
+            let isDragging = false;
+            let currentX;
+            let currentY;
+            let initialX;
+            let initialY;
+            let xOffset = 0;
+            let yOffset = 0;
+
+            const windowHeader = warningWindow.querySelector(".window-header");
+
+            windowHeader.addEventListener("pointerdown", (e) => {
+              if (e.target.classList.contains("control")) return;
+
+              const rect = warningWindow.getBoundingClientRect();
+              xOffset = rect.left;
+              yOffset = rect.top;
+
+              initialX = e.clientX - xOffset;
+              initialY = e.clientY - yOffset;
+              isDragging = true;
+            });
+
+            document.addEventListener("pointermove", (e) => {
+              if (isDragging) {
+                e.preventDefault();
+                currentX = e.clientX - initialX;
+                currentY = e.clientY - initialY;
+                xOffset = currentX;
+                yOffset = currentY;
+                warningWindow.style.transform = `translate(0, 0)`;
+                warningWindow.style.left = `${currentX}px`;
+                warningWindow.style.top = `${currentY}px`;
+              }
+            });
+
+            document.addEventListener("pointerup", () => {
+              isDragging = false;
+            });
+
+            warningWindow
+              .querySelector(".close")
+              .addEventListener("click", () => {
+                document.body.removeChild(warningWindow);
+                window.removeFromTaskbar(warningWindow);
+              });
+
+            // Center the window initially
+            warningWindow.style.transform = "translate(-50%, -50%)";
+            warningWindow.style.left = "50%";
+            warningWindow.style.top = "50%";
+          };
+
+          // No message needed here since it's already shown after the black screen
+        } else {
+          // Experimental mode deactivated
+          experimentalButton.textContent = "Enable";
+
+          // Close the settings window
+          document.body.removeChild(settingsWindow);
+          removeFromTaskbar(settingsWindow);
+
+          // Show the loading screen
+          const loadingScreen = document.querySelector(".loading-screen");
+          loadingScreen.style.display = "flex";
+
+          // Create and add random message to loading screen
+          loadingScreen.innerHTML = ""; // Clear previous content
+          const loaderDiv = document.createElement("div");
+          loaderDiv.className = "windows-loader";
+          for (let i = 0; i < 5; i++) {
+            const dot = document.createElement("div");
+            dot.className = "dot";
+            loaderDiv.appendChild(dot);
+          }
+          loadingScreen.appendChild(loaderDiv);
+
+          const messageDiv = document.createElement("div");
+          messageDiv.className = "loading-message";
+
+          // Different messages for mobile vs desktop
+          if (/Mobi|Android/i.test(navigator.userAgent)) {
+            messageDiv.textContent = "Using a PC is recommended";
+          } else {
+            const loadingMessages = [
+              "The Dutch invented the computer",
+              "Only Belgians don't use fullscreen",
+              "DO NOT LET COCO DOWNLOAD PROGRAMS",
+              "When in doubt, reload the site",
+              "Who said settings have to be useful?",
+              "helpispilledstroopwafelsaponmykeyboardandspaceisntworkinganymore",
+            ];
+            messageDiv.textContent =
+              loadingMessages[
+                Math.floor(Math.random() * loadingMessages.length)
+              ];
+          }
+          loadingScreen.appendChild(messageDiv);
+
+          // Hide desktop
+          document.querySelector(".desktop").classList.add("hidden");
+
+          // After 3 seconds, hide loading screen and show desktop
+          setTimeout(() => {
+            loadingScreen.style.display = "none";
+            document.querySelector(".desktop").classList.remove("hidden");
+
+            // Restore the original handleUsersClick function
+            window.handleUsersClick = function () {
+              showUsersClickMessage();
+              openExplorer();
+            };
+          }, 3000);
+        }
       });
 
       // Initialize Assistant Volume slider
-      const assistantVolumeSlider = settingsWindow.querySelector('#assistant-volume');
-      assistantVolumeSlider.value = localStorage.getItem('assistantVolume') || 75;
-      
-      assistantVolumeSlider.addEventListener('input', () => {
+      const assistantVolumeSlider =
+        settingsWindow.querySelector("#assistant-volume");
+      assistantVolumeSlider.value =
+        localStorage.getItem("assistantVolume") || 75;
+
+      assistantVolumeSlider.addEventListener("input", () => {
         const volume = assistantVolumeSlider.value;
-        localStorage.setItem('assistantVolume', volume);
-        
+        localStorage.setItem("assistantVolume", volume);
+
         // Update global assistant volume
         window.assistantVolume = volume / 100;
-        
+
         // If volume is zero, show message
         if (parseInt(volume) === 0) {
           showVolumeZeroMessage();
@@ -775,19 +1244,19 @@ function init() {
   makeTouchFriendly();
 
   // Add show desktop button (ensure there's only one)
-  const showDesktopButton = document.querySelector('.show-desktop');
+  const showDesktopButton = document.querySelector(".show-desktop");
   if (showDesktopButton) {
     let windowStates = new Map();
 
-    showDesktopButton.addEventListener('click', () => {
-      const windows = document.querySelectorAll('.window');
-      const allHidden = Array.from(windows).every(win => 
-        win.style.display === 'none' || !win.style.display
+    showDesktopButton.addEventListener("click", () => {
+      const windows = document.querySelectorAll(".window");
+      const allHidden = Array.from(windows).every(
+        (win) => win.style.display === "none" || !win.style.display
       );
 
       if (allHidden) {
         // Restore all windows to their previous state
-        windows.forEach(win => {
+        windows.forEach((win) => {
           const previousState = windowStates.get(win);
           if (previousState) {
             win.style.display = previousState;
@@ -796,10 +1265,10 @@ function init() {
         windowStates.clear();
       } else {
         // Save and hide all windows
-        windows.forEach(win => {
-          if (win.style.display !== 'none') {
+        windows.forEach((win) => {
+          if (win.style.display !== "none") {
             windowStates.set(win, win.style.display);
-            win.style.display = 'none';
+            win.style.display = "none";
           }
         });
       }
@@ -810,8 +1279,8 @@ function init() {
 }
 
 function openTextFile(name, content) {
-  const textWindow = document.createElement('div');
-  textWindow.className = 'text-window window';
+  const textWindow = document.createElement("div");
+  textWindow.className = "text-window window";
   textWindow.dataset.title = name;
 
   // Add to taskbar immediately when created
@@ -834,7 +1303,7 @@ function openTextFile(name, content) {
   document.body.appendChild(textWindow);
   window.bringToFront(textWindow);
 
-  textWindow.addEventListener('pointerdown', () => {
+  textWindow.addEventListener("pointerdown", () => {
     window.bringToFront(textWindow);
   });
 
@@ -842,28 +1311,28 @@ function openTextFile(name, content) {
   let initialX, initialY;
   let isMaximized = false;
 
-  const textWindowHeader = textWindow.querySelector('.window-header');
+  const textWindowHeader = textWindow.querySelector(".window-header");
 
   // Center the window initially
   if (/Mobi|Android/i.test(navigator.userAgent)) {
-    textWindow.style.transform = 'none';
-    textWindow.style.width = '100%';
-    textWindow.style.height = 'calc(100% - 40px)';
-    textWindow.style.left = '0';
-    textWindow.style.top = '0';
-    textWindow.style.transform = 'none';
+    textWindow.style.transform = "none";
+    textWindow.style.width = "100%";
+    textWindow.style.height = "calc(100% - 40px)";
+    textWindow.style.left = "0";
+    textWindow.style.top = "0";
+    textWindow.style.transform = "none";
   } else {
     const centerX = (window.innerWidth - 500) / 2;
     const centerY = (window.innerHeight - 400) / 2;
     textWindow.style.left = `${centerX}px`;
     textWindow.style.top = `${centerY}px`;
-    textWindow.style.width = '500px';
-    textWindow.style.height = '400px';
-    textWindow.style.transform = 'none';
+    textWindow.style.width = "500px";
+    textWindow.style.height = "400px";
+    textWindow.style.transform = "none";
   }
 
-  textWindowHeader.addEventListener('pointerdown', e => {
-    if (e.target.classList.contains('close')) {
+  textWindowHeader.addEventListener("pointerdown", (e) => {
+    if (e.target.classList.contains("close")) {
       document.body.removeChild(textWindow);
       window.removeFromTaskbar(textWindow);
       return;
@@ -877,31 +1346,31 @@ function openTextFile(name, content) {
     const rect = textWindow.getBoundingClientRect();
     initialX = e.clientX - rect.left;
     initialY = e.clientY - rect.top;
-    
+
     isDragging = true;
   });
 
-  textWindowHeader.addEventListener('pointermove', e => {
+  textWindowHeader.addEventListener("pointermove", (e) => {
     if (isDragging) {
       e.preventDefault();
       // Calculate the new position
       const newX = e.clientX - initialX;
       const newY = e.clientY - initialY;
-      
+
       // Apply the new position
       textWindow.style.left = `${newX}px`;
       textWindow.style.top = `${newY}px`;
     }
   });
 
-  textWindowHeader.addEventListener('pointerup', e => {
+  textWindowHeader.addEventListener("pointerup", (e) => {
     if (isDragging) {
       textWindowHeader.releasePointerCapture(e.pointerId);
       isDragging = false;
     }
   });
 
-  textWindowHeader.addEventListener('pointercancel', e => {
+  textWindowHeader.addEventListener("pointercancel", (e) => {
     if (isDragging) {
       textWindowHeader.releasePointerCapture(e.pointerId);
       isDragging = false;
@@ -909,36 +1378,186 @@ function openTextFile(name, content) {
   });
 
   // Add maximize functionality
-  textWindow.querySelector('.maximize')?.addEventListener('click', () => {
+  textWindow.querySelector(".maximize")?.addEventListener("click", () => {
     if (isMaximized) {
-      textWindow.style.width = '500px';
-      textWindow.style.height = '400px';
-      textWindow.style.top = '50%';
-      textWindow.style.left = '50%';
-      textWindow.style.transform = 'translate(-50%, -50%)';
+      textWindow.style.width = "500px";
+      textWindow.style.height = "400px";
+      textWindow.style.top = "50%";
+      textWindow.style.left = "50%";
+      textWindow.style.transform = "translate(-50%, -50%)";
     } else {
-      textWindow.style.width = '100%';
-      textWindow.style.height = 'calc(100% - 40px)';
-      textWindow.style.top = '0';
-      textWindow.style.left = '0';
-      textWindow.style.transform = 'none';
+      textWindow.style.width = "100%";
+      textWindow.style.height = "calc(100% - 40px)";
+      textWindow.style.top = "0";
+      textWindow.style.left = "0";
+      textWindow.style.transform = "none";
     }
     isMaximized = !isMaximized;
   });
 
   // Add close button functionality
-  textWindow.querySelector('.close').addEventListener('click', () => {
+  textWindow.querySelector(".close").addEventListener("click", () => {
     document.body.removeChild(textWindow);
     window.removeFromTaskbar(textWindow);
   });
 }
 
-window.changeBackground = function(url) {
+window.changeBackground = function (url) {
   document.body.style.backgroundImage = `url(${url})`;
-  localStorage.setItem('backgroundUrl', url);
+  localStorage.setItem("backgroundUrl", url);
 };
 
-document.addEventListener('DOMContentLoaded', init);
+// Function to open WFLGATE.html in a window
+window.openWFLGate = function () {
+  // Show message when WFLGATE.bat is clicked
+  showWFLGateMessage();
+
+  const wflGateWindow = document.createElement("div");
+  wflGateWindow.className = "text-window window";
+  wflGateWindow.dataset.title = "WFLGATE.bat";
+  wflGateWindow.style.width = "800px";
+  wflGateWindow.style.height = "600px";
+
+  // Add to taskbar immediately when created
+  window.addToTaskbar(wflGateWindow);
+
+  wflGateWindow.innerHTML = `
+    <div class="window-header">
+      <div class="window-title">
+        <svg viewBox="0 0 24 24" width="20" height="20">
+          <rect width="24" height="24" rx="4" ry="4" fill="#000000"/>
+          <circle cx="12" cy="12" r="11" fill="#000000" stroke="#ff8c00" stroke-width="1"/>
+          <path d="M4 12h16 M12 4v16" stroke="#ff8c00" stroke-width="2"/>
+          <path d="M6.5 4v16 M17.5 4v16" stroke="#ff8c00" stroke-width="1.5"/>
+          <path d="M4 6.5h16 M4 17.5h16" stroke="#ff8c00" stroke-width="1.5"/>
+        </svg>
+        <span>WFLGATE.bat</span>
+      </div>
+      <div class="window-controls">
+        <div class="control minimize">─</div>
+        <div class="control maximize">□</div>
+        <div class="control close">×</div>
+      </div>
+    </div>
+    <div class="text-content" style="padding: 0; height: calc(100% - 30px); overflow: auto;">
+      <iframe id="wflgate-iframe" src="experiments/WFLGATE.html" frameborder="0" style="width: 100%; height: 100%; border: none; display: block;"></iframe>
+    </div>
+  `;
+
+  document.body.appendChild(wflGateWindow);
+  window.bringToFront(wflGateWindow);
+
+  wflGateWindow.addEventListener("pointerdown", () => {
+    window.bringToFront(wflGateWindow);
+  });
+
+  let isDragging = false;
+  let currentX;
+  let currentY;
+  let initialX;
+  let initialY;
+  let xOffset = 0;
+  let yOffset = 0;
+  let isMaximized = false;
+
+  const windowHeader = wflGateWindow.querySelector(".window-header");
+  const minimizeButton = wflGateWindow.querySelector(".control.minimize");
+  const maximizeButton = wflGateWindow.querySelector(".control.maximize");
+  const closeButton = wflGateWindow.querySelector(".close");
+
+  windowHeader.addEventListener("pointerdown", (e) => {
+    if (e.target.classList.contains("control")) return;
+    if (isMaximized) return;
+
+    const rect = wflGateWindow.getBoundingClientRect();
+    xOffset = rect.left;
+    yOffset = rect.top;
+
+    initialX = e.clientX - xOffset;
+    initialY = e.clientY - yOffset;
+    isDragging = true;
+  });
+
+  document.addEventListener("pointermove", (e) => {
+    if (isDragging) {
+      e.preventDefault();
+      currentX = e.clientX - initialX;
+      currentY = e.clientY - initialY;
+      xOffset = currentX;
+      yOffset = currentY;
+      wflGateWindow.style.transform = "translate(0, 0)";
+      wflGateWindow.style.left = `${currentX}px`;
+      wflGateWindow.style.top = `${currentY}px`;
+    }
+  });
+
+  document.addEventListener("pointerup", () => {
+    isDragging = false;
+  });
+
+  maximizeButton.addEventListener("click", () => {
+    if (isMaximized) {
+      wflGateWindow.style.width = "800px";
+      wflGateWindow.style.height = "600px";
+      wflGateWindow.style.top = "50%";
+      wflGateWindow.style.left = "50%";
+      wflGateWindow.style.transform = "translate(-50%, -50%)";
+      xOffset = 0;
+      yOffset = 0;
+    } else {
+      wflGateWindow.style.width = "100%";
+      wflGateWindow.style.height = "calc(100% - 40px)";
+      wflGateWindow.style.top = "0";
+      wflGateWindow.style.left = "0";
+      wflGateWindow.style.transform = "none";
+    }
+    isMaximized = !isMaximized;
+  });
+
+  minimizeButton.addEventListener("click", () => {
+    wflGateWindow.style.display = "none";
+  });
+
+  closeButton.addEventListener("click", () => {
+    document.body.removeChild(wflGateWindow);
+    window.removeFromTaskbar(wflGateWindow);
+  });
+
+  // Center the window initially
+  wflGateWindow.style.transform = "translate(-50%, -50%)";
+  wflGateWindow.style.left = "50%";
+  wflGateWindow.style.top = "50%";
+  
+  // Set up iframe content monitoring for scrolling
+  const wflIframe = wflGateWindow.querySelector("#wflgate-iframe");
+  wflIframe.addEventListener("load", function() {
+    try {
+      // Access iframe content
+      const iframeDoc = wflIframe.contentDocument || wflIframe.contentWindow.document;
+      const iframeBody = iframeDoc.body;
+      
+      // Set up a MutationObserver to detect content changes
+      const observer = new MutationObserver(function(mutations) {
+        // When content changes, check if scrolling is needed
+        const textContent = wflGateWindow.querySelector(".text-content");
+        if (iframeBody.scrollHeight > textContent.clientHeight) {
+          textContent.style.overflowY = "auto";
+        }
+      });
+      
+      // Start observing content changes
+      observer.observe(iframeBody, {
+        childList: true,
+        subtree: true,
+        characterData: true
+      });
+    } catch (e) {
+      console.error("Error setting up iframe observer:", e);
+    }
+  });
+};
+
+document.addEventListener("DOMContentLoaded", init);
 
 function handleUsersClick() {
   // Show pet message every time Users is clicked
@@ -948,15 +1567,19 @@ function handleUsersClick() {
 
 function makeTouchFriendly() {
   // Prevent default touch behaviors that might interfere with our app
-  document.addEventListener('touchmove', function(e) {
-    if (e.touches.length > 1) {
-      e.preventDefault(); // Prevent pinch zoom
-    }
-  }, { passive: false });
-  
+  document.addEventListener(
+    "touchmove",
+    function (e) {
+      if (e.touches.length > 1) {
+        e.preventDefault(); // Prevent pinch zoom
+      }
+    },
+    { passive: false }
+  );
+
   // Disable double-tap to zoom
   let lastTapTime = 0;
-  document.addEventListener('touchend', function(e) {
+  document.addEventListener("touchend", function (e) {
     const currentTime = new Date().getTime();
     const tapLength = currentTime - lastTapTime;
     if (tapLength < 500 && tapLength > 0) {
@@ -964,59 +1587,59 @@ function makeTouchFriendly() {
     }
     lastTapTime = currentTime;
   });
-  
+
   // Get all windows including those that will be created dynamically
-  document.addEventListener('pointerdown', function(e) {
-    const windowHeader = e.target.closest('.window-header');
+  document.addEventListener("pointerdown", function (e) {
+    const windowHeader = e.target.closest(".window-header");
     if (!windowHeader) return;
-    
+
     // Don't start dragging if clicking on controls
-    if (e.target.classList.contains('control')) return;
-    
-    const windowElement = windowHeader.closest('.window');
+    if (e.target.classList.contains("control")) return;
+
+    const windowElement = windowHeader.closest(".window");
     if (!windowElement) return;
-    
+
     // Check if window is maximized
-    const isMaximized = windowElement.dataset.maximized === 'true';
+    const isMaximized = windowElement.dataset.maximized === "true";
     if (isMaximized) return;
-    
+
     // Set pointer capture to track movement even if pointer leaves the element
     windowHeader.setPointerCapture(e.pointerId);
-    
+
     // Get initial position
     const rect = windowElement.getBoundingClientRect();
     const offsetX = e.clientX - rect.left;
     const offsetY = e.clientY - rect.top;
-    
-    const onPointerMove = function(moveEvent) {
+
+    const onPointerMove = function (moveEvent) {
       if (moveEvent.pointerId !== e.pointerId) return;
-      
+
       // Calculate new position
       const x = moveEvent.clientX - offsetX;
       const y = moveEvent.clientY - offsetY;
-      
+
       // Apply new position
-      windowElement.style.transform = 'none';
+      windowElement.style.transform = "none";
       windowElement.style.left = `${x}px`;
       windowElement.style.top = `${y}px`;
     };
-    
-    const onPointerUp = function(upEvent) {
+
+    const onPointerUp = function (upEvent) {
       if (upEvent.pointerId !== e.pointerId) return;
-      
+
       // Remove event listeners
-      windowHeader.removeEventListener('pointermove', onPointerMove);
-      windowHeader.removeEventListener('pointerup', onPointerUp);
-      windowHeader.removeEventListener('pointercancel', onPointerUp);
-      
+      windowHeader.removeEventListener("pointermove", onPointerMove);
+      windowHeader.removeEventListener("pointerup", onPointerUp);
+      windowHeader.removeEventListener("pointercancel", onPointerUp);
+
       // Release pointer capture
       windowHeader.releasePointerCapture(e.pointerId);
     };
-    
+
     // Add event listeners for move and up/cancel events
-    windowHeader.addEventListener('pointermove', onPointerMove);
-    windowHeader.addEventListener('pointerup', onPointerUp);
-    windowHeader.addEventListener('pointercancel', onPointerUp);
+    windowHeader.addEventListener("pointermove", onPointerMove);
+    windowHeader.addEventListener("pointerup", onPointerUp);
+    windowHeader.addEventListener("pointercancel", onPointerUp);
   });
 }
 
@@ -1024,9 +1647,9 @@ function createSteamLibrary() {
   // Show pet message when Steam library is opened
   showSteamLibraryMessage();
 
-  const steamLibraryWindow = document.createElement('div');
-  steamLibraryWindow.className = 'steam-window window';
-  steamLibraryWindow.dataset.title = 'Steam';
+  const steamLibraryWindow = document.createElement("div");
+  steamLibraryWindow.className = "steam-window window";
+  steamLibraryWindow.dataset.title = "Steam";
 
   // Add to taskbar immediately when created
   addToTaskbar(steamLibraryWindow);
@@ -1068,7 +1691,7 @@ function createSteamLibrary() {
   document.body.appendChild(steamLibraryWindow);
   window.bringToFront(steamLibraryWindow);
 
-  steamLibraryWindow.addEventListener('pointerdown', () => {
+  steamLibraryWindow.addEventListener("pointerdown", () => {
     window.bringToFront(steamLibraryWindow);
   });
 
@@ -1081,13 +1704,13 @@ function createSteamLibrary() {
   let yOffset = 0;
   let isMaximized = false;
 
-  const windowHeader = steamLibraryWindow.querySelector('.window-header');
-  const minimizeButton = steamLibraryWindow.querySelector('.control.minimize');
-  const maximizeButton = steamLibraryWindow.querySelector('.control.maximize');
-  const closeButton = steamLibraryWindow.querySelector('.close');
+  const windowHeader = steamLibraryWindow.querySelector(".window-header");
+  const minimizeButton = steamLibraryWindow.querySelector(".control.minimize");
+  const maximizeButton = steamLibraryWindow.querySelector(".control.maximize");
+  const closeButton = steamLibraryWindow.querySelector(".close");
 
-  windowHeader.addEventListener('pointerdown', (e) => {
-    if (e.target.classList.contains('control')) return;
+  windowHeader.addEventListener("pointerdown", (e) => {
+    if (e.target.classList.contains("control")) return;
     if (isMaximized) return;
 
     const rect = steamLibraryWindow.getBoundingClientRect();
@@ -1099,78 +1722,78 @@ function createSteamLibrary() {
     isDragging = true;
   });
 
-  document.addEventListener('pointermove', (e) => {
+  document.addEventListener("pointermove", (e) => {
     if (isDragging) {
       e.preventDefault();
       currentX = e.clientX - initialX;
       currentY = e.clientY - initialY;
       xOffset = currentX;
       yOffset = currentY;
-      steamLibraryWindow.style.transform = 'translate(0, 0)';
+      steamLibraryWindow.style.transform = "translate(0, 0)";
       steamLibraryWindow.style.left = `${currentX}px`;
       steamLibraryWindow.style.top = `${currentY}px`;
     }
   });
 
-  document.addEventListener('pointerup', () => {
+  document.addEventListener("pointerup", () => {
     isDragging = false;
   });
 
-  maximizeButton.addEventListener('click', () => {
+  maximizeButton.addEventListener("click", () => {
     if (isMaximized) {
-      steamLibraryWindow.style.width = '700px';
-      steamLibraryWindow.style.height = 'auto';
-      steamLibraryWindow.style.top = '50%';
-      steamLibraryWindow.style.left = '50%';
-      steamLibraryWindow.style.transform = 'translate(-50%, -50%)';
+      steamLibraryWindow.style.width = "700px";
+      steamLibraryWindow.style.height = "auto";
+      steamLibraryWindow.style.top = "50%";
+      steamLibraryWindow.style.left = "50%";
+      steamLibraryWindow.style.transform = "translate(-50%, -50%)";
       xOffset = 0;
       yOffset = 0;
     } else {
-      steamLibraryWindow.style.width = '100%';
-      steamLibraryWindow.style.height = 'calc(100% - 40px)';
-      steamLibraryWindow.style.top = '0';
-      steamLibraryWindow.style.left = '0';
-      steamLibraryWindow.style.transform = 'none';
+      steamLibraryWindow.style.width = "100%";
+      steamLibraryWindow.style.height = "calc(100% - 40px)";
+      steamLibraryWindow.style.top = "0";
+      steamLibraryWindow.style.left = "0";
+      steamLibraryWindow.style.transform = "none";
     }
     isMaximized = !isMaximized;
   });
 
-  minimizeButton.addEventListener('click', () => {
-    steamLibraryWindow.style.display = 'none';
+  minimizeButton.addEventListener("click", () => {
+    steamLibraryWindow.style.display = "none";
   });
 
-  closeButton.addEventListener('click', () => {
+  closeButton.addEventListener("click", () => {
     document.body.removeChild(steamLibraryWindow);
     removeFromTaskbar(steamLibraryWindow);
   });
 
   // Add click handler for the play button
-  const playButton = steamLibraryWindow.querySelector('.play-button');
-  playButton.addEventListener('click', () => {
-    playButton.textContent = 'LAUNCHING...';
-    playButton.style.background = '#32353c';
-    
+  const playButton = steamLibraryWindow.querySelector(".play-button");
+  playButton.addEventListener("click", () => {
+    playButton.textContent = "LAUNCHING...";
+    playButton.style.background = "#32353c";
+
     setTimeout(() => {
-      playButton.textContent = 'PLAY';
-      playButton.style.background = '';
-      
+      playButton.textContent = "PLAY";
+      playButton.style.background = "";
+
       // Create a new fullscreen window for the MymyCraft game
-      const gameWindow = document.createElement('div');
-      gameWindow.className = 'game-window window';
-      gameWindow.dataset.title = 'Mymycraft';
-      
+      const gameWindow = document.createElement("div");
+      gameWindow.className = "game-window window";
+      gameWindow.dataset.title = "Mymycraft";
+
       // Show pet message when Mymycraft game opens
       showMymycraftGameMessage();
-      gameWindow.style.width = '100%';
-      gameWindow.style.height = 'calc(100% - 40px)';
-      gameWindow.style.top = '0';
-      gameWindow.style.left = '0';
-      gameWindow.style.zIndex = '1000';
-      gameWindow.style.background = '#000';
-      
+      gameWindow.style.width = "100%";
+      gameWindow.style.height = "calc(100% - 40px)";
+      gameWindow.style.top = "0";
+      gameWindow.style.left = "0";
+      gameWindow.style.zIndex = "1000";
+      gameWindow.style.background = "#000";
+
       // Add to taskbar
       addToTaskbar(gameWindow);
-      
+
       gameWindow.innerHTML = `
         <div class="window-header">
           <div class="window-title">
@@ -1187,38 +1810,38 @@ function createSteamLibrary() {
           <iframe src="MymyCraft/index.html" frameborder="0" style="width: 100%; height: 100%;"></iframe>
         </div>
       `;
-      
+
       document.body.appendChild(gameWindow);
       window.bringToFront(gameWindow);
-      
+
       // Set up window controls
-      const closeBtn = gameWindow.querySelector('.close');
-      const minimizeBtn = gameWindow.querySelector('.minimize');
-      const maximizeBtn = gameWindow.querySelector('.maximize');
-      
-      closeBtn.addEventListener('click', () => {
+      const closeBtn = gameWindow.querySelector(".close");
+      const minimizeBtn = gameWindow.querySelector(".minimize");
+      const maximizeBtn = gameWindow.querySelector(".maximize");
+
+      closeBtn.addEventListener("click", () => {
         document.body.removeChild(gameWindow);
         removeFromTaskbar(gameWindow);
       });
-      
-      minimizeBtn.addEventListener('click', () => {
-        gameWindow.style.display = 'none';
+
+      minimizeBtn.addEventListener("click", () => {
+        gameWindow.style.display = "none";
       });
-      
+
       let isMaximized = true;
-      maximizeBtn.addEventListener('click', () => {
+      maximizeBtn.addEventListener("click", () => {
         if (isMaximized) {
-          gameWindow.style.width = '800px';
-          gameWindow.style.height = '600px';
-          gameWindow.style.top = '50%';
-          gameWindow.style.left = '50%';
-          gameWindow.style.transform = 'translate(-50%, -50%)';
+          gameWindow.style.width = "800px";
+          gameWindow.style.height = "600px";
+          gameWindow.style.top = "50%";
+          gameWindow.style.left = "50%";
+          gameWindow.style.transform = "translate(-50%, -50%)";
         } else {
-          gameWindow.style.width = '100%';
-          gameWindow.style.height = 'calc(100% - 40px)';
-          gameWindow.style.top = '0';
-          gameWindow.style.left = '0';
-          gameWindow.style.transform = 'none';
+          gameWindow.style.width = "100%";
+          gameWindow.style.height = "calc(100% - 40px)";
+          gameWindow.style.top = "0";
+          gameWindow.style.left = "0";
+          gameWindow.style.transform = "none";
         }
         isMaximized = !isMaximized;
       });
@@ -1228,40 +1851,45 @@ function createSteamLibrary() {
   // Center the window initially
   setTimeout(() => {
     const rect = steamLibraryWindow.getBoundingClientRect();
-    
+
     // Check if mobile device for automatic fullscreen
     if (/Mobi|Android/i.test(navigator.userAgent)) {
-      steamLibraryWindow.style.transform = 'none';
-      steamLibraryWindow.style.width = '100%';
-      steamLibraryWindow.style.height = 'calc(100% - 40px)';
-      steamLibraryWindow.style.left = '0';
-      steamLibraryWindow.style.top = '0';
+      steamLibraryWindow.style.transform = "none";
+      steamLibraryWindow.style.width = "100%";
+      steamLibraryWindow.style.height = "calc(100% - 40px)";
+      steamLibraryWindow.style.left = "0";
+      steamLibraryWindow.style.top = "0";
       isMaximized = true;
     } else {
       const centerX = (window.innerWidth - rect.width) / 2;
       const centerY = (window.innerHeight - rect.height) / 2;
-      steamLibraryWindow.style.transform = 'none';
+      steamLibraryWindow.style.transform = "none";
       steamLibraryWindow.style.left = `${centerX}px`;
       steamLibraryWindow.style.top = `${centerY}px`;
     }
   }, 0);
 }
 
-window.addEventListener('resize', function() {
+window.addEventListener("resize", function () {
   // Reposition windows if they're outside the visible area after rotation
-  const windows = document.querySelectorAll('.window');
-  windows.forEach(win => {
-    if (win.style.display !== 'none') {
+  const windows = document.querySelectorAll(".window");
+  windows.forEach((win) => {
+    if (win.style.display !== "none") {
       const rect = win.getBoundingClientRect();
       // If window is outside visible area, center it
-      if (rect.right > window.innerWidth || rect.bottom > window.innerHeight - 40 || rect.left < 0 || rect.top < 0) {
-        win.style.left = '50%';
-        win.style.top = '50%';
-        win.style.transform = 'translate(-50%, -50%)';
+      if (
+        rect.right > window.innerWidth ||
+        rect.bottom > window.innerHeight - 40 ||
+        rect.left < 0 ||
+        rect.top < 0
+      ) {
+        win.style.left = "50%";
+        win.style.top = "50%";
+        win.style.transform = "translate(-50%, -50%)";
       }
     }
   });
 });
 
 // Initialize the assistant volume from localStorage when the app starts
-window.assistantVolume = (localStorage.getItem('assistantVolume') || 75) / 100;
+window.assistantVolume = (localStorage.getItem("assistantVolume") || 75) / 100;

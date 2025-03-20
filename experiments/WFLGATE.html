@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WFLGate Terminal</title>
+    <style>
+      body {
+        background-color: #000;
+        color: #ffffff; /* White text for commands */
+        font-family: "Courier New", monospace;
+        padding: 20px;
+        margin: 0;
+        overflow: auto; /* Changed from hidden to auto to allow scrolling */
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        min-height: 100vh; /* Ensure content takes at least full height */
+      }
+      #terminal {
+        width: 100%;
+        text-align: left;
+        font-size: 18px;
+        margin-bottom: 20px;
+        line-height: 1.6; /* Add line spacing */
+      }
+      #portal-container {
+        display: none; /* Initially hidden */
+        width: 100%;
+        text-align: center;
+        animation: portalPulse 3s infinite;
+      }
+      #portal {
+        font-size: 14px;
+        line-height: 1;
+        white-space: pre;
+        text-align: center;
+      }
+      .cursor {
+        animation: blink 1s infinite;
+      }
+      .error-text {
+        color: #ff0000; /* Red text for error messages */
+      }
+      @keyframes blink {
+        0%,
+        49% {
+          opacity: 1;
+        }
+        50%,
+        100% {
+          opacity: 0;
+        }
+      }
+      @keyframes portalPulse {
+        0% {
+          color: #803800;
+        } /* Darker orange */
+        50% {
+          color: #ff8c00;
+        } /* Bright orange */
+        100% {
+          color: #803800;
+        } /* Back to darker orange */
+      }
+      .paused {
+        animation-play-state: paused;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="terminal"></div>
+    <div id="portal-container">
+      <pre id="portal"></pre>
+    </div>
+
+    <script>
+      const terminal = document.getElementById("terminal");
+      const portalContainer = document.getElementById("portal-container");
+      const portal = document.getElementById("portal");
+
+      // Flag to control animation
+      let animationRunning = true;
+
+      // Terminal text animation
+      function typeText(element, text, callback) {
+        let index = 0;
+        element.innerHTML = "";
+
+        function type() {
+          if (index < text.length) {
+            element.innerHTML += text.charAt(index);
+            index++;
+            setTimeout(type, 50); // Typing speed
+          } else if (callback) {
+            callback();
+          }
+        }
+
+        type();
+      }
+
+      // Animated dots
+      function animateDots(element, baseText, maxDots = 3) {
+        let dots = 0;
+
+        return setInterval(() => {
+          let dotsText = ".".repeat(dots);
+          element.innerHTML = baseText + dotsText;
+          dots = (dots + 1) % (maxDots + 1);
+        }, 500); // Speed of dot animation
+      }
+
+      // Start the sequence
+      window.onload = function () {
+        // First message: "WFLGate initiated..."
+        terminal.innerHTML = "WFLGate initiated";
+        const dotsInterval1 = animateDots(terminal, "WFLGate initiated");
+
+        // After 5 seconds, show the portal
+        setTimeout(() => {
+          clearInterval(dotsInterval1);
+          terminal.innerHTML = "WFLGate initiated...";
+          portalContainer.style.display = "block";
+          initPortal();
+          renderPortal();
+          animate();
+
+          // After 3 more seconds (8 seconds total), show the second message
+          setTimeout(() => {
+            terminal.innerHTML =
+              "WFLGate initiated...<br><br>Scanning for acceptable beacons";
+            const dotsInterval2 = animateDots(
+              terminal,
+              "WFLGate initiated...<br><br>Scanning for acceptable beacons"
+            );
+
+            // After 10 more seconds (18 seconds total), show "No beacons located."
+            setTimeout(() => {
+              // Stop the dots animation
+              clearInterval(dotsInterval2);
+
+              // Display the final message with red text for the error
+              terminal.innerHTML =
+                'WFLGate initiated...<br><br>Scanning for acceptable beacons...<br><br><span class="error-text">No beacons located.</span>';
+
+              // Pause the portal animation
+              animationRunning = false;
+
+              // Pause the portal pulse animation
+              portalContainer.classList.add("paused");
+            }, 10000);
+          }, 3000);
+        }, 5000);
+      };
+
+      // Portal animation code
+      const size = 30; // Size of the portal (radius)
+      const centerX = size;
+      const centerY = size;
+
+      // Characters to use for different parts of the whirlpool
+      const chars = ["@", "#", "$", "*", "+", "=", "-", ":", ".", " "];
+
+      // Create a 2D array to represent the portal
+      let portalArray = Array(size * 2)
+        .fill()
+        .map(() => Array(size * 2).fill(" "));
+
+      // Initialize the portal with a whirlpool pattern
+      function initPortal() {
+        for (let y = 0; y < size * 2; y++) {
+          for (let x = 0; x < size * 2; x++) {
+            // Calculate distance from center
+            const dx = x - centerX;
+            const dy = y - centerY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            // Calculate angle
+            let angle = Math.atan2(dy, dx);
+            if (angle < 0) angle += 2 * Math.PI;
+
+            // Only draw within the circle
+            if (distance <= size) {
+              // Create a spiral effect
+              const spiralValue = (distance / 3 + angle * 3) % chars.length;
+              const charIndex = Math.floor(spiralValue);
+              portalArray[y][x] = chars[charIndex];
+            }
+          }
+        }
+      }
+
+      // Render the portal
+      function renderPortal() {
+        let portalText = "";
+        for (let y = 0; y < size * 2; y++) {
+          for (let x = 0; x < size * 2; x++) {
+            portalText += portalArray[y][x];
+          }
+          portalText += "\n";
+        }
+        portal.textContent = portalText;
+      }
+
+      // Rotate the portal (spinning effect)
+      function rotatePortal() {
+        const newPortalArray = Array(size * 2)
+          .fill()
+          .map(() => Array(size * 2).fill(" "));
+
+        for (let y = 0; y < size * 2; y++) {
+          for (let x = 0; x < size * 2; x++) {
+            // Calculate distance from center
+            const dx = x - centerX;
+            const dy = y - centerY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            // Calculate angle
+            let angle = Math.atan2(dy, dx);
+            if (angle < 0) angle += 2 * Math.PI;
+
+            // Only update within the circle
+            if (distance <= size) {
+              // Create a spiral effect with faster rotation
+              const rotationSpeed = 0.25; // Increased for faster spinning
+              const spiralValue =
+                (distance / 3 + angle * 3 + animationTime * rotationSpeed) %
+                chars.length;
+              const charIndex = Math.floor(spiralValue);
+              newPortalArray[y][x] = chars[charIndex];
+            }
+          }
+        }
+
+        portalArray = newPortalArray;
+      }
+
+      // Add a second rotation effect that moves characters in a circular pattern
+      function addCircularMotion() {
+        const tempArray = Array(size * 2)
+          .fill()
+          .map((_, y) =>
+            Array(size * 2)
+              .fill()
+              .map((_, x) => portalArray[y][x])
+          );
+
+        for (let y = 0; y < size * 2; y++) {
+          for (let x = 0; x < size * 2; x++) {
+            // Calculate distance from center
+            const dx = x - centerX;
+            const dy = y - centerY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            // Only process within the circle
+            if (distance <= size && distance > 0) {
+              // Calculate angle
+              let angle = Math.atan2(dy, dx);
+
+              // Add rotation based on distance from center (inner rings rotate faster)
+              // Increased rotation amount for faster spinning
+              const rotationAmount =
+                0.05 * (1 - distance / size) * Math.sin(animationTime * 0.4);
+              const newAngle = angle + rotationAmount;
+
+              // Calculate new position
+              const newX = Math.round(centerX + Math.cos(newAngle) * distance);
+              const newY = Math.round(centerY + Math.sin(newAngle) * distance);
+
+              // Check if new position is within bounds
+              if (
+                newX >= 0 &&
+                newX < size * 2 &&
+                newY >= 0 &&
+                newY < size * 2
+              ) {
+                // Swap characters for a subtle circular motion
+                if (Math.random() < 0.4) {
+                  // Increased probability for more movement
+                  tempArray[y][x] = portalArray[newY][newX];
+                }
+              }
+            }
+          }
+        }
+
+        // Apply the changes
+        for (let y = 0; y < size * 2; y++) {
+          for (let x = 0; x < size * 2; x++) {
+            if (tempArray[y][x] !== " ") {
+              portalArray[y][x] = tempArray[y][x];
+            }
+          }
+        }
+      }
+
+      // Animation loop
+      let animationTime = 0;
+      function animate() {
+        if (animationRunning) {
+          rotatePortal(); // Main spinning effect
+          addCircularMotion(); // Additional circular motion for more dynamic effect
+          renderPortal();
+          animationTime += 0.1;
+        }
+        requestAnimationFrame(animate);
+      }
+    </script>
+  </body>
+</html>

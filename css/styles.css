@@ -777,6 +777,22 @@ body.nederlands .window-header {
   background: #ff7800;
 }
 
+/* Experimental mode styles */
+body.experimental-mode .desktop-icons .desktop-icon:not(.wflgate-shortcut) {
+  display: none !important;
+}
+
+/* Hide WFLGATE shortcut by default, only show in experimental mode */
+.wflgate-shortcut {
+  display: none !important;
+}
+
+body.experimental-mode .wflgate-shortcut {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+}
+
 body.nederlands .control {
   color: black;
 }
@@ -966,7 +982,7 @@ body.nederlands .control.close:hover {
 .speech-bubble {
   position: absolute;
   background: #ffffff;
-  color: #AB261B;
+  color: #ff7800;
   padding: 10px 15px;
   border-radius: 8px;
   font-family: monospace;

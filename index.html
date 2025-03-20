@@ -12,7 +12,7 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <title>WFLOS</title>
-    <link rel="stylesheet" href="css/styles.css?v=4" />
+    <link rel="stylesheet" href="css/styles.css?v=8" />
     <link rel="icon" href="images/icon.png" type="image/png" />
     <!-- Preload Steam images -->
     <link
@@ -62,6 +62,31 @@
             style="width: 45px; height: 45px"
           />
           <span>Maya Stress Relief</span>
+        </div>
+        <div class="desktop-icon wflgate-shortcut" onclick="openWFLGate()">
+          <svg viewBox="0 0 24 24" style="width: 45px; height: 45px">
+            <rect width="24" height="24" rx="4" ry="4" fill="#000000" />
+            <circle
+              cx="12"
+              cy="12"
+              r="11"
+              fill="#000000"
+              stroke="#ff8c00"
+              stroke-width="1"
+            />
+            <path d="M4 12h16 M12 4v16" stroke="#ff8c00" stroke-width="2" />
+            <path
+              d="M6.5 4v16 M17.5 4v16"
+              stroke="#ff8c00"
+              stroke-width="1.5"
+            />
+            <path
+              d="M4 6.5h16 M4 17.5h16"
+              stroke="#ff8c00"
+              stroke-width="1.5"
+            />
+          </svg>
+          <span>WFLGATE.bat</span>
         </div>
       </div>
 
@@ -140,7 +165,7 @@
       </div>
     </div>
 
-    <script type="module" src="js/main.js?v=6"></script>
+    <script type="module" src="js/main.js?v=7"></script>
     <script>
       function handleUsersClick() {
         setTimeout(() => {

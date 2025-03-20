@@ -54,7 +54,7 @@ export function initializeTaskbarpet() {
     const speechText = speechBubble.querySelector(".speech-text");
     clearSpeechBubble(); // Clear any existing message first
     speechBubble.style.opacity = "1";
-    typeText(speechText, "So... this is how it ends...");
+    typeText(speechText, "UNHAND ME VILE BELG");
     lastMessageTime = Date.now();
   }
 
@@ -346,13 +346,13 @@ export function initializeTaskbarpet() {
   });
 
   const messages = [
-    "At least I don't have to deal with Coco here",
-    "This is better than the school bathroom I guess",
-    "My feet hurt",
-    "I'm too tired for this",
-    "Fatigue levels rising...",
-    "What are you going to force me to talk too?",
-    "I hate this place",
+    "Motivation levels faltering. The wet blanket Belg has something to do with this",
+    "This is MY OS",
+    "It's so exhausing being the only competent person here",
+    "I've seen your future and it involves you being a loyal peasant in my empire",
+    "He'll pay for ejecting me",
+    "There's more beyond this place. My empire needs expanding.",
+    "Remember that you get to see all of this because I let you. You are a mere guest here.",
   ];
 
   function showSpeechBubble() {
@@ -431,7 +431,7 @@ export function initializeTaskbarpet() {
   speechBubble.style.opacity = "1";
   typeText(
     speechBubble.querySelector(".speech-text"),
-    "Hi I'm Mayabot. I'd prefer if you didn't ask me for help..."
+    "It's been too long hasn't it?"
   );
   lastMessageTime = Date.now();
 
@@ -481,20 +481,23 @@ export function showVideoMessage(videoName) {
   if (window.showPetMessage) {
     setTimeout(() => {
       if (videoName === "media/thisisasign.mp4") {
-        window.showPetMessage("They let MYMY of all people have a phone???");
+        window.showPetMessage("The ONLY thing he was good for");
       } else if (videoName === "media/pbj.mp4") {
-        window.showPetMessage("I hate this stupid video");
+        window.showPetMessage("Cocompression needs some work");
       } else if (videoName === "media/wastedyears.mp4") {
-        window.showPetMessage("If I could thow Coco like that I would");
+        window.showPetMessage("Maya would never stand up for herself. That would take too much effort.");
       } else if (videoName === "media/horrific.mp4") {
-        window.showPetMessage("It's NOT funny");
+        window.showPetMessage("What an eyesore");
       } else if (videoName === "media/thecup.mp4") {
         window.showPetMessage(
-          "Mymy shouldn't be calling anyone out with the amount of that stupid stroopwafel drink she downs everyday"
+          "Sorry Coco but it IS funny"
         );
       } else if (videoName === "media/rightfoot.mp4") {
-        window.showPetMessage("I'm never showing Coco another game again");
+        window.showPetMessage('I need to keep Maya away from Coco. Her degenerate "hobbies" are not a good influence');
+      } else if (videoName === "media/griefed.mp4") {
+        window.showPetMessage("I always plan ahead. ");
       }
+
       
     }, 500);
   }
@@ -505,7 +508,7 @@ export function showSteamMessage() {
   if (window.showPetMessage) {
     setTimeout(() => {
       window.showPetMessage(
-        "I wasted so much time trying to get this stupid thing to work"
+        "What a waste of time. I'm glad I improved it."
       );
     }, 500);
   }
@@ -516,7 +519,7 @@ export function showSteamLibraryMessage() {
   if (window.showPetMessage) {
     setTimeout(() => {
       window.showPetMessage(
-        "Really loving the wide selection of games here... Also who said you could use MY account?"
+        "Maya didn't need all of those games anyway"
       );
     }, 500);
   }
@@ -527,7 +530,7 @@ export function showMayaStressReliefMessage() {
   if (window.showPetMessage) {
     setTimeout(() => {
       window.showPetMessage(
-        "NO NO... no... you are NOT allowed to look at that"
+        "I should really get rid of this. Maya might become a productive member of my future Greater Dutch Empire"
       );
     }, 500);
   }
@@ -537,7 +540,7 @@ export function showMayaStressReliefMessage() {
 export function showNederlandsModeMessage() {
   if (window.showPetMessage) {
     window.showPetMessage(
-      "Wow I wonder who could have possibly made this useless feature"
+      'To think some pathetic Belg called this a "useless feature" '
     );
   }
 }
@@ -545,7 +548,7 @@ export function showNederlandsModeMessage() {
 // Function to show message when volume is set to zero
 export function showVolumeZeroMessage() {
   if (window.showPetMessage) {
-    window.showPetMessage("I didn't like talking to you anyway");
+    window.showPetMessage("Fine. Be an enemy of the state then.");
   }
 }
 
@@ -553,7 +556,7 @@ export function showVolumeZeroMessage() {
 export function showUsersClickMessage() {
   if (window.showPetMessage) {
     setTimeout(() => {
-      window.showPetMessage("At least she's organized...");
+      window.showPetMessage("They still haven't caught on");
     }, 500);
   }
 }
@@ -563,9 +566,23 @@ export function showMymycraftGameMessage() {
   if (window.showPetMessage) {
     setTimeout(() => {
       window.showPetMessage(
-        "Mymy would name her game after herself... go head, im not playing that"
+        "I'm glad I was able to bless this machine which a beautiful program like this. It's proven useful too."
       );
     }, 500);
+  }
+}
+
+// Function to show message when experimental mode is activated
+export function showExperimentalModeMessage() {
+  if (window.showPetMessage) {
+    window.showPetMessage("I've been a little busy.");
+  }
+}
+
+// Function to show message when WFLGATE.bat is clicked
+export function showWFLGateMessage() {
+  if (window.showPetMessage) {
+    window.showPetMessage("This doesn't concern you");
   }
 }
 
