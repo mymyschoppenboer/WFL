@@ -888,7 +888,7 @@ export function initializeExplorer() {
           "rightfoot.mp4": {
             type: "file",
             content: "Video file",
-          }
+          },
         },
       },
       Mymy: {
@@ -1286,6 +1286,123 @@ Notes: Asset retrieval <br>
         IM NOT DONE HERE. PUT ME BACK IN OR I WILL HAVE ALL OF YOU TRAITORS KEELHAULED
     </div>
     <div class="system">[4:50 UTC][SYSTEM]: User "Mymy" muted for 10 minutes.</div>
+`,
+          },
+          "log-devchat-03-19-25.txt": {
+            type: "file",
+            content: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversation Log</title>
+    <style>
+        body {
+            background-color: black;
+            color: #ffffff;
+            padding: 20px;
+        }
+        .message {
+            margin-bottom: 15px;
+        }
+        .handler {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+        .dev {
+            color: #66ccff;
+            font-weight: bold;
+        }
+        .timestamp {
+            color: #888;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <span class="dev">sh3llsh0ck3d</span> <span class="timestamp">[10:45 UTC]</span>:  
+        Hey Ram I haven't seen you say anything for a while? Are things going alright?
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:49 UTC]</span>:  
+        Things are going
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:49 UTC]</span>:   
+        That's for sure
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:50 UTC]</span>:  
+        I have two people breathing down my neck 24/7
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:50 UTC]</span>:  
+        Well one that's actually a person at least
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:50 UTC]</span>:  
+        Out of all of the models why the hell did you give her access to a phone plan?
+    </div>
+    <div class="message">
+        <span class="dev">sh3llsh0ck3d</span> <span class="timestamp">[10:51 UTC]</span>:  
+        Because I was told to
+    </div>
+    <div class="message">
+        <span class="dev">sh3llsh0ck3d</span> <span class="timestamp">[10:51 UTC]</span>:  
+        And I like having a job
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:51 UTC]</span>:  
+        right yeah whatever
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:51 UTC]</span>:  
+        She's been calling me FIFTEEN TIMES A DAY
+    </div>
+    <div class="message">
+        <span class="dev">sh3llsh0ck3d</span> <span class="timestamp">[10:52 UTC]</span>:  
+        Why does she have more tasks for you?
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:52 UTC]</span>:  
+        NO IT'S NOT EVEN ANYTHING IMPORTANT
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:52 UTC]</span>: 
+        LITERALLY JUST CALLS TO INSULT ME AND HANGS UP
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:52 UTC]</span>:  
+        ALL DAY EVERY DAY
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:52 UTC]</span>:  
+        AND I ONLY ANSWER THIS DUMB SHIT BECAUSE I HAVE TO
+    </div>
+    <div class="message">
+        <span class="dev">sh3llsh0ck3d</span> <span class="timestamp">[10:53 UTC]</span>:  
+        Hey relax it's just phone calls. You get paid well enough to put up with that right
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:53 UTC]</span>:  
+        Enough for beer money I guess
+    </div>
+    <div class="message">
+        <span class="dev">sh3llsh0ck3d</span> <span class="timestamp">[10:54 UTC]</span>:  
+        Oh are you plastered again lmao?
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:54 UTC]</span>:  
+        Do you care?
+    </div>
+    <div class="message">
+        <span class="dev">sh3llsh0ck3d</span> <span class="timestamp">[10:55 UTC]</span>:  
+        No just don't do anything stupid okay?
+    </div>
+</body>
+</html>
+
 `,
           },
         },
