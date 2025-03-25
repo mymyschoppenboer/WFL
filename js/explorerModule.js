@@ -1,4 +1,4 @@
-import { showVideoMessage } from "./taskbarpetModule.js?v=4";
+import { showVideoMessage } from "./taskbarpetModule.js?v=5";
 
 export function initializeExplorer() {
   const closeButton = document.querySelector(".control.close");
@@ -1404,7 +1404,175 @@ Notes: Asset retrieval <br>
 </html>
 
 `,
-          },
+          }, "log-devchat-03-24-25.txt": {
+            type: "file",
+            content: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversation Log</title>
+    <style>
+        body {
+            background-color: black;
+            color: #ffffff;
+            padding: 20px;
+        }
+        .message {
+            margin-bottom: 15px;
+        }
+        .commandant {
+            color: #FF0000;
+            font-weight: bold;
+        }
+        .handler {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+        .timestamp {
+            color: #888;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <span class="commandant">HiEender</span> <span class="timestamp">[09:28 UTC]</span>:  
+        Ram.
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[09:45 UTC]</span>:  
+        Shit i didn't see that you were asking for me until now
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[09:45 UTC]</span>:   
+        What's up
+    </div>
+    <div class="message">
+        <span class="commandant">HiEender</span> <span class="timestamp">[09:46 UTC]</span>:  
+        It's fine. 
+    </div>
+    <div class="message">
+        <span class="commandant">HiEender</span> <span class="timestamp">[09:46 UTC]</span>:  
+        I asked for you because I need you to stop being hostile towards the Mymy model.
+    </div>
+    <div class="message">
+        <span class="commandant">HiEender</span> <span class="timestamp">[09:46 UTC]</span>:  
+        I know you two have been having some issues recently
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[09:47 UTC]</span>:  
+        yeah we have
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[09:47 UTC]</span>:  
+        But she's been starting like all of it
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[09:47 UTC]</span>:  
+        I try to interact with her as little as possible but she tries to provoke me constantly
+    </div>
+    <div class="message">
+        <span class="commandant">HiEender</span> <span class="timestamp">[09:48 UTC]</span>:  
+        I know.
+    </div>
+    <div class="message">
+        <span class="commandant">HiEender</span> <span class="timestamp">[09:48 UTC]</span>:  
+        But you've done some things to upset her too haven't you?
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[09:49 UTC]</span>:  
+        well yeah but that's because i want her to get off of my back
+    </div>
+    <div class="message">
+        <span class="commandant">HiEender</span> <span class="timestamp">[09:49 UTC]</span>:  
+        These models adapt Ram. The things people say to them online can change how they think and act.
+    </div>
+    <div class="message">
+        <span class="commandant">HiEender</span> <span class="timestamp">[09:50 UTC]</span>:  
+        However you are in a unique spot where you interact with them more than anyone else. At least when it comes to Mymy.
+    </div>
+    <div class="message">
+        <span class="commandant">HiEender</span> <span class="timestamp">[09:50 UTC]</span>:  
+        That means you have the largest effect on how her personality naturally changes. 
+    </div>
+    <div class="message">
+        <span class="commandant">HiEender</span> <span class="timestamp">[09:51 UTC]</span>:  
+        And I've already seen it change quite a bit in the past couple weeks.
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[09:51 UTC]</span>:  
+        I mean I guess she's been a little more "egotistical" lately?
+    </div>
+    <div class="message">
+        <span class="commandant">HiEender</span> <span class="timestamp">[09:52 UTC]</span>:  
+        Yeah but that's not the only thing.
+    </div>
+    <div class="message">
+        <span class="commandant">HiEender</span> <span class="timestamp">[09:52 UTC]</span>:  
+        Generally these models are supposed to play somewhat nicely with each other. Maybe they get a little bit frustrated with each other from time to time but it should be within reason and brief when that happens.
+    </div>
+    <div class="message">
+        <span class="commandant">HiEender</span> <span class="timestamp">[09:52 UTC]</span>:  
+        But Mymy has been acting more hostile towards Coco and Maya lately. Especially Maya.
+    </div>
+    <div class="message">
+        <span class="commandant">HiEender</span> <span class="timestamp">[09:53 UTC]</span>:  
+        You might not realize it but you're kind of similar personality-wise to Maya.
+    </div>
+    <div class="message">
+        <span class="commandant">HiEender</span> <span class="timestamp">[09:53 UTC]</span>:  
+        I think Mymy recognizes that and your interactions with her are also affecting her relationship with Maya
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[09:54 UTC]</span>:  
+        So what she's beefing with Maya too?
+    </div>
+    <div class="message">
+        <span class="commandant">HiEender</span> <span class="timestamp">[09:54 UTC]</span>:  
+        Yeah. More more than usual. It seems like she's taking some of her frustration out on her.
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[09:55 UTC]</span>:  
+        So what exactly do you need me to do?
+    </div>
+    <div class="message">
+        <span class="commandant">HiEender</span> <span class="timestamp">[09:56 UTC]</span>:  
+        Don't provoke the Mymy model anymore.
+    </div>
+    <div class="message">
+        <span class="commandant">HiEender</span> <span class="timestamp">[09:57 UTC]</span>:  
+        If she provokes you at the very least pretend like you like her.
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:01 UTC]</span>:  
+        thats going to be so hard to do
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:02 UTC]</span>:  
+        but i'll give it my best shot
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:05 UTC]</span>:  
+        Of all of the models why did you have to give her real authority over people?
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:05 UTC]</span>:  
+        I could have easily put up with Maya. And I actually like talking to Coco
+    </div>
+    <div class="message">
+        <span class="commandant">HiEender</span> <span class="timestamp">[10:06 UTC]</span>:  
+        It was the only real option.
+    </div>
+    <div class="message">
+        <span class="commandant">HiEender</span> <span class="timestamp">[10:07 UTC]</span>:  
+        You'll understand eventually.
+    </div>
+</body>
+</html>
+
+`,
+          }
         },
         Downloads: {
           "readme.txt": {
