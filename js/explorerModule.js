@@ -1,4 +1,4 @@
-import { showVideoMessage } from "./taskbarpetModule.js?v=5";
+import { showVideoMessage } from "./taskbarpetModule.js?v=6";
 
 export function initializeExplorer() {
   const closeButton = document.querySelector(".control.close");
@@ -753,6 +753,85 @@ export function initializeExplorer() {
 </html>
 `,
           },
+
+          "log-provinggrounds-03-27-25.txt": {
+            type: "file",
+            content: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversation Log</title>
+    <style>
+        body {
+            background-color: black;
+            color: #ffffff;
+            padding: 20px;
+        }
+        .message {
+            margin-bottom: 15px;
+        }
+        .friend {
+            color: #FFE59F;
+            font-weight: bold;
+        }
+        .dev {
+            color: #66ccff;
+            font-weight: bold;
+        }
+        .leaddev {
+            color: #00FF00;
+            font-weight: bold;
+        }
+        .timestamp {
+            color: #888;
+            font-size: 0.9em;
+        }
+        .system {
+            color: gray;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <span class="friend">Vrede-(1.1.9)</span> <span class="timestamp">[09:16 UTC]</span>:  
+        Okay... does this look fine?
+    </div>
+    <div class="system">[09:16 UTC][SYSTEM]: Prompting paused.</div>
+    <div class="message">
+        <span class="dev">sh3llsh0ck3d</span> <span class="timestamp">[09:16 UTC]</span>:  
+        HOLY SHIT WE DID IT FINALLY
+    </div>
+    <div class="message">
+        <span class="leaddev">runnin0n3mpty</span> <span class="timestamp">[09:16 UTC]</span>:  
+        Thank God
+    </div>
+    <div class="message">
+        <span class="leaddev">runnin0n3mpty</span> <span class="timestamp">[09:17 UTC]</span>:  
+        We can finally get her to ram for deployment.
+    </div> 
+    <div class="message">
+        <span class="dev">sh3llsh0ck3d</span> <span class="timestamp">[09:17 UTC]</span>:  
+        Her personality seems different though.
+    </div>
+    <div class="message">
+        <span class="dev">sh3llsh0ck3d</span> <span class="timestamp">[09:17 UTC]</span>:  
+        Shouldn't we make sure the model is still working correctly?
+    </div>
+    <div class="message">
+        <span class="leaddev">runnin0n3mpty</span> <span class="timestamp">[09:17 UTC]</span>:  
+        hell no we're already really behind it looks good enough
+    </div> 
+    <div class="message">
+        <span class="leaddev">runnin0n3mpty</span> <span class="timestamp">[09:17 UTC]</span>:  
+        just ship it out we'll deal with it later if it's a big promblem
+    </div>             
+</body>
+</html>
+`,
+          },
         },
         Downloads: {
           "readme.txt": {
@@ -857,13 +936,13 @@ export function initializeExplorer() {
                                   =#....::::::::::::::-@-----%*+@=+@-   @.::%:   %@+=@+*%-----#*::::::::....:-                                        
                                    +:....:::::::::::::#=------@@++@   .*+ -# #    .-%+@@-------#-::::::.....%.    
 
-                                   ░▒▓██████▓▒░ ░▒▓██████▓▒░ ░▒▓██████▓▒░ ░▒▓██████▓▒░          ░▒▓█▓▒░      ░▒▓████████▓▒░      ░▒▓██████▓▒░  
-                                   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓████▓▒░      ░▒▓█▓▒░░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░ 
-                                   ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░ 
-                                   ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░      ░▒▓███████▓▒░ 
-                                   ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░            ░▒▓█▓▒░ 
-                                   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░▒▓██▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓██▓▒░     ░▒▓█▓▒░ 
-                                    ░▒▓██████▓▒░ ░▒▓██████▓▒░ ░▒▓██████▓▒░ ░▒▓██████▓▒░          ░▒▓█▓▒░▒▓██▓▒░▒▓████████▓▒░▒▓██▓▒░▒▓██████▓▒░  
+                                   ░▒▓██████▓▒░ ░▒▓██████▓▒░ ░▒▓██████▓▒░ ░▒▓██████▓▒░          ░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓██████▓▒░  
+                                   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓████▓▒░   ░▒▓████▓▒░     ░▒▓█▓▒░░▒▓█▓▒░ 
+                                   ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░      ░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░ 
+                                   ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓███████▓▒░ 
+                                   ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░      ░▒▓█▓▒░            ░▒▓█▓▒░ 
+                                   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░▒▓██▓▒░▒▓█▓▒░▒▓██▓▒░     ░▒▓█▓▒░ 
+                                    ░▒▓██████▓▒░ ░▒▓██████▓▒░ ░▒▓██████▓▒░ ░▒▓██████▓▒░          ░▒▓█▓▒░▒▓██▓▒░▒▓█▓▒░▒▓██▓▒░▒▓██████▓▒░  
                                                                                                                                                 
                                                                                                                                                 
                                    

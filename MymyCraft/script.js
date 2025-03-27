@@ -804,7 +804,7 @@ function createWorld() {
     {
       position: { x: 38, y: 1, z: 38 },
       type: "sign",
-      text: "Someone has flattened my beautiful house and that someone will pay dearly for it.",
+      text: "I don't really care for the snow. Do whatever you want with this place.",
       textColor: "#ff8c00" // Orange text color
     },
 

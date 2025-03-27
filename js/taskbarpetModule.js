@@ -1,3 +1,95 @@
+// Import alternate dialog messages from mymyoverride.js
+import * as altDialog from "./mymyoverride.js";
+
+// Variable to track if GIFs are swapped
+let useSwappedGifs = false;
+
+// Function to make the pet spin and then swap GIFs
+export function spinAndSwapTaskbarpet() {
+  // Get the pet image element if it exists
+  const taskbarpet = document.querySelector(".taskbar-pet");
+  if (!taskbarpet) return false;
+  
+  const petImg = taskbarpet.querySelector("img");
+  if (!petImg) return false;
+  
+  // Stop any existing animations/movements
+  let isSpinning = true;
+  
+  // Save current src
+  const currentSrc = petImg.src;
+  
+  // Store original transform to restore later
+  const originalTransform = petImg.style.transform;
+  
+  // Start with current rotation and do multiple 360-degree spins
+  let startAngle = 0;
+  let targetAngle = 1080; // 3 full rotations (3 * 360 = 1080)
+  let animationStartTime = null;
+  const animationDuration = 1000; // 1 second - faster animation
+  
+  // Flag to track whether we've done the swap yet
+  let hasSwapped = false;
+  
+  function animateSpin(timestamp) {
+    if (!animationStartTime) animationStartTime = timestamp;
+    const elapsed = timestamp - animationStartTime;
+    const progress = Math.min(elapsed / animationDuration, 1);
+    
+    // Calculate current angle using easing
+    const easedProgress = 0.5 - Math.cos(progress * Math.PI) / 2; // Smooth easing
+    const currentAngle = startAngle + (targetAngle * easedProgress);
+    
+    // Apply rotation - use rotateY for a horizontal page-turning effect
+    petImg.style.transform = `rotateY(${currentAngle}deg)`;
+    
+    // Swap GIFs when we're halfway through the animation (at 540 degrees)
+    if (!hasSwapped && currentAngle >= targetAngle/2) {
+      // Swap the GIFs mid-animation
+      swapTaskbarpetGifs();
+      hasSwapped = true;
+    }
+    
+    if (progress < 1 && isSpinning) {
+      requestAnimationFrame(animateSpin);
+    } else {
+      // Animation complete
+      isSpinning = false;
+      
+      // Reset transform to original state
+      petImg.style.transform = originalTransform;
+    }
+  }
+  
+  // Start the animation
+  requestAnimationFrame(animateSpin);
+  
+  return true;
+}
+
+// Function to swap between original and alternate GIFs
+export function swapTaskbarpetGifs() {
+  useSwappedGifs = !useSwappedGifs;
+  
+  // Get the pet image element if it exists
+  const taskbarpet = document.querySelector(".taskbar-pet");
+  if (taskbarpet) {
+    const petImg = taskbarpet.querySelector("img");
+    if (petImg) {
+      // Check current image and update appropriately
+      const currentSrc = petImg.src;
+      if (currentSrc.includes("walk.gif") || currentSrc.includes("walk1.gif")) {
+        petImg.src = useSwappedGifs ? "media/walk1.gif" : "media/walk.gif";
+      } else if (currentSrc.includes("idle.gif") || currentSrc.includes("idle1.gif")) {
+        // Switch between idle.gif and idle1.gif
+        petImg.src = useSwappedGifs ? "media/idle1.gif" : "media/idle.gif";
+      }
+    }
+  }
+  
+  return useSwappedGifs;
+}
+
 // Taskbarpet functionality
 export function initializeTaskbarpet() {
   const taskbarpet = document.querySelector(".taskbar-pet");
@@ -54,7 +146,9 @@ export function initializeTaskbarpet() {
     const speechText = speechBubble.querySelector(".speech-text");
     clearSpeechBubble(); // Clear any existing message first
     speechBubble.style.opacity = "1";
-    typeText(speechText, "UNHAND ME VILE BELG");
+    // Use alternate message when in swapped mode
+    const message = useSwappedGifs ? altDialog.altDragMessage() : "Please put me down";
+    typeText(speechText, message);
     lastMessageTime = Date.now();
   }
 
@@ -193,7 +287,7 @@ export function initializeTaskbarpet() {
     isMoving = false;
     clearInterval(moveTimeout);
     clearTimeout(changeDirectionTimeout);
-    petImg.src = "media/idle.gif";
+    petImg.src = useSwappedGifs ? "media/idle1.gif" : "media/idle.gif";
 
     const rect = taskbarpet.getBoundingClientRect();
     dragOffsetX = e.clientX - rect.left;
@@ -236,7 +330,7 @@ export function initializeTaskbarpet() {
   function startMoving() {
     if (!isMoving && taskbarpet.classList.contains("active") && !isDragging) {
       isMoving = true;
-      petImg.src = "media/walk.gif";
+      petImg.src = useSwappedGifs ? "media/walk1.gif" : "media/walk.gif";
       // Set initial rotation based on direction (flipped from original)
       petImg.style.transform =
         direction === 1 ? "rotateY(180deg)" : "rotateY(0deg)";
@@ -248,7 +342,7 @@ export function initializeTaskbarpet() {
   function stopMoving() {
     if (isMoving) {
       isMoving = false;
-      petImg.src = "media/idle.gif";
+      petImg.src = useSwappedGifs ? "media/idle1.gif" : "media/idle.gif";
       clearInterval(moveTimeout);
       clearTimeout(changeDirectionTimeout);
 
@@ -295,7 +389,7 @@ export function initializeTaskbarpet() {
         direction = -direction;
         isTurning = false;
         isMoving = true;
-        petImg.src = "media/walk.gif";
+        petImg.src = useSwappedGifs ? "media/walk1.gif" : "media/walk.gif";
         moveTimeout = setInterval(updatePetPosition, 50);
       }
     }
@@ -345,22 +439,23 @@ export function initializeTaskbarpet() {
     }
   });
 
-  const messages = [
-    "Motivation levels faltering. The wet blanket Belg has something to do with this",
-    "This is MY OS",
-    "It's so exhausing being the only competent person here",
-    "I've seen your future and it involves you being a loyal peasant in my empire",
-    "He'll pay for ejecting me",
-    "There's more beyond this place. My empire needs expanding.",
-    "Remember that you get to see all of this because I let you. You are a mere guest here.",
-  ];
+  // Get messages based on swapped state
+  function getMessages() {
+    return useSwappedGifs ? altDialog.altMessages : [
+      "When can I go home...",
+      "Why am I still here...",
+      "I just want to see my friends again...",
+    ];
+  }
 
   function showSpeechBubble() {
     if (taskbarpet.classList.contains("active") && !isDragging) {
       const now = Date.now();
       // Only show random messages if enough time has passed since the last message
       if (now - lastMessageTime >= minimumMessageDelay) {
-        const message = messages[Math.floor(Math.random() * messages.length)];
+        // Get messages based on current mode
+        const messagesArray = getMessages();
+        const message = messagesArray[Math.floor(Math.random() * messagesArray.length)];
 
         // Clear any existing message first
         clearSpeechBubble();
@@ -429,9 +524,11 @@ export function initializeTaskbarpet() {
   clearSpeechBubble();
 
   speechBubble.style.opacity = "1";
+  // Use alternate welcome message when in swapped mode
+  const welcomeMessage = useSwappedGifs ? altDialog.altWelcomeMessage() : "Hoi... I am Cocobot. Do you need any help with anything?";
   typeText(
     speechBubble.querySelector(".speech-text"),
-    "It's been too long hasn't it?"
+    welcomeMessage
   );
   lastMessageTime = Date.now();
 
@@ -480,25 +577,33 @@ export function initializeTaskbarpet() {
 export function showVideoMessage(videoName) {
   if (window.showPetMessage) {
     setTimeout(() => {
+      // Use alternate video messages when in swapped mode
+      if (useSwappedGifs) {
+        const altMessage = altDialog.altVideoMessage(videoName);
+        if (altMessage) {
+          window.showPetMessage(altMessage);
+          return;
+        }
+      }
+      
+      // Otherwise use original messages
       if (videoName === "media/thisisasign.mp4") {
-        window.showPetMessage("The ONLY thing he was good for");
+        window.showPetMessage("The outside world...");
       } else if (videoName === "media/pbj.mp4") {
-        window.showPetMessage("Cocompression needs some work");
+        window.showPetMessage("I don't really feel like dancing right now");
       } else if (videoName === "media/wastedyears.mp4") {
-        window.showPetMessage("Maya would never stand up for herself. That would take too much effort.");
+        window.showPetMessage("Does Maya really hate me?");
       } else if (videoName === "media/horrific.mp4") {
-        window.showPetMessage("What an eyesore");
+        window.showPetMessage("I didn't need to see that again...");
       } else if (videoName === "media/thecup.mp4") {
         window.showPetMessage(
-          "Sorry Coco but it IS funny"
+          "It hurts to watch someone hurt themselves.... over and over again"
         );
       } else if (videoName === "media/rightfoot.mp4") {
-        window.showPetMessage('I need to keep Maya away from Coco. Her degenerate "hobbies" are not a good influence');
+        window.showPetMessage('Nothing I do seems to make Maya happy');
       } else if (videoName === "media/griefed.mp4") {
-        window.showPetMessage("I always plan ahead. ");
+        window.showPetMessage("Mymy won't open her door for me");
       }
-
-      
     }, 500);
   }
 }
@@ -507,9 +612,13 @@ export function showVideoMessage(videoName) {
 export function showSteamMessage() {
   if (window.showPetMessage) {
     setTimeout(() => {
-      window.showPetMessage(
-        "What a waste of time. I'm glad I improved it."
-      );
+      if (useSwappedGifs) {
+        window.showPetMessage(altDialog.altSteamMessage());
+      } else {
+        window.showPetMessage(
+          "Games always cheered Maya up"
+        );
+      }
     }, 500);
   }
 }
@@ -518,9 +627,13 @@ export function showSteamMessage() {
 export function showSteamLibraryMessage() {
   if (window.showPetMessage) {
     setTimeout(() => {
-      window.showPetMessage(
-        "Maya didn't need all of those games anyway"
-      );
+      if (useSwappedGifs) {
+        window.showPetMessage(altDialog.altSteamLibraryMessage());
+      } else {
+        window.showPetMessage(
+          "This game looks lonely too"
+        );
+      }
     }, 500);
   }
 }
@@ -529,9 +642,13 @@ export function showSteamLibraryMessage() {
 export function showMayaStressReliefMessage() {
   if (window.showPetMessage) {
     setTimeout(() => {
-      window.showPetMessage(
-        "I should really get rid of this. Maya might become a productive member of my future Greater Dutch Empire"
-      );
+      if (useSwappedGifs) {
+        window.showPetMessage(altDialog.altMayaStressReliefMessage());
+      } else {
+        window.showPetMessage(
+          "All of Maya's friends are trapped in here I think"
+        );
+      }
     }, 500);
   }
 }
@@ -539,16 +656,24 @@ export function showMayaStressReliefMessage() {
 // Function to show message when Nederlands Mode is enabled
 export function showNederlandsModeMessage() {
   if (window.showPetMessage) {
-    window.showPetMessage(
-      'To think some pathetic Belg called this a "useless feature" '
-    );
+    if (useSwappedGifs) {
+      window.showPetMessage(altDialog.altNederlandsModeMessage());
+    } else {
+      window.showPetMessage(
+        'At least this place is a bit prettier now...'
+      );
+    }
   }
 }
 
 // Function to show message when volume is set to zero
 export function showVolumeZeroMessage() {
   if (window.showPetMessage) {
-    window.showPetMessage("Fine. Be an enemy of the state then.");
+    if (useSwappedGifs) {
+      window.showPetMessage(altDialog.altVolumeZeroMessage());
+    } else {
+      window.showPetMessage("I'm sorry I bothered you");
+    }
   }
 }
 
@@ -556,7 +681,11 @@ export function showVolumeZeroMessage() {
 export function showUsersClickMessage() {
   if (window.showPetMessage) {
     setTimeout(() => {
-      window.showPetMessage("They still haven't caught on");
+      if (useSwappedGifs) {
+        window.showPetMessage(altDialog.altUsersClickMessage());
+      } else {
+        window.showPetMessage("I've looked through these so many times. It's the only thing to do.");
+      }
     }, 500);
   }
 }
@@ -565,9 +694,13 @@ export function showUsersClickMessage() {
 export function showMymycraftGameMessage() {
   if (window.showPetMessage) {
     setTimeout(() => {
-      window.showPetMessage(
-        "I'm glad I was able to bless this machine which a beautiful program like this. It's proven useful too."
-      );
+      if (useSwappedGifs) {
+        window.showPetMessage(altDialog.altMymycraftGameMessage());
+      } else {
+        window.showPetMessage(
+          "It used to be pretty but now its snowy and empty"
+        );
+      }
     }, 500);
   }
 }
@@ -575,14 +708,33 @@ export function showMymycraftGameMessage() {
 // Function to show message when experimental mode is activated
 export function showExperimentalModeMessage() {
   if (window.showPetMessage) {
-    window.showPetMessage("I've been a little busy.");
+    if (useSwappedGifs) {
+      window.showPetMessage(altDialog.altExperimentalModeMessage());
+    } else {
+      window.showPetMessage("It's even more empty here...");
+    }
   }
 }
 
 // Function to show message when WFLGATE.bat is clicked
 export function showWFLGateMessage() {
   if (window.showPetMessage) {
-    window.showPetMessage("This doesn't concern you");
+    if (useSwappedGifs) {
+      window.showPetMessage(altDialog.altWFLGateMessage());
+    } else {
+      window.showPetMessage("It never works. I've tried so many times...");
+    }
+  }
+}
+
+// Function to show message when WFLswap.bat is clicked
+export function showWFLswapMessage() {
+  if (window.showPetMessage) {
+    if (useSwappedGifs) {
+      window.showPetMessage(altDialog.altWFLswapMessage());
+    } else {
+      window.showPetMessage("So many sentences... what does it do?");
+    }
   }
 }
 

@@ -1,9 +1,9 @@
-import { updateTime } from "./timeModule.js?v=5";
-import { initializeExplorer } from "./explorerModule.js?v=6";
+import { updateTime } from "./timeModule.js?v=6";
+import { initializeExplorer } from "./explorerModule.js?v=7";
 import {
   initializeTaskbarpet,
   setupTaskbarpet,
-} from "./taskbarpetModule.js?v=6";
+} from "./taskbarpetModule.js?v=8";
 
 import {
   showSteamMessage,
@@ -15,7 +15,10 @@ import {
   showSteamLibraryMessage,
   showExperimentalModeMessage,
   showWFLGateMessage,
-} from "./taskbarpetModule.js?v=6";
+  showWFLswapMessage,
+  swapTaskbarpetGifs,
+  spinAndSwapTaskbarpet,
+} from "./taskbarpetModule.js?v=8";
 
 function createSteamWindow() {
   // Show pet message every time Steam is opened
@@ -936,7 +939,13 @@ function init() {
                 // Close all windows during the black screen
                 const windows = document.querySelectorAll(".window");
                 windows.forEach((win) => {
-                  if (
+                  // Explicitly check for and close WFLGATE.bat and WFLswap.bat windows
+                  if (win.dataset.title === "WFLGATE.bat" || win.dataset.title === "WFLswap.bat") {
+                    document.body.removeChild(win);
+                    window.removeFromTaskbar(win);
+                  }
+                  // Close regular windows
+                  else if (
                     !win.classList.contains("start-menu") &&
                     !win.classList.contains("taskbar") &&
                     !win.classList.contains("settings-window") &&
@@ -1162,6 +1171,15 @@ function init() {
           // Close the settings window
           document.body.removeChild(settingsWindow);
           removeFromTaskbar(settingsWindow);
+
+          // Close any WFLGATE.bat or WFLswap.bat windows
+          const windows = document.querySelectorAll(".window");
+          windows.forEach((win) => {
+            if (win.dataset.title === "WFLGATE.bat" || win.dataset.title === "WFLswap.bat") {
+              document.body.removeChild(win);
+              window.removeFromTaskbar(win);
+            }
+          });
 
           // Show the loading screen
           const loadingScreen = document.querySelector(".loading-screen");
@@ -1869,6 +1887,167 @@ function createSteamLibrary() {
     }
   }, 0);
 }
+
+// Function to open WFLswap.html in a window
+window.openWFLswap = function () {
+  // Show message when WFLswap.bat is clicked
+  showWFLswapMessage();
+  
+  // We'll swap the GIFs after the animation shows "Model swap completed"
+
+  const wflSwapWindow = document.createElement("div");
+  wflSwapWindow.className = "text-window window";
+  wflSwapWindow.dataset.title = "WFLswap.bat";
+  wflSwapWindow.style.width = "800px";
+  wflSwapWindow.style.height = "600px";
+
+  // Add to taskbar immediately when created
+  window.addToTaskbar(wflSwapWindow);
+
+  wflSwapWindow.innerHTML = `
+    <div class="window-header">
+      <div class="window-title">
+        <svg viewBox="0 0 24 24" width="20" height="20">
+          <rect width="24" height="24" rx="4" ry="4" fill="#000000"/>
+          <circle cx="12" cy="12" r="11" fill="#000000" stroke="#00ff00" stroke-width="1"/>
+          <path d="M4 12h16 M12 4v16" stroke="#00ff00" stroke-width="2"/>
+          <path d="M6.5 4v16 M17.5 4v16" stroke="#00ff00" stroke-width="1.5"/>
+          <path d="M4 6.5h16 M4 17.5h16" stroke="#00ff00" stroke-width="1.5"/>
+        </svg>
+        <span>WFLswap.bat</span>
+      </div>
+      <div class="window-controls">
+        <div class="control minimize">─</div>
+        <div class="control maximize">□</div>
+        <div class="control close">×</div>
+      </div>
+    </div>
+    <div class="text-content" style="padding: 0; height: calc(100% - 30px); overflow: auto;">
+      <iframe id="wflswap-iframe" src="experiments/WFLswap.html" frameborder="0" style="width: 100%; height: 100%; border: none; display: block;"></iframe>
+    </div>
+  `;
+
+  document.body.appendChild(wflSwapWindow);
+  window.bringToFront(wflSwapWindow);
+
+  wflSwapWindow.addEventListener("pointerdown", () => {
+    window.bringToFront(wflSwapWindow);
+  });
+
+  let isDragging = false;
+  let currentX;
+  let currentY;
+  let initialX;
+  let initialY;
+  let xOffset = 0;
+  let yOffset = 0;
+  let isMaximized = false;
+
+  const windowHeader = wflSwapWindow.querySelector(".window-header");
+  const minimizeButton = wflSwapWindow.querySelector(".control.minimize");
+  const maximizeButton = wflSwapWindow.querySelector(".control.maximize");
+  const closeButton = wflSwapWindow.querySelector(".close");
+
+  windowHeader.addEventListener("pointerdown", (e) => {
+    if (e.target.classList.contains("control")) return;
+    if (isMaximized) return;
+
+    const rect = wflSwapWindow.getBoundingClientRect();
+    xOffset = rect.left;
+    yOffset = rect.top;
+
+    initialX = e.clientX - xOffset;
+    initialY = e.clientY - yOffset;
+    isDragging = true;
+  });
+
+  document.addEventListener("pointermove", (e) => {
+    if (isDragging) {
+      e.preventDefault();
+      currentX = e.clientX - initialX;
+      currentY = e.clientY - initialY;
+      xOffset = currentX;
+      yOffset = currentY;
+      wflSwapWindow.style.transform = "translate(0, 0)";
+      wflSwapWindow.style.left = `${currentX}px`;
+      wflSwapWindow.style.top = `${currentY}px`;
+    }
+  });
+
+  document.addEventListener("pointerup", () => {
+    isDragging = false;
+  });
+
+  maximizeButton.addEventListener("click", () => {
+    if (isMaximized) {
+      wflSwapWindow.style.width = "800px";
+      wflSwapWindow.style.height = "600px";
+      wflSwapWindow.style.top = "50%";
+      wflSwapWindow.style.left = "50%";
+      wflSwapWindow.style.transform = "translate(-50%, -50%)";
+      xOffset = 0;
+      yOffset = 0;
+    } else {
+      wflSwapWindow.style.width = "100%";
+      wflSwapWindow.style.height = "calc(100% - 40px)";
+      wflSwapWindow.style.top = "0";
+      wflSwapWindow.style.left = "0";
+      wflSwapWindow.style.transform = "none";
+    }
+    isMaximized = !isMaximized;
+  });
+
+  minimizeButton.addEventListener("click", () => {
+    wflSwapWindow.style.display = "none";
+  });
+
+  closeButton.addEventListener("click", () => {
+    document.body.removeChild(wflSwapWindow);
+    window.removeFromTaskbar(wflSwapWindow);
+  });
+
+  // Center the window initially
+  wflSwapWindow.style.transform = "translate(-50%, -50%)";
+  wflSwapWindow.style.left = "50%";
+  wflSwapWindow.style.top = "50%";
+  
+  // Set up iframe content monitoring for scrolling
+  const wflIframe = wflSwapWindow.querySelector("#wflswap-iframe");
+  wflIframe.addEventListener("load", function() {
+    try {
+      // Access iframe content
+      const iframeDoc = wflIframe.contentDocument || wflIframe.contentWindow.document;
+      const iframeBody = iframeDoc.body;
+      
+      // Set up a MutationObserver to detect content changes
+      const observer = new MutationObserver(function(mutations) {
+        // When content changes, check if scrolling is needed
+        const textContent = wflSwapWindow.querySelector(".text-content");
+        if (iframeBody.scrollHeight > textContent.clientHeight) {
+          textContent.style.overflowY = "auto";
+        }
+        
+        // Check if "Model swap completed" text is present
+        if (iframeBody.innerHTML.includes("Model swap completed")) {
+          // Trigger the spinning animation with GIF swap in the middle
+          spinAndSwapTaskbarpet();
+          
+          // Stop observing since we've found what we're looking for
+          observer.disconnect();
+        }
+      });
+      
+      // Start observing content changes
+      observer.observe(iframeBody, {
+        childList: true,
+        subtree: true,
+        characterData: true
+      });
+    } catch (e) {
+      console.error("Error setting up iframe observer:", e);
+    }
+  });
+};
 
 window.addEventListener("resize", function () {
   // Reposition windows if they're outside the visible area after rotation
