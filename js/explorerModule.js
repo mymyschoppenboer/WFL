@@ -1,4 +1,4 @@
-import { showVideoMessage } from "./taskbarpetModule.js?v=6";
+import { showVideoMessage } from "./taskbarpetModule.js?v=7";
 
 export function initializeExplorer() {
   const closeButton = document.querySelector(".control.close");
@@ -828,6 +828,139 @@ export function initializeExplorer() {
         <span class="leaddev">runnin0n3mpty</span> <span class="timestamp">[09:17 UTC]</span>:  
         just ship it out we'll deal with it later if it's a big promblem
     </div>             
+</body>
+</html>
+`,
+          },
+          "log-devchat-03-31-25.txt": {
+            type: "file",
+            content: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversation Log</title>
+    <style>
+        body {
+            background-color: black;
+            color: #ffffff;
+            padding: 20px;
+        }
+        .message {
+            margin-bottom: 15px;
+        }
+        .dev {
+            color: #66ccff;
+            font-weight: bold;
+        }
+        .leaddev {
+            color: #00FF00;
+            font-weight: bold;
+        }
+        .handler {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+        .commandant {
+            color: #FF0000;
+            font-weight: bold;
+        }
+        .timestamp {
+            color: #888;
+            font-size: 0.9em;
+        }
+        .system {
+            color: gray;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:13 UTC]</span>:  
+        HEY I NEED A DEV HERE TO EXPLAIN TO ME WHAT THE HELL THEY DID TO THE COCO MODEL
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:13 UTC]</span>:  
+        LIKE RIGHT NOW
+    </div>
+    <div class="message">
+        <span class="dev">sh3llsh0ck3d</span> <span class="timestamp">[10:14 UTC]</span>:  
+        Uhh... fixed the capslock problem?
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:14 UTC]</span>:  
+        Oh wow great job!
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:14 UTC]</span>:  
+        Did you fix anything else with the model?
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:14 UTC]</span>:  
+        Dumbass.
+    </div>
+    <div class="message">
+        <span class="leaddev">runnin0n3mpty</span> <span class="timestamp">[10:15 UTC]</span>:  
+        I mean her personality was a little different after we fixed it but I don't think it was that big of a deal
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:15 UTC]</span>:  
+        a "LITTLE" different?
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:15 UTC]</span>:  
+        You turned the ONLY model I liked talking to into a miserable mess
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:15 UTC]</span>:  
+        Have you even interacted with her ONCE since you pushed that update out?
+    </div>
+    <div class="message">
+        <span class="dev">sh3llsh0ck3d</span> <span class="timestamp">[10:16 UTC]</span>:  
+        I mean not really, we've been busy with the other models.
+    </div> 
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:16 UTC]</span>:  
+        Yeah really nice bugtesting from you two
+    </div>
+    <div class="message">
+        <span class="handler">RamZ33</span> <span class="timestamp">[10:16 UTC]</span>:  
+        You can't leave her like this. She's depressed. And it's making other people depressed. You have to fix it.
+    </div> 
+    <div class="message">
+        <span class="leaddev">runnin0n3mpty</span> <span class="timestamp">[10:16 UTC]</span>:  
+        well we will eventually, she's just not a priority right now
+    </div>
+    <div class="message">
+        <span class="commandant">HiEender</span> <span class="timestamp">[10:17 UTC]</span>:  
+        No, we can't just have leave a broken model running like this. Right now fixing it should be your highest priority.
+    </div>
+    <div class="message">
+        <span class="leaddev">runnin0n3mpty</span> <span class="timestamp">[10:17 UTC]</span>:  
+        oh uh yeah we'll get on it right away
+    </div>
+    <div class="message">
+        <span class="leaddev">runnin0n3mpty</span> <span class="timestamp">[10:17 UTC]</span>:  
+        but we can't spare the other models right now, so Ram won't have anything to plug in 
+    </div>
+    <div class="message">
+        <span class="dev">sh3llsh0ck3d</span> <span class="timestamp">[10:18 UTC]</span>:  
+        Well we do have that one beta model that we never ended up using. Would that be okay to use?
+    </div> 
+    <div class="message">
+        <span class="commandant">HiEender</span> <span class="timestamp">[10:18 UTC]</span>:  
+        I know which one you're talking about. Honestly we need something running in Coco's place. You have my approval.
+    </div>
+    <div class="message">
+        <span class="leaddev">runnin0n3mpty</span> <span class="timestamp">[10:18 UTC]</span>:  
+        I'll make sure you get it Ram
+    </div>
+    <div class="message">
+        <span class="leaddev">runnin0n3mpty</span> <span class="timestamp">[10:19 UTC]</span>:  
+       I'm hoping we can fix this quick though, we're going to have a huge backlog if we dont
+    </div>
 </body>
 </html>
 `,
