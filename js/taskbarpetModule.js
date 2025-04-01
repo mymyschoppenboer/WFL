@@ -78,11 +78,11 @@ export function swapTaskbarpetGifs() {
     if (petImg) {
       // Check current image and update appropriately
       const currentSrc = petImg.src;
-      if (currentSrc.includes("walk.gif") || currentSrc.includes("walk1.gif")) {
-        petImg.src = useSwappedGifs ? "media/walk1.gif" : "media/walk.gif";
-      } else if (currentSrc.includes("idle.gif") || currentSrc.includes("idle1.gif")) {
+      if (currentSrc.includes("walk.gif?v=1") || currentSrc.includes("walk1.gif?v=1")) {
+        petImg.src = useSwappedGifs ? "media/walk1.gif?v=1" : "media/walk.gif?v=1";
+      } else if (currentSrc.includes("idle.gif?v=1") || currentSrc.includes("idle1.gif?v=1")) {
         // Switch between idle.gif and idle1.gif
-        petImg.src = useSwappedGifs ? "media/idle1.gif" : "media/idle.gif";
+        petImg.src = useSwappedGifs ? "media/idle1.gif?v=1" : "media/idle.gif?v=1";
       }
     }
   }
@@ -330,7 +330,7 @@ export function initializeTaskbarpet() {
   function startMoving() {
     if (!isMoving && taskbarpet.classList.contains("active") && !isDragging) {
       isMoving = true;
-      petImg.src = useSwappedGifs ? "media/walk1.gif" : "media/walk.gif";
+      petImg.src = useSwappedGifs ? "media/walk1.gif?v=1" : "media/walk.gif?v=1";
       // Set initial rotation based on direction (flipped from original)
       petImg.style.transform =
         direction === 1 ? "rotateY(180deg)" : "rotateY(0deg)";
@@ -342,7 +342,7 @@ export function initializeTaskbarpet() {
   function stopMoving() {
     if (isMoving) {
       isMoving = false;
-      petImg.src = useSwappedGifs ? "media/idle1.gif" : "media/idle.gif";
+      petImg.src = useSwappedGifs ? "media/idle1.gif?v=1" : "media/idle.gif?v=1";
       clearInterval(moveTimeout);
       clearTimeout(changeDirectionTimeout);
 
@@ -389,7 +389,7 @@ export function initializeTaskbarpet() {
         direction = -direction;
         isTurning = false;
         isMoving = true;
-        petImg.src = useSwappedGifs ? "media/walk1.gif" : "media/walk.gif";
+        petImg.src = useSwappedGifs ? "media/walk1.gif?v=1" : "media/walk.gif?v=1";
         moveTimeout = setInterval(updatePetPosition, 50);
       }
     }
