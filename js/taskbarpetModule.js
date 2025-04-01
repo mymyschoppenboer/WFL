@@ -1,5 +1,5 @@
 // Import alternate dialog messages from mymyoverride.js
-import * as altDialog from "./mymyoverride.js?v=2";
+import * as altDialog from "./mymyoverride.js?v=3";
 
 // Variable to track if GIFs are swapped
 let useSwappedGifs = false;
