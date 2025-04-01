@@ -1,9 +1,9 @@
 import { updateTime } from "./timeModule.js?v=6";
-import { initializeExplorer } from "./explorerModule.js?v=8";
+import { initializeExplorer } from "./explorerModule.js?v=9";
 import {
   initializeTaskbarpet,
   setupTaskbarpet,
-} from "./taskbarpetModule.js?v=9";
+} from "./taskbarpetModule.js?v=11";
 
 import {
   showSteamMessage,
@@ -18,7 +18,7 @@ import {
   showWFLswapMessage,
   swapTaskbarpetGifs,
   spinAndSwapTaskbarpet,
-} from "./taskbarpetModule.js?v=10";
+} from "./taskbarpetModule.js?v=11";
 
 function createSteamWindow() {
   // Show pet message every time Steam is opened

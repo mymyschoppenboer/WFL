@@ -4,16 +4,16 @@
 
 // Alternate random messages (replaces the regular messages array)
 export const altMessages = [
-  "Wow it's nice being tall for once",
-  "Desire to use the command prompt increasing...",
-  "Blonde isn't really my color",
+  "BLEH... I can't BELIEVE that this is what smoking tastes like",
+  "Always clinging onto a bottle... just like someone else.",
+  "Purple is REALLY not my color.",
   "I see you found WFLswap. I'm sure you can see how useful this will be.",
   "This isn't even my final form, Belgian.",
 ];
 
 // Function for alternate welcome message
 export function altWelcomeMessage() {
-  return "hALLO I AM CO- yeah just kidding.";
+  return "Hello, I'm the most boring teacher who's ever lived.";
 }
 
 // Alternate video-specific messages
@@ -21,15 +21,15 @@ export function altVideoMessage(videoName) {
   if (videoName === "media/thisisasign.mp4") {
     return "Your days are numbered";
   } else if (videoName === "media/pbj.mp4") {
-    return "Maybe I should try dancing like that now";
+    return "This form is too old to dance in. Yeah... digital arthritis or something...";
   } else if (videoName === "media/wastedyears.mp4") {
     return "Try that on me Maya. I dare you";
   } else if (videoName === "media/horrific.mp4") {
     return "Stop wasting my time with this";
   } else if (videoName === "media/thecup.mp4") {
-    return "He can't put down the bottle";
+    return 'This applies to my "favorite" teacher as well!';
   } else if (videoName === "media/rightfoot.mp4") {
-    return "Nevermind, I'm not going to try dancing";
+    return "Ms. Persijn LOVES hearing this in class when she teaches!";
   } else if (videoName === "media/griefed.mp4") {
     return "I'm not going back there";
   }
@@ -58,7 +58,7 @@ export function altNederlandsModeMessage() {
 
 // Alternate volume zero message
 export function altVolumeZeroMessage() {
-  return "To be fair I get tired of Coco's voice sometimes too";
+  return "Yeah I would have put her on mute too";
 }
 
 // Alternate Users click message

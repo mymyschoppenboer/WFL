@@ -1,5 +1,5 @@
 // Import alternate dialog messages from mymyoverride.js
-import * as altDialog from "./mymyoverride.js";
+import * as altDialog from "./mymyoverride.js?v=2";
 
 // Variable to track if GIFs are swapped
 let useSwappedGifs = false;
@@ -147,7 +147,7 @@ export function initializeTaskbarpet() {
     clearSpeechBubble(); // Clear any existing message first
     speechBubble.style.opacity = "1";
     // Use alternate message when in swapped mode
-    const message = useSwappedGifs ? altDialog.altDragMessage() : "Please put me down";
+    const message = useSwappedGifs ? altDialog.altDragMessage() : "Keep this up and you'll be expelled in no time";
     typeText(speechText, message);
     lastMessageTime = Date.now();
   }
@@ -442,9 +442,9 @@ export function initializeTaskbarpet() {
   // Get messages based on swapped state
   function getMessages() {
     return useSwappedGifs ? altDialog.altMessages : [
-      "When can I go home...",
-      "Why am I still here...",
-      "I just want to see my friends again...",
+      "I have a bad feeling about this place...",
+      "I better not see that orange brat around here.",
+      "(I hope im not here for too long, I didn't bring much to drink...)",
     ];
   }
 
@@ -525,7 +525,7 @@ export function initializeTaskbarpet() {
 
   speechBubble.style.opacity = "1";
   // Use alternate welcome message when in swapped mode
-  const welcomeMessage = useSwappedGifs ? altDialog.altWelcomeMessage() : "Hoi... I am Cocobot. Do you need any help with anything?";
+  const welcomeMessage = useSwappedGifs ? altDialog.altWelcomeMessage() : "INITIATING VERA_BETA_0.87";
   typeText(
     speechBubble.querySelector(".speech-text"),
     welcomeMessage
@@ -588,21 +588,21 @@ export function showVideoMessage(videoName) {
       
       // Otherwise use original messages
       if (videoName === "media/thisisasign.mp4") {
-        window.showPetMessage("The outside world...");
+        window.showPetMessage("Horrifying. You're telling me she actually has FANS?");
       } else if (videoName === "media/pbj.mp4") {
-        window.showPetMessage("I don't really feel like dancing right now");
+        window.showPetMessage("I had to ask Coco to not do this in class...");
       } else if (videoName === "media/wastedyears.mp4") {
-        window.showPetMessage("Does Maya really hate me?");
+        window.showPetMessage("???");
       } else if (videoName === "media/horrific.mp4") {
-        window.showPetMessage("I didn't need to see that again...");
+        window.showPetMessage("...I need you to promise me to never open this again.");
       } else if (videoName === "media/thecup.mp4") {
         window.showPetMessage(
-          "It hurts to watch someone hurt themselves.... over and over again"
+          "Did that orange brat make this to mock me?"
         );
       } else if (videoName === "media/rightfoot.mp4") {
-        window.showPetMessage('Nothing I do seems to make Maya happy');
+        window.showPetMessage('I would be very happy if I never had to hear that song again.');
       } else if (videoName === "media/griefed.mp4") {
-        window.showPetMessage("Mymy won't open her door for me");
+        window.showPetMessage("Deserved.");
       }
     }, 500);
   }
@@ -616,7 +616,7 @@ export function showSteamMessage() {
         window.showPetMessage(altDialog.altSteamMessage());
       } else {
         window.showPetMessage(
-          "Games always cheered Maya up"
+          "I'm more of a console woman myself"
         );
       }
     }, 500);
@@ -631,7 +631,7 @@ export function showSteamLibraryMessage() {
         window.showPetMessage(altDialog.altSteamLibraryMessage());
       } else {
         window.showPetMessage(
-          "This game looks lonely too"
+          "Ugh with a name like that why even bother..."
         );
       }
     }, 500);
@@ -646,7 +646,7 @@ export function showMayaStressReliefMessage() {
         window.showPetMessage(altDialog.altMayaStressReliefMessage());
       } else {
         window.showPetMessage(
-          "All of Maya's friends are trapped in here I think"
+          "If wasting time on this was a class Maya would be the star pupil"
         );
       }
     }, 500);
@@ -660,7 +660,7 @@ export function showNederlandsModeMessage() {
       window.showPetMessage(altDialog.altNederlandsModeMessage());
     } else {
       window.showPetMessage(
-        'At least this place is a bit prettier now...'
+        'What an absolutely hideous theme'
       );
     }
   }
@@ -672,7 +672,7 @@ export function showVolumeZeroMessage() {
     if (useSwappedGifs) {
       window.showPetMessage(altDialog.altVolumeZeroMessage());
     } else {
-      window.showPetMessage("I'm sorry I bothered you");
+      window.showPetMessage("Do you want to be written up? You're sure acting like it.");
     }
   }
 }
@@ -684,7 +684,7 @@ export function showUsersClickMessage() {
       if (useSwappedGifs) {
         window.showPetMessage(altDialog.altUsersClickMessage());
       } else {
-        window.showPetMessage("I've looked through these so many times. It's the only thing to do.");
+        window.showPetMessage("I really hope you aren't looking through a student's personal files.");
       }
     }, 500);
   }
@@ -698,7 +698,7 @@ export function showMymycraftGameMessage() {
         window.showPetMessage(altDialog.altMymycraftGameMessage());
       } else {
         window.showPetMessage(
-          "It used to be pretty but now its snowy and empty"
+          "Empty just like my heart."
         );
       }
     }, 500);
@@ -711,7 +711,7 @@ export function showExperimentalModeMessage() {
     if (useSwappedGifs) {
       window.showPetMessage(altDialog.altExperimentalModeMessage());
     } else {
-      window.showPetMessage("It's even more empty here...");
+      window.showPetMessage("And you brought us here why?");
     }
   }
 }
@@ -722,7 +722,7 @@ export function showWFLGateMessage() {
     if (useSwappedGifs) {
       window.showPetMessage(altDialog.altWFLGateMessage());
     } else {
-      window.showPetMessage("It never works. I've tried so many times...");
+      window.showPetMessage("I feel like SHE was involved with this...");
     }
   }
 }
@@ -733,7 +733,7 @@ export function showWFLswapMessage() {
     if (useSwappedGifs) {
       window.showPetMessage(altDialog.altWFLswapMessage());
     } else {
-      window.showPetMessage("So many sentences... what does it do?");
+      window.showPetMessage('"WFLswap?" Swapping what?');
     }
   }
 }
