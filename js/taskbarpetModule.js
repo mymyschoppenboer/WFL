@@ -9,68 +9,68 @@ export function spinAndSwapTaskbarpet() {
   // Get the pet image element if it exists
   const taskbarpet = document.querySelector(".taskbar-pet");
   if (!taskbarpet) return false;
-  
+
   const petImg = taskbarpet.querySelector("img");
   if (!petImg) return false;
-  
+
   // Stop any existing animations/movements
   let isSpinning = true;
-  
+
   // Save current src
   const currentSrc = petImg.src;
-  
+
   // Store original transform to restore later
   const originalTransform = petImg.style.transform;
-  
+
   // Start with current rotation and do multiple 360-degree spins
   let startAngle = 0;
   let targetAngle = 1080; // 3 full rotations (3 * 360 = 1080)
   let animationStartTime = null;
   const animationDuration = 1000; // 1 second - faster animation
-  
+
   // Flag to track whether we've done the swap yet
   let hasSwapped = false;
-  
+
   function animateSpin(timestamp) {
     if (!animationStartTime) animationStartTime = timestamp;
     const elapsed = timestamp - animationStartTime;
     const progress = Math.min(elapsed / animationDuration, 1);
-    
+
     // Calculate current angle using easing
     const easedProgress = 0.5 - Math.cos(progress * Math.PI) / 2; // Smooth easing
-    const currentAngle = startAngle + (targetAngle * easedProgress);
-    
+    const currentAngle = startAngle + targetAngle * easedProgress;
+
     // Apply rotation - use rotateY for a horizontal page-turning effect
     petImg.style.transform = `rotateY(${currentAngle}deg)`;
-    
+
     // Swap GIFs when we're halfway through the animation (at 540 degrees)
-    if (!hasSwapped && currentAngle >= targetAngle/2) {
+    if (!hasSwapped && currentAngle >= targetAngle / 2) {
       // Swap the GIFs mid-animation
       swapTaskbarpetGifs();
       hasSwapped = true;
     }
-    
+
     if (progress < 1 && isSpinning) {
       requestAnimationFrame(animateSpin);
     } else {
       // Animation complete
       isSpinning = false;
-      
+
       // Reset transform to original state
       petImg.style.transform = originalTransform;
     }
   }
-  
+
   // Start the animation
   requestAnimationFrame(animateSpin);
-  
+
   return true;
 }
 
 // Function to swap between original and alternate GIFs
 export function swapTaskbarpetGifs() {
   useSwappedGifs = !useSwappedGifs;
-  
+
   // Get the pet image element if it exists
   const taskbarpet = document.querySelector(".taskbar-pet");
   if (taskbarpet) {
@@ -80,13 +80,16 @@ export function swapTaskbarpetGifs() {
       const currentSrc = petImg.src;
       if (currentSrc.includes("walk.gif") || currentSrc.includes("walk1.gif")) {
         petImg.src = useSwappedGifs ? "media/walk1.gif" : "media/walk.gif";
-      } else if (currentSrc.includes("idle.gif") || currentSrc.includes("idle1.gif")) {
+      } else if (
+        currentSrc.includes("idle.gif") ||
+        currentSrc.includes("idle1.gif")
+      ) {
         // Switch between idle.gif and idle1.gif
         petImg.src = useSwappedGifs ? "media/idle1.gif" : "media/idle.gif";
       }
     }
   }
-  
+
   return useSwappedGifs;
 }
 
@@ -147,7 +150,9 @@ export function initializeTaskbarpet() {
     clearSpeechBubble(); // Clear any existing message first
     speechBubble.style.opacity = "1";
     // Use alternate message when in swapped mode
-    const message = useSwappedGifs ? altDialog.altDragMessage() : "Please put me down";
+    const message = useSwappedGifs
+      ? altDialog.altDragMessage()
+      : "wOAH BE CAREFUL1";
     typeText(speechText, message);
     lastMessageTime = Date.now();
   }
@@ -441,11 +446,13 @@ export function initializeTaskbarpet() {
 
   // Get messages based on swapped state
   function getMessages() {
-    return useSwappedGifs ? altDialog.altMessages : [
-      "(It's still a bit lonely here)",
-      "dO YOU THINK THIS PLACE IS BIG ENOUGH FOR A RUGBY MATCH/",
-      "iM STILL NOT ALLOWED TO DOWNLOAD THINGS BUT I CAN STILL MAKE MY OWN FUN1",
-    ];
+    return useSwappedGifs
+      ? altDialog.altMessages
+      : [
+          "(It's still a bit lonely here)",
+          "dO YOU THINK THIS PLACE IS BIG ENOUGH FOR A RUGBY MATCH/",
+          "iM STILL NOT ALLOWED TO DOWNLOAD THINGS BUT I CAN STILL MAKE MY OWN FUN1",
+        ];
   }
 
   function showSpeechBubble() {
@@ -455,7 +462,8 @@ export function initializeTaskbarpet() {
       if (now - lastMessageTime >= minimumMessageDelay) {
         // Get messages based on current mode
         const messagesArray = getMessages();
-        const message = messagesArray[Math.floor(Math.random() * messagesArray.length)];
+        const message =
+          messagesArray[Math.floor(Math.random() * messagesArray.length)];
 
         // Clear any existing message first
         clearSpeechBubble();
@@ -525,11 +533,10 @@ export function initializeTaskbarpet() {
 
   speechBubble.style.opacity = "1";
   // Use alternate welcome message when in swapped mode
-  const welcomeMessage = useSwappedGifs ? altDialog.altWelcomeMessage() : "hOI! i AM COCOBOT1 dO YOU NEED HELP WITH ANYTHING/";
-  typeText(
-    speechBubble.querySelector(".speech-text"),
-    welcomeMessage
-  );
+  const welcomeMessage = useSwappedGifs
+    ? altDialog.altWelcomeMessage()
+    : "hOI! i AM COCOBOT1 dO YOU NEED HELP WITH ANYTHING/";
+  typeText(speechBubble.querySelector(".speech-text"), welcomeMessage);
   lastMessageTime = Date.now();
 
   // Schedule speech after initial message (wait for typing + 2s delay)
@@ -585,7 +592,7 @@ export function showVideoMessage(videoName) {
           return;
         }
       }
-      
+
       // Otherwise use original messages
       if (videoName === "media/thisisasign.mp4") {
         window.showPetMessage("hAVE I SEEN THIS PLACE BEFORE/");
@@ -600,7 +607,9 @@ export function showVideoMessage(videoName) {
           "i THINK MS. PERSIJN WOULD LIKE THIS SONG1 sHOULD I SHOW IT TO HER/ "
         );
       } else if (videoName === "media/rightfoot.mp4") {
-        window.showPetMessage('mAYA DOESNT LIKE IT WHEN I DANCE IN FRONT OF OTHER PEOPLE :)1');
+        window.showPetMessage(
+          "mAYA DOESNT LIKE IT WHEN I DANCE IN FRONT OF OTHER PEOPLE :)1"
+        );
       } else if (videoName === "media/griefed.mp4") {
         window.showPetMessage("sNOWING/ bUT IT IS APRIL...");
       }
@@ -630,9 +639,7 @@ export function showSteamLibraryMessage() {
       if (useSwappedGifs) {
         window.showPetMessage(altDialog.altSteamLibraryMessage());
       } else {
-        window.showPetMessage(
-          "dID SHE MEAN A GAME WHERE YOU MINE THINGS/"
-        );
+        window.showPetMessage("dID SHE MEAN A GAME WHERE YOU MINE THINGS/");
       }
     }, 500);
   }
@@ -659,9 +666,7 @@ export function showNederlandsModeMessage() {
     if (useSwappedGifs) {
       window.showPetMessage(altDialog.altNederlandsModeMessage());
     } else {
-      window.showPetMessage(
-        'wOW SO PRETTY1'
-      );
+      window.showPetMessage("wOW SO PRETTY1");
     }
   }
 }
@@ -697,9 +702,7 @@ export function showMymycraftGameMessage() {
       if (useSwappedGifs) {
         window.showPetMessage(altDialog.altMymycraftGameMessage());
       } else {
-        window.showPetMessage(
-          "i THINK MYMY ABANDONED THIS PLACE..."
-        );
+        window.showPetMessage("i THINK MYMY ABANDONED THIS PLACE...");
       }
     }, 500);
   }
@@ -711,7 +714,9 @@ export function showExperimentalModeMessage() {
     if (useSwappedGifs) {
       window.showPetMessage(altDialog.altExperimentalModeMessage());
     } else {
-      window.showPetMessage("mYMY GETS A LITTLE DEFENSIVE IF YOU MENTION THIS PLACE");
+      window.showPetMessage(
+        "mYMY GETS A LITTLE DEFENSIVE IF YOU MENTION THIS PLACE"
+      );
     }
   }
 }
@@ -743,7 +748,7 @@ export function setupTaskbarpet() {
   const taskbarpet = document.querySelector(".taskbar-pet");
   // Don't restore the taskbarpet state from localStorage
   // Always start with the taskbarpet closed
-  
+
   // We still need to keep the toggle functionality in the settings
   // but we won't restore the state on page load
 }
