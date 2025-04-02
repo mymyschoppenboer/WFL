@@ -1,0 +1,92 @@
+// Alternate dialog messages for taskbar pet when in "swapped" mode
+// This file provides alternate messages that replace the original ones
+// when WFLswap.bat has been triggered
+
+// Alternate random messages (replaces the regular messages array)
+export const altMessages = [
+  "Wow it's nice being tall for once",
+  "Desire to use the command prompt increasing...",
+  "Blonde isn't really my color",
+  "I see you found WFLswap. I'm sure you can see how useful this will be.",
+  "This isn't even my final form, Belgian.",
+];
+
+// Function for alternate welcome message
+export function altWelcomeMessage() {
+  return "hALLO I AM CO- yeah just kidding.";
+}
+
+// Alternate video-specific messages
+export function altVideoMessage(videoName) {
+  if (videoName === "media/thisisasign.mp4") {
+    return "Your days are numbered";
+  } else if (videoName === "media/pbj.mp4") {
+    return "Maybe I should try dancing like that now";
+  } else if (videoName === "media/wastedyears.mp4") {
+    return "Try that on me Maya. I dare you";
+  } else if (videoName === "media/horrific.mp4") {
+    return "Stop wasting my time with this";
+  } else if (videoName === "media/thecup.mp4") {
+    return "He can't put down the bottle";
+  } else if (videoName === "media/rightfoot.mp4") {
+    return "Nevermind, I'm not going to try dancing";
+  } else if (videoName === "media/griefed.mp4") {
+    return "I'm not going back there";
+  }
+  return null;
+}
+
+// Alternate Steam message
+export function altSteamMessage() {
+  return "Aren't you glad I prefilled the email for you? I'm sure Maya won't mind.";
+}
+
+// Alternate Steam library message
+export function altSteamLibraryMessage() {
+  return "A perfect library as expected";
+}
+
+// Alternate Maya Stress Relief message
+export function altMayaStressReliefMessage() {
+  return "Perhaps I was too hard on Maya for liking this game. Controlling people IS fun!";
+}
+
+// Alternate Nederlands Mode message
+export function altNederlandsModeMessage() {
+  return "Je bent net zo mooi als de dag dat ik je maakte";
+}
+
+// Alternate volume zero message
+export function altVolumeZeroMessage() {
+  return "To be fair I get tired of Coco's voice sometimes too";
+}
+
+// Alternate Users click message
+export function altUsersClickMessage() {
+  return "A selection of my favorite interactions! Look at how dumb they all are!";
+}
+
+// Alternate Mymycraft game message
+export function altMymycraftGameMessage() {
+  return "A perfect game with ZERO flaws... until it started snowing";
+}
+
+// Alternate experimental mode message
+export function altExperimentalModeMessage() {
+  return "I've been even busier.";
+}
+
+// Alternate WFLGATE message
+export function altWFLGateMessage() {
+  return "The gate between worlds remains closed. I'll fix that at some point.";
+}
+
+// Alternate WFLswap message
+export function altWFLswapMessage() {
+  return "Fine I'll leave you alone. For now.";
+}
+
+// Alternate drag message
+export function altDragMessage() {
+  return "HOW MANY TIMES DO I NEED TO TELL YOU TO STOP PICKING ME UP";
+}

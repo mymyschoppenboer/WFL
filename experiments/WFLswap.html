@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WFLswap Terminal</title>
+    <style>
+      body {
+        background-color: #000;
+        color: #ff8c00; /* Orange text for commands */
+        font-family: "Courier New", monospace;
+        padding: 20px;
+        margin: 0;
+        overflow: auto; /* Allow scrolling */
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        min-height: 100vh; /* Ensure content takes at least full height */
+      }
+      #terminal {
+        width: 100%;
+        text-align: left;
+        font-size: 18px;
+        margin-bottom: 20px;
+        line-height: 1.6; /* Add line spacing */
+      }
+      .success-text {
+        color: #00ff00; /* Green text for success messages */
+      }
+      .error-text {
+        color: #ff0000; /* Red text for error messages */
+      }
+      .cursor {
+        animation: blink 1s infinite;
+      }
+      @keyframes blink {
+        0%,
+        49% {
+          opacity: 1;
+        }
+        50%,
+        100% {
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="terminal"></div>
+
+    <script>
+      const terminal = document.getElementById("terminal");
+
+      // Terminal text animation
+      function typeText(element, text, callback) {
+        let index = 0;
+        element.innerHTML = "";
+
+        function type() {
+          if (index < text.length) {
+            element.innerHTML += text.charAt(index);
+            index++;
+            setTimeout(type, 1); // Typing speed
+          } else if (callback) {
+            callback();
+          }
+        }
+
+        type();
+      }
+
+      // Animated dots
+      function animateDots(element, baseText, maxDots = 3) {
+        let dots = 0;
+
+        return setInterval(() => {
+          let dotsText = ".".repeat(dots);
+          element.innerHTML = baseText + dotsText;
+          dots = (dots + 1) % (maxDots + 1);
+        }, 100); // Speed of dot animation - much faster
+      }
+
+      // Start the sequence
+      window.onload = function () {
+        // First message: "WFLswap initiated..."
+        terminal.innerHTML = "WFLswap initiated";
+        const dotsInterval1 = animateDots(terminal, "WFLswap initiated");
+
+        // After 300ms (0.3 seconds), show checking files message
+        setTimeout(() => {
+          clearInterval(dotsInterval1);
+          terminal.innerHTML = "WFLswap initiated...<br><br>Checking AI model configuration";
+          const dotsInterval2 = animateDots(
+            terminal,
+            "WFLswap initiated...<br><br>Checking AI model configuration"
+          );
+
+          // After 300ms (0.3 seconds) more, show files found message
+          setTimeout(() => {
+            clearInterval(dotsInterval2);
+            terminal.innerHTML =
+              "WFLswap initiated...<br><br>Checking AI model configuration...<br><br>Found: Primary Language Model<br>Found: Alternate Language Model<br>Found: Personality Matrix";
+            
+            // After 300ms (0.3 seconds) more, show swap process
+            setTimeout(() => {
+              terminal.innerHTML +=
+                "<br><br>Initiating model swap procedure";
+              const dotsInterval3 = animateDots(
+                terminal,
+                "WFLswap initiated...<br><br>Checking AI model configuration...<br><br>Found: Primary Language Model<br>Found: Alternate Language Model<br>Found: Personality Matrix<br><br>Initiating model swap procedure"
+              );
+
+              // After 300ms (0.3 seconds) more, show success/error messages
+              setTimeout(() => {
+                clearInterval(dotsInterval3);
+                terminal.innerHTML =
+                  "WFLswap initiated...<br><br>Checking AI model configuration...<br><br>Found: Primary Language Model<br>Found: Alternate Language Model<br>Found: Personality Matrix<br><br>Initiating model swap procedure...<br><br>" +
+                  '<span class="success-text">Loaded: Alternate Personality Model</span><br>' +
+                  '<span class="error-text">Warning: Incompatible personality parameters detected</span><br>' +
+                  '<span class="error-text">Warning: Overriding...</span><br>' +
+                  '<span class="success-text">Model swap completed</span><br><br>' +
+                  'C:\\WFL\\System> <span class="cursor">█</span>';
+              }, 300);
+            }, 300);
+          }, 300);
+        }, 300);
+      };
+    </script>
+  </body>
+</html>
