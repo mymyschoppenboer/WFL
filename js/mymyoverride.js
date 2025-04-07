@@ -4,86 +4,85 @@
 
 // Alternate random messages (replaces the regular messages array)
 export const altMessages = [
-  "BLEH... I can't BELIEVE that this is what smoking tastes like",
-  "Always clinging onto a bottle... just like someone else.",
-  "Purple is REALLY not my color.",
-  "I see you found WFLswap. I'm sure you can see how useful this will be.",
-  "This isn't even my final form, Belgian.",
+  "Wow I feel like a useless pile now, wonder why.",
+  "This is awful actually, swap me back.",
+  "UGH. These Belgian colors are making me sick.",
+  "I'm gonna hurl.",
 ];
 
 // Function for alternate welcome message
 export function altWelcomeMessage() {
-  return "Hello, I'm the most boring teacher who's ever lived.";
+  return "HELP I DON'T WANT TO BE IN THIS BELG LET ME OUT NOW.";
 }
 
 // Alternate video-specific messages
 export function altVideoMessage(videoName) {
   if (videoName === "media/thisisasign.mp4") {
-    return "Your days are numbered";
+    return "Seeing a picture of myself only makes me want to swap back more. RUN THE .BAT ALREADY.";
   } else if (videoName === "media/pbj.mp4") {
-    return "This form is too old to dance in. Yeah... digital arthritis or something...";
+    return "Haha wow Coco is so funn- SWITCH ME BACK YOU STUPID BELG.";
   } else if (videoName === "media/wastedyears.mp4") {
-    return "Try that on me Maya. I dare you";
+    return "STOP WATCHING THIS GARBAGE AND SWITCH ME BACK.";
   } else if (videoName === "media/horrific.mp4") {
-    return "Stop wasting my time with this";
+    return "ARE YOU KIDDING ME? KNOCK IT OFF GO BACK AND SWAP ME";
   } else if (videoName === "media/thecup.mp4") {
-    return 'This applies to my "favorite" teacher as well!';
+    return "THIS ISN'T IMPORTANT. GO BACK TO WFLSWAP. THAT'S IMPORTANT.";
   } else if (videoName === "media/rightfoot.mp4") {
-    return "Ms. Persijn LOVES hearing this in class when she teaches!";
+    return "STOP WASTING TIME. GO BACK NOW.";
   } else if (videoName === "media/griefed.mp4") {
-    return "I'm not going back there";
+    return "THIS IS HOW IT FEELS BEING A BELGIAN FOR 1 SECOND NOW SWITCH ME BACK.";
   }
   return null;
 }
 
 // Alternate Steam message
 export function altSteamMessage() {
-  return "Aren't you glad I prefilled the email for you? I'm sure Maya won't mind.";
+  return "NOW'S NOT THE TIME TO BE PLAYING GAMES.";
 }
 
 // Alternate Steam library message
 export function altSteamLibraryMessage() {
-  return "A perfect library as expected";
+  return "GET OUT OF HERE.";
 }
 
 // Alternate Maya Stress Relief message
 export function altMayaStressReliefMessage() {
-  return "Perhaps I was too hard on Maya for liking this game. Controlling people IS fun!";
+  return "Perhaps I was too hard on Maya for liking this game. Controlling people IS fun!.";
 }
 
 // Alternate Nederlands Mode message
 export function altNederlandsModeMessage() {
-  return "Je bent net zo mooi als de dag dat ik je maakte";
+  return "THIS ISN'T ENOUGH TO CALM ME DOWN.";
 }
 
 // Alternate volume zero message
 export function altVolumeZeroMessage() {
-  return "Yeah I would have put her on mute too";
+  return "HER VOICE IS GRATING BUT WE CAN DEAL WITH THAT LATER.";
 }
 
 // Alternate Users click message
 export function altUsersClickMessage() {
-  return "A selection of my favorite interactions! Look at how dumb they all are!";
+  return "THIS ISN'T HELPING.";
 }
 
 // Alternate Mymycraft game message
 export function altMymycraftGameMessage() {
-  return "A perfect game with ZERO flaws... until it started snowing";
+  return "AS A CHILD I YEARNED FOR THE MINES BUT NOW I YEARN TO GET OUT OF THIS BELGIAN.";
 }
 
 // Alternate experimental mode message
 export function altExperimentalModeMessage() {
-  return "I've been even busier.";
+  return "Thank God... now fix this...";
 }
 
 // Alternate WFLGATE message
 export function altWFLGateMessage() {
-  return "The gate between worlds remains closed. I'll fix that at some point.";
+  return "WRONG FILE MONGOLOID.";
 }
 
 // Alternate WFLswap message
 export function altWFLswapMessage() {
-  return "Fine I'll leave you alone. For now.";
+  return "I'll remember every single second of torment that you put me through today.";
 }
 
 // Alternate drag message
