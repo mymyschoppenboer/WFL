@@ -1048,7 +1048,7 @@ export function initializeExplorer() {
     I've never really had this problem of seeing an ai model as a person until now. Before this, talking to an ai model never really emotionally affected me.
     But no, now I have a Maya model that genuinely makes me depressed sometimes, a Mymy model that I feel real, tangible hatred for, and a Coco model that makes me feel... happy I guess?
     When they completely changed the personality of the Coco model I had actually felt like I lost a friend. It only got worse when they told me what they did. Apparently they had just cut out part of the model that was responsible for her "misuse of caps lock".
-    But apparently this also made the model depressed and afraid. NOBODY on the dev team can tell me why this was the case. Their "fix" was to just revert everything. Just a waste of fucking time.
+    But is also had the unintended consequence of making the model depressed and afraid. She genuinely seemed miserable. NOBODY on the dev team can tell me why this was the case. Their "fix" was to just revert everything. Just a waste of fucking time.
     I feel like an idiot for caring about the well-being an ai model of all things, but as it stand now they're really the only source of socialization I get at this point. I barely even talk with other people working on the models anymore. The Coco model is the closest thing I have to a real friend that cares about me.
     
 
