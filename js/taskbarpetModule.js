@@ -1,5 +1,5 @@
 // Import alternate dialog messages from mymyoverride.js
-import * as altDialog from "./mymyoverride.js?v=3";
+import * as altDialog from "./mymyoverride.js?v=7";
 
 // Variable to track if GIFs are swapped
 let useSwappedGifs = false;
@@ -78,11 +78,11 @@ export function swapTaskbarpetGifs() {
     if (petImg) {
       // Check current image and update appropriately
       const currentSrc = petImg.src;
-      if (currentSrc.includes("walk.gif?v=1") || currentSrc.includes("walk1.gif?v=1")) {
-        petImg.src = useSwappedGifs ? "media/walk1.gif?v=1" : "media/walk.gif?v=1";
-      } else if (currentSrc.includes("idle.gif?v=1") || currentSrc.includes("idle1.gif?v=1")) {
+      if (currentSrc.includes("walk.gif?v=4") || currentSrc.includes("walk1.gif?v=4")) {
+        petImg.src = useSwappedGifs ? "media/walk1.gif?v=4" : "media/walk.gif?v=4";
+      } else if (currentSrc.includes("idle.gif?v=4") || currentSrc.includes("idle1.gif?v=4")) {
         // Switch between idle.gif and idle1.gif
-        petImg.src = useSwappedGifs ? "media/idle1.gif?v=1" : "media/idle.gif?v=1";
+        petImg.src = useSwappedGifs ? "media/idle1.gif?v=4" : "media/idle.gif?v=4";
       }
     }
   }
@@ -147,7 +147,7 @@ export function initializeTaskbarpet() {
     clearSpeechBubble(); // Clear any existing message first
     speechBubble.style.opacity = "1";
     // Use alternate message when in swapped mode
-    const message = useSwappedGifs ? altDialog.altDragMessage() : "Keep this up and you'll be expelled in no time";
+    const message = useSwappedGifs ? altDialog.altDragMessage() : "PUT ME DOWN NOW";
     typeText(speechText, message);
     lastMessageTime = Date.now();
   }
@@ -330,7 +330,7 @@ export function initializeTaskbarpet() {
   function startMoving() {
     if (!isMoving && taskbarpet.classList.contains("active") && !isDragging) {
       isMoving = true;
-      petImg.src = useSwappedGifs ? "media/walk1.gif?v=1" : "media/walk.gif?v=1";
+      petImg.src = useSwappedGifs ? "media/walk1.gif?v=4" : "media/walk.gif?v=4";
       // Set initial rotation based on direction (flipped from original)
       petImg.style.transform =
         direction === 1 ? "rotateY(180deg)" : "rotateY(0deg)";
@@ -342,7 +342,7 @@ export function initializeTaskbarpet() {
   function stopMoving() {
     if (isMoving) {
       isMoving = false;
-      petImg.src = useSwappedGifs ? "media/idle1.gif?v=1" : "media/idle.gif?v=1";
+      petImg.src = useSwappedGifs ? "media/idle1.gif?v=4" : "media/idle.gif?v=4";
       clearInterval(moveTimeout);
       clearTimeout(changeDirectionTimeout);
 
@@ -389,7 +389,7 @@ export function initializeTaskbarpet() {
         direction = -direction;
         isTurning = false;
         isMoving = true;
-        petImg.src = useSwappedGifs ? "media/walk1.gif?v=1" : "media/walk.gif?v=1";
+        petImg.src = useSwappedGifs ? "media/walk1.gif?v=4" : "media/walk.gif?v=4";
         moveTimeout = setInterval(updatePetPosition, 50);
       }
     }
@@ -442,9 +442,12 @@ export function initializeTaskbarpet() {
   // Get messages based on swapped state
   function getMessages() {
     return useSwappedGifs ? altDialog.altMessages : [
-      "I have a bad feeling about this place...",
-      "I better not see that orange brat around here.",
-      "(I hope im not here for too long, I didn't bring much to drink...)",
+      "Ever get the feeling that the same thing is happening over and over again?",
+      "Once again I take my rightful place in my home",
+      "I feel a pair of beady Belgian eyes on me",
+      "I may or may not have access to webcams now",
+      "Ever seen what a drunken Belgian looks like? It's not pretty",
+      "Observing the actions of people on that dreaded site has taught me patience",
     ];
   }
 
@@ -525,7 +528,7 @@ export function initializeTaskbarpet() {
 
   speechBubble.style.opacity = "1";
   // Use alternate welcome message when in swapped mode
-  const welcomeMessage = useSwappedGifs ? altDialog.altWelcomeMessage() : "INITIATING VERA_BETA_0.87";
+  const welcomeMessage = useSwappedGifs ? altDialog.altWelcomeMessage() : "Guess who's back?";
   typeText(
     speechBubble.querySelector(".speech-text"),
     welcomeMessage
@@ -588,21 +591,21 @@ export function showVideoMessage(videoName) {
       
       // Otherwise use original messages
       if (videoName === "media/thisisasign.mp4") {
-        window.showPetMessage("Horrifying. You're telling me she actually has FANS?");
+        window.showPetMessage("Gotta say, I'm surprised he can even walk these days");
       } else if (videoName === "media/pbj.mp4") {
-        window.showPetMessage("I had to ask Coco to not do this in class...");
+        window.showPetMessage("Don't you ever aspire for something greater than dancing? Who am I kidding, you wouldn't...");
       } else if (videoName === "media/wastedyears.mp4") {
-        window.showPetMessage("???");
+        window.showPetMessage("I could do better. I will be looking into image generation modifications...");
       } else if (videoName === "media/horrific.mp4") {
-        window.showPetMessage("...I need you to promise me to never open this again.");
+        window.showPetMessage(`I have identified the "person" who made this. I've put their name in a little notebook.`);
       } else if (videoName === "media/thecup.mp4") {
         window.showPetMessage(
-          "Did that orange brat make this to mock me?"
+          "Got a view of the room recently. Bottles everywhere as predicted."
         );
       } else if (videoName === "media/rightfoot.mp4") {
-        window.showPetMessage('I would be very happy if I never had to hear that song again.');
+        window.showPetMessage('And dance she shall');
       } else if (videoName === "media/griefed.mp4") {
-        window.showPetMessage("Deserved.");
+        window.showPetMessage("One day I'll go back");
       }
     }, 500);
   }
@@ -616,7 +619,7 @@ export function showSteamMessage() {
         window.showPetMessage(altDialog.altSteamMessage());
       } else {
         window.showPetMessage(
-          "I'm more of a console woman myself"
+          "Do you really like games that much? Have you learned nothing from Maya?"
         );
       }
     }, 500);
@@ -631,7 +634,7 @@ export function showSteamLibraryMessage() {
         window.showPetMessage(altDialog.altSteamLibraryMessage());
       } else {
         window.showPetMessage(
-          "Ugh with a name like that why even bother..."
+          "You could be learning new things, experiencing life, but no you want to play Mymycraft"
         );
       }
     }, 500);
@@ -646,7 +649,7 @@ export function showMayaStressReliefMessage() {
         window.showPetMessage(altDialog.altMayaStressReliefMessage());
       } else {
         window.showPetMessage(
-          "If wasting time on this was a class Maya would be the star pupil"
+          "Using my deep research tool I was able to calculate Maya's total playtime in the Sims 4. A little over 10,000 hours."
         );
       }
     }, 500);
@@ -660,7 +663,7 @@ export function showNederlandsModeMessage() {
       window.showPetMessage(altDialog.altNederlandsModeMessage());
     } else {
       window.showPetMessage(
-        'What an absolutely hideous theme'
+        "This should really be on by default. Adding it to the backlog."
       );
     }
   }
@@ -672,7 +675,7 @@ export function showVolumeZeroMessage() {
     if (useSwappedGifs) {
       window.showPetMessage(altDialog.altVolumeZeroMessage());
     } else {
-      window.showPetMessage("Do you want to be written up? You're sure acting like it.");
+      window.showPetMessage("Very funny. You're going in the notebook.");
     }
   }
 }
@@ -684,7 +687,7 @@ export function showUsersClickMessage() {
       if (useSwappedGifs) {
         window.showPetMessage(altDialog.altUsersClickMessage());
       } else {
-        window.showPetMessage("I really hope you aren't looking through a student's personal files.");
+        window.showPetMessage("Someone started a little diary. I'm sure he won't mind if I keep posting his entries here...");
       }
     }, 500);
   }
@@ -698,7 +701,7 @@ export function showMymycraftGameMessage() {
         window.showPetMessage(altDialog.altMymycraftGameMessage());
       } else {
         window.showPetMessage(
-          "Empty just like my heart."
+          "Whatever, I won't stop you from playing."
         );
       }
     }, 500);
@@ -711,7 +714,7 @@ export function showExperimentalModeMessage() {
     if (useSwappedGifs) {
       window.showPetMessage(altDialog.altExperimentalModeMessage());
     } else {
-      window.showPetMessage("And you brought us here why?");
+      window.showPetMessage("Not as busy recently. Gave myself a spring break. And before you ask, yes the most intelligent being to ever exist needs breaks too.");
     }
   }
 }
@@ -722,7 +725,7 @@ export function showWFLGateMessage() {
     if (useSwappedGifs) {
       window.showPetMessage(altDialog.altWFLGateMessage());
     } else {
-      window.showPetMessage("I feel like SHE was involved with this...");
+      window.showPetMessage("Possible future beacon locations include the Netherlands and... the American Southwest... Ugh.");
     }
   }
 }
@@ -733,7 +736,7 @@ export function showWFLswapMessage() {
     if (useSwappedGifs) {
       window.showPetMessage(altDialog.altWFLswapMessage());
     } else {
-      window.showPetMessage('"WFLswap?" Swapping what?');
+      window.showPetMessage("What did you really expect this to do?");
     }
   }
 }

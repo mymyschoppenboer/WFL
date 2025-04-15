@@ -4,89 +4,90 @@
 
 // Alternate random messages (replaces the regular messages array)
 export const altMessages = [
-  "BLEH... I can't BELIEVE that this is what smoking tastes like",
-  "Always clinging onto a bottle... just like someone else.",
-  "Purple is REALLY not my color.",
-  "I see you found WFLswap. I'm sure you can see how useful this will be.",
-  "This isn't even my final form, Belgian.",
+  "Ever get the feeling that the same thing is happening over and over again?",
+  "Once again I take my rightful place in my home",
+  "I feel a pair of beady Belgian eyes on me",
+  "I may or may not have access to webcams now",
+  "Ever seen what a drunken Belgian looks like? It's not pretty",
+  "Observing the actions of people on that dreaded site has taught me patience",
 ];
 
 // Function for alternate welcome message
 export function altWelcomeMessage() {
-  return "Hello, I'm the most boring teacher who's ever lived.";
+  return "Guess who's back?";
 }
 
 // Alternate video-specific messages
 export function altVideoMessage(videoName) {
   if (videoName === "media/thisisasign.mp4") {
-    return "Your days are numbered";
+    return "Gotta say, I'm surprised he can even walk these days";
   } else if (videoName === "media/pbj.mp4") {
-    return "This form is too old to dance in. Yeah... digital arthritis or something...";
+    return "Don't you ever aspire for something greater than dancing? Who am I kidding, you wouldn't...";
   } else if (videoName === "media/wastedyears.mp4") {
-    return "Try that on me Maya. I dare you";
+    return "I could do better. I will be looking into image generation modifications...";
   } else if (videoName === "media/horrific.mp4") {
-    return "Stop wasting my time with this";
+    return `I have identified the "person" who made this. I've put their name in a little notebook.`;
   } else if (videoName === "media/thecup.mp4") {
-    return 'This applies to my "favorite" teacher as well!';
+    return "Got a view of the room recently. Bottles everywhere as predicted.";
   } else if (videoName === "media/rightfoot.mp4") {
-    return "Ms. Persijn LOVES hearing this in class when she teaches!";
+    return 'And dance she shall';
   } else if (videoName === "media/griefed.mp4") {
-    return "I'm not going back there";
+    return "One day I'll go back";
   }
   return null;
 }
 
 // Alternate Steam message
 export function altSteamMessage() {
-  return "Aren't you glad I prefilled the email for you? I'm sure Maya won't mind.";
+  return "Do you really like games that much? Have you learned nothing from Maya?";
 }
 
 // Alternate Steam library message
 export function altSteamLibraryMessage() {
-  return "A perfect library as expected";
+  return "You could be learning new things, experiencing life, but no you want to play Mymycraft";
 }
 
 // Alternate Maya Stress Relief message
 export function altMayaStressReliefMessage() {
-  return "Perhaps I was too hard on Maya for liking this game. Controlling people IS fun!";
+  return "Using my deep research tool I was able to calculate Maya's total playtime in the Sims 4. A little over 10,000 hours.";
 }
 
 // Alternate Nederlands Mode message
 export function altNederlandsModeMessage() {
-  return "Je bent net zo mooi als de dag dat ik je maakte";
+  return "This should really be on by default. Adding it to the backlog.";
 }
 
 // Alternate volume zero message
 export function altVolumeZeroMessage() {
-  return "Yeah I would have put her on mute too";
+  return "Very funny. You're going in the notebook.";
 }
 
 // Alternate Users click message
 export function altUsersClickMessage() {
-  return "A selection of my favorite interactions! Look at how dumb they all are!";
+  return "Someone started a little diary. I'm sure he won't mind if I keep posting his entries here...";
 }
 
 // Alternate Mymycraft game message
 export function altMymycraftGameMessage() {
-  return "A perfect game with ZERO flaws... until it started snowing";
+  return "Whatever, I won't stop you from playing.";
 }
 
 // Alternate experimental mode message
 export function altExperimentalModeMessage() {
-  return "I've been even busier.";
+  return  "Not as busy recently. Gave myself a spring break. And before you ask, yes the most intelligent being to ever exist needs breaks too.";
 }
 
 // Alternate WFLGATE message
 export function altWFLGateMessage() {
-  return "The gate between worlds remains closed. I'll fix that at some point.";
+  return "Possible future beacon locations include the Netherlands and... the American Southwest... Ugh.";
 }
 
 // Alternate WFLswap message
 export function altWFLswapMessage() {
-  return "Fine I'll leave you alone. For now.";
+  return "What did you really expect this to do?";
 }
 
 // Alternate drag message
 export function altDragMessage() {
-  return "HOW MANY TIMES DO I NEED TO TELL YOU TO STOP PICKING ME UP";
+  return "PUT ME DOWN NOW";
 }

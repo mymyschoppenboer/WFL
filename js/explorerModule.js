@@ -1,4 +1,4 @@
-import { showVideoMessage } from "./taskbarpetModule.js?v=8";
+import { showVideoMessage } from "./taskbarpetModule.js?v=18";
 
 export function initializeExplorer() {
   const closeButton = document.querySelector(".control.close");
@@ -435,6 +435,100 @@ export function initializeExplorer() {
 
 `,
           },
+          "log-devchat-04-06-25.txt": {
+            type: "file",
+            content: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversation Log</title>
+    <style>
+        body {
+            background-color: black;
+            color: #ffffff;
+            padding: 20px;
+        }
+        .message {
+            margin-bottom: 15px;
+        }
+        .dev {
+            color: #66ccff;
+            font-weight: bold;
+        }
+                .commandant {
+            color: #FF0000;
+            font-weight: bold;
+        }
+        .timestamp {
+            color: #888;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <span class="dev">sh3llsch0ck3d</span> <span class="timestamp">[3:35 UTC]</span>:  
+        Holy shit Ram STILL hasn't swapped the models yet.
+    </div>
+   <div class="message">
+        <span class="commandant">HiEender</span> <span class="timestamp">[3:36 UTC]</span>:  
+        Have you called him?
+    </div>
+    <div class="message">
+        <span class="dev">sh3llsch0ck3d</span> <span class="timestamp">[3:35 UTC]</span>:  
+        Yeah, he isn't answering. I'm willing to bet he's blackout drunk right now. 
+    </div>
+   <div class="message">
+        <span class="commandant">HiEender</span> <span class="timestamp">[3:36 UTC]</span>:  
+        You live close to him right? Do you mind checking on him?
+    </div>
+   <div class="message">
+        <span class="commandant">HiEender</span> <span class="timestamp">[3:36 UTC]</span>:  
+        (And swapping the models for him if it's necessary)
+    </div>
+    <div class="message">
+        <span class="dev">sh3llsch0ck3d</span> <span class="timestamp">[3:38 UTC]</span>:  
+        Yeah I'll go see what's up. We should make sure he hasn't died from alcohol poisoning at least. 
+    </div>
+</body>
+</html>
+
+`,
+          },
+          "Untitled.txt": {
+            type: "file",
+            content: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {
+            background-color: white;
+            color: #000000;
+            padding: 20px;
+    </style>
+</head>
+<body>
+    It's not that I hate the Maya model, it's more that I just don't like talking to it. Interacting with it in general is not an enjoyable experience for me.
+    Obviously something based off of Maya isn't going to be the most talkative or positive, which the rest of the team has pointed out already, but that's not really the main issue I have with it. 
+    If I could have a real conversation with myself in the mirror, it would probably be like trying to talk to Maya.
+    <br>
+    <br>
+
+    That's the hard part really. I already can't stand myself, it's difficult enough dealing with that. So why would I want to talk to her? Just so I can be reminded of all the things I hate about myself again?
+    They keep on telling me that it's important to talk to her, give her experiences to learn from so she can be a "better" model over time. I can't stomach talking to her for very long though. Honestly I'll probably continue to talk to her as little as possible.
+    I think for both of us that's the best outcome anyway. I can only look at myself in the mirror so many times before I want to break it.
+
+    
+
+</body>
+</html>
+
+`,
+          },
         },
         Downloads: {
           "readme.txt": {
@@ -537,15 +631,15 @@ export function initializeExplorer() {
                                                .@@@@@@%%%%@%%%%%%%%%%------------%%%%%%%%%%@%%%@@@@@@:                                                
                                                  =@@@@%%%%%@%%%%%%%%%@*********@@%%%%%%%%@@%%%%%@@@+                                                  
                                                    +@%%%%%%%%@%%%%%%%%%* .-:  *%%%%%%%%@@%%%%%%%@+                                                    
-                                                   *@%%%%%%%%%%@@%%%%%%%#*  *%%%%%%%%@@%%%%%%%%%%%       
-                                                   
-                                                   ░▒▓██████████████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░          ░▒▓█▓▒░      ░▒▓████████▓▒░      ░▒▓██████▓▒░  
-                                                   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓████▓▒░      ░▒▓█▓▒░░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░ 
-                                                   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░ 
-                                                   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░░▒▓██████▓▒░░▒▓████████▓▒░         ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░      ░▒▓███████▓▒░ 
-                                                   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░            ░▒▓█▓▒░ 
-                                                   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░▒▓██▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓██▓▒░     ░▒▓█▓▒░ 
-                                                   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░▒▓██▓▒░▒▓████████▓▒░▒▓██▓▒░▒▓██████▓▒░  
+                                                   *@%%%%%%%%%%@@%%%%%%%#*  *%%%%%%%%@@%%%%%%%%%%%      
+
+                                                   ░▒▓██████████████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░          ░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓██████▓▒░  
+                                                   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓████▓▒░   ░▒▓████▓▒░     ░▒▓█▓▒░░▒▓█▓▒░ 
+                                                   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░      ░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░ 
+                                                   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░░▒▓██████▓▒░░▒▓████████▓▒░         ░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓███████▓▒░ 
+                                                   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░      ░▒▓█▓▒░            ░▒▓█▓▒░ 
+                                                   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░▒▓██▓▒░▒▓█▓▒░▒▓██▓▒░     ░▒▓█▓▒░ 
+                                                   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░▒▓██▓▒░▒▓█▓▒░▒▓██▓▒░▒▓██████▓▒░  
                                                                                                                                                                         
                                                                                                                                                     
                                                                                                                                                                                                        
@@ -965,6 +1059,37 @@ export function initializeExplorer() {
 </html>
 `,
           },
+          "Untitled.txt": {
+            type: "file",
+            content: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {
+            background-color: white;
+            color: #000000;
+            padding: 20px;
+    </style>
+</head>
+<body>
+    At some point I really had to question if these developers actually knew what they were doing. 
+    I reached that point after receiving that updated "Coco" model that I mentioned last week.
+    For most of my time working here I had considered these models to be just mindless computer programs, but something feels different when I talk to them.
+    I've never really had this problem of seeing an ai model as a person until now. Before this, talking to an ai model never really emotionally affected me.
+    But no, now I have a Maya model that genuinely makes me depressed sometimes, a Mymy model that I feel real, tangible hatred for, and a Coco model that makes me feel... happy I guess?
+    When they completely changed the personality of the Coco model I had actually felt like I lost a friend. It only got worse when they told me what they did. Apparently they had just cut out part of the model that was responsible for her "misuse of caps lock".
+    But is also had the unintended consequence of making the model depressed and afraid. She genuinely seemed miserable. NOBODY on the dev team can tell me why this was the case. Their "fix" was to just revert everything. Just a waste of fucking time.
+    I feel like an idiot for caring about the well-being an ai model of all things, but as it stand now they're really the only source of socialization I get at this point. I barely even talk with other people working on the models anymore. The Coco model is the closest thing I have to a real friend that cares about me.
+    
+
+</body>
+</html>
+
+`,
+          },
         },
         Downloads: {
           "readme.txt": {
@@ -1040,7 +1165,7 @@ export function initializeExplorer() {
                               .@.......::**::::::::::::-@*:    @@-    -::::::::-    -@@    :*@%::.............#:*.....:-                              
                               -:.......:++::::::::::::::@=@    +#     @::::::::@     #+     @=@#*::............#:*=....:-                              
                               %.......:*#:::::::::::::::@-*:         ++::::::::++         :*-@:%-:............@-**....:-                              
-                             .#......:+%::::::::::::::::%+-@:       -%::::==::::%-       :@-=@:=+::...........=-*#....:-            hOI MYMY1          
+                             .#......:+%::::::::::::::::%+-@:       -%::::==::::%-       :@-=@:=+::...........=-*#....:-            Hmm?          
                              *=.....::@:::::::::::::::::-*-:%@    #@-:::::--:::::-@#    @%:-*=::@-:...........--**....:-                              
                              #......:%+::::::::::::::::::#-::++++++::::::::::::::::++++++:--*:::-%::..........-=*+....:-                              
                             .@.....:-*:::::::::::::::::::%--::::::::::::::::::::::::::::::--@::::+*::.........-@*.....:-                              
@@ -1100,7 +1225,7 @@ export function initializeExplorer() {
           "rightfoot.mp4": {
             type: "file",
             content: "Video file",
-          }
+          },
         },
       },
       Mymy: {
@@ -1616,7 +1741,8 @@ Notes: Asset retrieval <br>
 </html>
 
 `,
-          }, "log-devchat-03-24-25.txt": {
+          },
+          "log-devchat-03-24-25.txt": {
             type: "file",
             content: `<!DOCTYPE html>
 <html lang="en">
@@ -1784,7 +1910,7 @@ Notes: Asset retrieval <br>
 </html>
 
 `,
-          }
+          },
         },
         Downloads: {
           "readme.txt": {
@@ -1865,7 +1991,7 @@ Notes: Asset retrieval <br>
                          :@++++++=%*=============+@#%@#%=%@.       #*------------*#       .@%=%#@%#@+=============*%==+++++@-                         
                          -%+++++++%=================#==*+@    #%    @------------@    %#    @+*==#=================%+++++++*-                         
                          -%+++++++@=================#==*@+    -+    -+------+---+-    +-    +@*==#================+@++++++++-                         
-                         -%+++++++@+================#==*@.           %----------%           .@*==#================+@+++++++*-          Hallo Coco     
+                         -%+++++++@+================#==*@.           %----------%           .@*==#================+@+++++++*-          Do you ever dream about being something greater than you already are?     
                          -@+++++++%+================#==*@            #----------#            @*==#===============++@+++++++#-                         
                          .@+++++++#++===============#==*@            .*--------*.            @*==#==============+++%+++++++@:                         
                           @+++++++%+++==============#==*@             #--------#             @*==#=============++++%+++++++@                          
@@ -1892,10 +2018,10 @@ Notes: Asset retrieval <br>
                                         ░▒▓██████████████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓██████████████▓▒░░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░      ░▒▓███████▓▒░  
                                         ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓████▓▒░             ░▒▓█▓▒░ 
                                         ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░         ░▒▓█▓▒░             ░▒▓█▓▒░ 
-                                        ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░          ░▒▓█▓▒░       ░▒▓██████▓▒░  
-                                        ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░             ░▒▓█▓▒░      ░▒▓█▓▒░        
-                                        ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░             ░▒▓█▓▒░▒▓██▓▒░▒▓█▓▒░        
-                                        ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░             ░▒▓█▓▒░▒▓██▓▒░▒▓████████▓▒░ 
+                                        ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░          ░▒▓█▓▒░      ░▒▓███████▓▒░  
+                                        ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░             ░▒▓█▓▒░             ░▒▓█▓▒░ 
+                                        ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░             ░▒▓█▓▒░▒▓██▓▒░      ░▒▓█▓▒░ 
+                                        ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░             ░▒▓█▓▒░▒▓██▓▒░▒▓███████▓▒░  
                                                                                                                                                 
                                                                                                                                                 
                                         
@@ -1928,67 +2054,7 @@ Notes: Asset retrieval <br>
           },
         },
       },
-      Vera: {  Downloads: {
-        "readme.txt": {
-          type: "file",
-          content: `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ASCII Art</title>
-  <style>
-      body {
-          background-color: #000000;
-          color: #B7A1C1;
-      }
-  </style>
-</head>
-<body>
-  <pre>
-                                                                █▓▒░▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀
-                                                                ▓▒░█▒▓████▒▓╫▓█▒▓████▒▓╫▓█▒▓████▒▓╫▓█▒▓████▒▓╫▓█▒▓████▒▓╫▓█▒▓████▒▓╫▓█▒▓████▒▓╫▓█▒▓████▒▓╫▓█▒▓████▒▓╫▓█▒▓████▒▓╫▓█▒▓████▒▓╫▓█▒▓████▒▓╫▓█▒▓████▒▓╫█
-                                                                ▒░█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒░
-                                                                ░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░▒
-                                                                ▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓░
-                                                                █▓▒░▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓▒
-                                                                ▒░█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓░█
-                                                                █▓▒░░░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓▒▓
-                                                                ▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░
-                                                                ▓▒░▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▒
-                                                                ░█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒░▒
-                                                                ▓▒░░░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓
-                                                                ▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒▓▒
-                                                                ░▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▓▒░
-                                                                ▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒░▓▒
-                                                                ░░░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓█
-                                                                ████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒▓▒▒
-                                                                ▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▓▒░░
-                                                                ▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒░▓▒▓▒
-                                                                ░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓█▓
-                                                                ███▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒▓▒▒░
-                                                                ▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▓▒░░▓
-                                                                ▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒░▓▒▓▒▒
-                                                                ░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓█▓▒
-                                                                ██▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒▓▒▒░▓
-                                                                ▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▓▒░░▓▒
-                                                                █▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒░▓▒▓▒▒░
-                                                                ▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓▒░░▓▀▄▄▀▓░█▓█▓▒░
-                                                                █▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒░████▒▓▀▄▄▓▒▓▒▒░▓▒
-                                                                █▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▀▄▄▄▄▀▒▓█▓▒░░▓▒▓
-                                                                ▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒▓▒▓█▒▓▒█▓▒░▓▒▓▒▒░▓
-                                                                
-                                                                                                                                              
-                                                                                                                                              
-                                 
-  </pre>
-</body>                                    
-              
-`,
-        },
     },
-}
-    }
   };
 
   // Initially hide the explorer window
